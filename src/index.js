@@ -1,4 +1,4 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map('map').setView([-34.908023, -57.945027], 20);
 
 var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -8,6 +8,34 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
+
+//var pointA = new L.LatLng(-34.9074347, -57.9447564);
+//var pointB = new L.LatLng(-34.9074503, -57.944866);
+var pointList = [
+    [-34.90742641,-57.944758],
+    //[-34.90742641,-57.944799],
+    //[-34.90744659,-57.94480888],
+   // [-34.90745952,-57.94484454],
+   // [-34.90746032,-57.94482766],
+    //[-34.90741351,-57.94474911],
+    [-34.9074489,-57.9448633],
+    [-34.907453, -57.944804],
+    [-34.907477, -57.944755],
+    [-34.907502, -57.944722],
+    [-34.907486, -57.944701],
+    //[-34.907468, -57.944694],
+    //[-34.90745334,-57.94471979],
+    //[-34.90747057,-57.9447937],
+    //[-34.90739901,-57.94475907]
+];
+
+var firstpolyline = new L.polygon(pointList, {
+    color: 'red',
+    weight: 1,
+    opacity: 1,
+    smoothFactor: 1
+});
+firstpolyline.addTo(map);
 
 var marker, circle,id;
 const options = {
