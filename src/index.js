@@ -49,24 +49,38 @@ function getLocation(){
 }
 function removeAfter(){
     if (marker) map.removeLayer(marker);
-    if (circle) map.removeLayer(circle);
+    //if (circle) map.removeLayer(circle);
+}
+/**
+ * (x1,y1) (x2,y2) par de coord continuas de la sección; formato [lat,lng] -> [y,x]
+ * lngC longitud actual tomada por el gps
+ * Retorna el valor de la recta tangente por 2 puntos de la sección (latitud)
+ */
+function calculateLineTg(x1,y1,x2,y2,lngC,latC){
+    let m = (y2 - y1) / (x2 - x1); //    [-34.884032,-58.019961], [-34.883993,-58.020022],
+    let y = (m * (lngC-x1)) + (y1); //ec recta por 2 puntos, x
+    let x = ((latC - y1)/ m) + x1;
+    return {y,x}; //retorna la latitud calculada
 }
 /**
  * 
  * @param {GeolocationPosition} position 
  */
 function getPosition(position){
-    const { latitude, longitude} = position.coords; //lat es y, long es x 
-    let m = (-34.883993 - (-34.884032)) / (-58.020022 - (-58.019961)); //    [-34.884032,-58.019961], [-34.883993,-58.020022],
-    let x = longitude; //long actual
-    let y = (m * (x-(-58.019961))) + (-34.884032); //ec recta por 2 puntos, x
+    const { latitude, longitude} = position.coords; //lat es y, long es x  [lat,lng] -> [y,x]
+   // let {y,x} = calculateLineTg(-58.019961,-34.884032,-58.020022,-34.883993,longitude,latitude);
     var altitude = position.coords.altitude; 
     var heading = position.coords.heading;
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     
-    if ( y == latitude) alert('pertenece a la recta');
-    //removeAfter();
+   // if (( y <= latitude) & (x <= longitude)) {
+        let {y,x} = calculateLineTg(-58.01999,-34.883958,-58.020022,-34.883993,latitude,longitude); //[-34.883993,-58.020022],[-34.883958, -58.01999],
+        if (( y <= latitude) & (x <= longitude)){
+            alert('pertenece a la recta');
+        }
+    //}
+    removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
     marker = L.marker([latitude, longitude]).addTo(map)
           //  .bindPopup("Estas en la posición con latitud "+latitude+" y longitud "+longitude+". Con precisión de "+accuracy+" metros");
