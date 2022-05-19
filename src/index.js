@@ -10,10 +10,10 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 }).addTo(map);
 
 var pointList = [
-    [-34.884032,-58.019961], //dibujo primer poligono, primera seccion
-    [-34.883993,-58.020022],
-    [-34.883958, -58.01999],
-    [-34.883994, -58.019937]
+    [-34.883993,-58.02002], //dibujo primer poligono, esta no es la primera seccion, autojuste el poligono para que forme un rectangulo
+    [-34.883958,-58.02002],
+    [-34.883958, -58.019937],
+    [-34.883993, -58.019937]
 ];
 
 var firstpolyline = new L.polygon(pointList, {
@@ -74,12 +74,11 @@ function getPosition(position){
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     
-   // if (( y <= latitude) & (x <= longitude)) {
-        let {y,x} = calculateLineTg(-58.01999,-34.883958,-58.020022,-34.883993,latitude,longitude); //[-34.883993,-58.020022],[-34.883958, -58.01999],
-        if (( y <= latitude) & (x <= longitude)){
-            alert('pertenece a la recta');
+    if ((latitude <= (-34.883958))&(latitude >= (-34.883993))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+        if((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            alert('estoy en el area');
         }
-    //}
+    }
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
     marker = L.marker([latitude, longitude]).addTo(map)
