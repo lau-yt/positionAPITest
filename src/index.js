@@ -8,14 +8,21 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
-
+//puntos de secciones
+//primera sección 
 var pointList = [
-    [-34.883993,-58.02002], //dibujo primer poligono, esta no es la primera seccion, autojuste el poligono para que forme un rectangulo
+    [-34.883993,-58.02002], 
     [-34.883958,-58.02002],
     [-34.883958, -58.019937],
     [-34.883993, -58.019937]
 ];
-
+//segunda sección 
+let pointList2 = [
+    [-34.883958,-58.02002],
+    [-34.883958, -58.019937],
+    [-34.883915, -58.019937],
+    [-34.883915,-58.02002],
+];
 var firstpolyline = new L.polygon(pointList, {
     color: 'red',
     weight: 1,
@@ -23,12 +30,18 @@ var firstpolyline = new L.polygon(pointList, {
     smoothFactor: 1
 });
 firstpolyline.addTo(map);
-
+firstpolyline = new L.polygon(pointList2, {
+    color: 'blue',
+    weight: 1,
+    opacity: 1,
+    smoothFactor: 1
+});
+firstpolyline.addTo(map);
 var marker, circle,id;
 const options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 27000
+    timeout: 10000
 };
 document.getElementById("button").addEventListener('click', ()=>{
     navigator.geolocation.clearWatch(id);
@@ -62,21 +75,26 @@ function calculateLineTg(x1,y1,x2,y2,lngC,latC){
     let x = ((latC - y1)/ m) + x1;
     return {y,x}; //retorna la latitud calculada
 }
+function section_x(){
+
+}
 /**
  * 
  * @param {GeolocationPosition} position 
  */
 function getPosition(position){
     const { latitude, longitude} = position.coords; //lat es y, long es x  [lat,lng] -> [y,x]
-   // let {y,x} = calculateLineTg(-58.019961,-34.884032,-58.020022,-34.883993,longitude,latitude);
     var altitude = position.coords.altitude; 
     var heading = position.coords.heading;
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     
-    if ((latitude <= (-34.883958))&(latitude >= (-34.883993))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-        if((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            alert('estoy en el area');
+    if((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+        if ((latitude <= (-34.883915))&(latitude >= (-34.883958))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+            alert('estoy en el area 2');
+        else {
+            if ((latitude < (-34.883958))&(latitude >= (-34.883993)))
+                alert('estoy en el area 1');
         }
     }
     removeAfter();
