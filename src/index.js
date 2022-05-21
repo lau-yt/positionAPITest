@@ -88,13 +88,13 @@ function getPosition(position){
     var heading = position.coords.heading;
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
-    
+    let d = document.getElementById('title');
     if((longitude <= (-58.019937))&(longitude >= (-58.02002))){
         if ((latitude <= (-34.883915))&(latitude >= (-34.883958))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-            alert('estoy en el area 2');
+            d.innerHTML = 'area 1';
         else {
             if ((latitude < (-34.883958))&(latitude >= (-34.883993)))
-                alert('estoy en el area 1');
+            d.innerHTML = 'area 2';
         }
     }
     removeAfter();
