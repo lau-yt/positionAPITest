@@ -94,9 +94,14 @@ function getPosition(position){
             d.innerHTML = 'area 1';
         else {
             if ((latitude < (-34.883958))&(latitude >= (-34.883993)))
-            d.innerHTML = 'area 2';
+                d.innerHTML = 'area 2';
+            else 
+                d.innerHTML = 'sin area';    
         }
     }
+    else 
+        d.innerHTML = 'sin area';
+
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
     marker = L.marker([latitude, longitude]).addTo(map)
