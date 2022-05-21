@@ -41,7 +41,7 @@ var marker, circle,id;
 const options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 20000
+    timeout: 50000
 };
 document.getElementById("button").addEventListener('click', ()=>{
     navigator.geolocation.clearWatch(id);
