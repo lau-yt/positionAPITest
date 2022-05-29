@@ -8,6 +8,7 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
+let array_sections = [false,false,false,false,false,false];
 //puntos de secciones
 //primera sección 
 var pointList = [
@@ -84,10 +85,8 @@ const options = {
 
 // Funcion modulado de getPosition
 function cheack_area1(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            
+    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){            
         if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                    
             return true;
         }
     }
@@ -95,7 +94,6 @@ function cheack_area1(latitude, longitude){
 }
 function cheack_area2(latitude, longitude){
     if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            
         if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
         {
             return true;
@@ -112,13 +110,11 @@ function cheack_area3(latitude, longitude){
     return false;
 }
 function cheack_area4(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-                
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){       
         if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
                         
             return true;
         }
-
     }
     return false;
 }
@@ -130,8 +126,6 @@ function cheack_area5(latitude, longitude){
         }
     }
     return false;
-                        
-    
 }
 function cheack_area6(latitude, longitude){
     if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
@@ -164,8 +158,19 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-function section_x(){
-
+function actualizoVector(area){
+    array_sections[area]=true;
+}
+function chequeoVector(){ //ver donde invocarlo  (:
+    let indice; let array = [];
+    array_sections.forEach((element,index) => {
+        if (element) indice = index;
+    });
+    //indice me va a dar 1 seccion 1
+    // indice e va a dar 2 de la seccion 2
+}
+function almacenarEnCache(){
+    localStorage.setItem(arraySections,array_sections);
 }
 /**
  * 
@@ -178,27 +183,31 @@ function getPosition(position){
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     let d = document.getElementById('title');
-
+    let area;
         if  (cheack_area3(latitude,longitude)){
             d.innerHTML = 'area 3';
+            area = 3;
         }
         else {
-                if (cheack_area1(latitude,longitude)) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                    d.innerHTML = 'area 1';
+                if (cheack_area1(latitude,longitude)){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                    d.innerHTML = 'area 1'; area = 1;
+                }
                 else{
-                    if (cheack_area2(latitude,longitude))
-                        d.innerHTML = 'area 2';
+                    if (cheack_area2(latitude,longitude)){
+                        d.innerHTML = 'area 2'; area=2;
+                    }
                     else{
-                        if (cheack_area4(latitude,longitude))
-                            d.innerHTML = 'area 4';
+                        if (cheack_area4(latitude,longitude)){
+                            d.innerHTML = 'area 4';area=4;
+                        }
                         else {
                             if(cheack_area5(latitude,longitude)){
-                                    d.innerHTML = 'area 5';
+                                    d.innerHTML = 'area 5';area=5;
                                 
                             }
                             else 
                                 if(cheack_area6(latitude,longitude)){    
-                                    d.innerHTML = 'area 6';
+                                    d.innerHTML = 'area 6';area=6;
                                 }
                                 else 
                                     d.innerHTML = 'sin area';    
@@ -206,9 +215,8 @@ function getPosition(position){
                     }    
                 }    
             }
-
-        
-
+        actualizoVector(area);
+        almacenarEnCache();
 
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
