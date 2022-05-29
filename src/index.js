@@ -117,30 +117,33 @@ function getPosition(position){
     var accuracy = position.coords.accuracy;
     let d = document.getElementById('title');
     if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860)))
+        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
             d.innerHTML = 'area 3';
-        if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            if ((latitude <= (-34.883958))&(latitude >= (-34.884010))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                d.innerHTML = 'area 1';
-            else {
-                if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
-                    d.innerHTML = 'area 2';
-            }
         }
-        else 
-            if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-                if ((latitude < (-34.883860))&(latitude >= (-34.883910)))   
-                    d.innerHTML = 'area 4';
+        else {
+            if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+                if ((latitude <= (-34.883958))&(latitude >= (-34.884010))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                    d.innerHTML = 'area 1';
                 else {
-                    if ((latitude < (-34.883910))&(latitude > (-34.883958)))
-                        d.innerHTML = 'area 5';
-                    else 
-                        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-                            d.innerHTML = 'area 6';
-                        else 
-                            d.innerHTML = 'sin area';    
-                }   
+                    if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
+                        d.innerHTML = 'area 2';
+                }
             }
+            else 
+                if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+                    if ((latitude < (-34.883860))&(latitude >= (-34.883910)))   
+                        d.innerHTML = 'area 4';
+                    else {
+                        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
+                            d.innerHTML = 'area 5';
+                        else 
+                            if ((latitude < (-34.883958))&(latitude > (-34.884010)))
+                                d.innerHTML = 'area 6';
+                            else 
+                                d.innerHTML = 'sin area';    
+                    }   
+                }
+        }
     }else 
         d.innerHTML = 'sin area';
 
