@@ -215,8 +215,8 @@ function getPosition(position){
                     }    
                 }    
             }
-        actualizoVector(area);
-        almacenarEnCache();
+      //  actualizoVector(area);
+      //  almacenarEnCache();
 
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
