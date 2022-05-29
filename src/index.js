@@ -116,36 +116,36 @@ function getPosition(position){
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     let d = document.getElementById('title');
-    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
+
+        if  (cheack_area3(latitude,longitude)){
             d.innerHTML = 'area 3';
         }
         else {
-            if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-                if ((latitude <= (-34.883958))&(latitude >= (-34.884010))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                if (cheack_area1(latitude,longitude)) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
                     d.innerHTML = 'area 1';
                 else {
-                    if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
+                    if (cheack_area2(latitude,longitude))
                         d.innerHTML = 'area 2';
                 }
-            }
-            else 
-                if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-                    if ((latitude < (-34.883860))&(latitude >= (-34.883910)))   
+             
+                if (cheack_area4(latitude,longitude))
                         d.innerHTML = 'area 4';
-                    else {
-                        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
+                else {
+                    if(cheack_area5(latitude,longitude)){
                             d.innerHTML = 'area 5';
+                        
+                    }
+                    else 
+                        if(cheack_area6(latitude,longitude)){    
+                               d.innerHTML = 'area 6';
+                        }
                         else 
-                            if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-                                d.innerHTML = 'area 6';
-                            else 
-                                d.innerHTML = 'sin area';    
-                    }   
-                }
-        }
-    }else 
-        d.innerHTML = 'sin area';
+                            d.innerHTML = 'sin area';    
+                }   
+                
+            }
+        
+
 
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
@@ -157,6 +157,61 @@ function getPosition(position){
     //map.fitBounds(group.getBounds()); //Sets a map view that contains the given geographical bounds with the maximum zoom level possible.
     let msg = 'Coordinate: Latitud: '+latitude+' Longitud: '+longitude+' Precision (m): '+accuracy+' Altitud: '+altitude+' Orientacion (grados): '+heading+' velocidad: '+speed;
     console.log(msg);
+}
+
+// Funcion modulado de getPosition
+function cheack_area1(latitude, longitude){
+    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            
+        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                    
+            return true;
+        }
+    }
+}
+function cheack_area2(latitud, longitud){
+    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            
+        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
+        {
+            return true;
+        }
+    }
+}
+function cheack_area3(latitud, longitud){
+    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
+        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
+            return true;
+        }
+    }
+}
+function cheack_area4(latitud, longitud){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+                
+        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
+                        
+            return true;
+        }
+
+    }
+}
+function cheack_area5(latitud, longitud){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
+        {
+            return true;
+        }
+    }
+                        
+    
+}
+function cheack_area6(latitud, longitud){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
+        {
+            return true;
+        }
+    }
 }
 /**
  * 
