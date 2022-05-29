@@ -11,32 +11,70 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 //puntos de secciones
 //primera sección 
 var pointList = [
-    [-34.883993,-58.02002], 
-    [-34.883958,-58.02002],
+    [-34.884010,-58.020020], 
+    [-34.883958,-58.020020],
     [-34.883958, -58.019937],
-    [-34.883993, -58.019937]
+    [-34.884010, -58.019937]
 ];
 //segunda sección 
 let pointList2 = [
     [-34.883958,-58.02002],
     [-34.883958, -58.019937],
-    [-34.883915, -58.019937],
-    [-34.883915,-58.02002],
+    [-34.883860, -58.019937],
+    [-34.883860,-58.02002],
 ];
-var firstpolyline = new L.polygon(pointList, {
+//tercera sección 
+let pointList3 = [
+    [-34.883860, -58.019854],
+    [-34.883860,-58.02002],
+    [-34.883800, -58.02002],
+    [-34.883800, -58.019854]
+];
+//cuarta sección 
+let pointList4 = [
+    [-34.883860, -58.019937],
+    [-34.883860,-58.019854],
+    [-34.883910, -58.019854],
+    [-34.883910, -58.019937]
+];
+//quinta sección 
+let pointList5 = [
+    [-34.883958, -58.019937],
+    [-34.883958,-58.019854],
+    [-34.883910, -58.019854],
+    [-34.883910, -58.019937]
+];
+//sexta sección 
+let pointList6 = [
+    [-34.883958, -58.019937],
+    [-34.883958,-58.019854],
+    [-34.884010, -58.019854],
+    [-34.884010, -58.019937]
+];
+let custome = {
     color: 'red',
     weight: 1,
     opacity: 1,
     smoothFactor: 1
-});
+}
+var firstpolyline = new L.polygon(pointList,custome);
 firstpolyline.addTo(map);
-firstpolyline = new L.polygon(pointList2, {
-    color: 'blue',
-    weight: 1,
-    opacity: 1,
-    smoothFactor: 1
-});
+custome.color = 'blue'
+firstpolyline = new L.polygon(pointList2, custome);
 firstpolyline.addTo(map);
+custome.color = 'green'
+firstpolyline = new L.polygon(pointList3, custome);
+firstpolyline.addTo(map);
+custome.color = 'yellow'
+firstpolyline = new L.polygon(pointList4, custome);
+firstpolyline.addTo(map);
+custome.color = 'orange'
+firstpolyline = new L.polygon(pointList5, custome);
+firstpolyline.addTo(map);
+custome.color = 'black'
+firstpolyline = new L.polygon(pointList6, custome);
+firstpolyline.addTo(map);
+
 var marker, circle,id;
 const options = {
     enableHighAccuracy: true,
@@ -64,17 +102,6 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-/**
- * (x1,y1) (x2,y2) par de coord continuas de la sección; formato [lat,lng] -> [y,x]
- * lngC longitud actual tomada por el gps
- * Retorna el valor de la recta tangente por 2 puntos de la sección (latitud)
- */
-function calculateLineTg(x1,y1,x2,y2,lngC,latC){
-    let m = (y2 - y1) / (x2 - x1); //    [-34.884032,-58.019961], [-34.883993,-58.020022],
-    let y = (m * (lngC-x1)) + (y1); //ec recta por 2 puntos, x
-    let x = ((latC - y1)/ m) + x1;
-    return {y,x}; //retorna la latitud calculada
-}
 function section_x(){
 
 }
@@ -89,17 +116,30 @@ function getPosition(position){
     var speed = position.coords.speed;
     var accuracy = position.coords.accuracy;
     let d = document.getElementById('title');
-    if((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-        if ((latitude <= (-34.883915))&(latitude >= (-34.883958))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-            d.innerHTML = 'area 1';
-        else {
-            if ((latitude < (-34.883958))&(latitude >= (-34.883993)))
-                d.innerHTML = 'area 2';
-            else 
-                d.innerHTML = 'sin area';    
+    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
+        if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            if ((latitude <= (-34.883958))&(latitude >= (-34.884010))) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                d.innerHTML = 'area 1';
+            else {
+                if ((latitude < (-34.883958))&(latitude >= (-34.883860)))
+                    d.innerHTML = 'area 2';
+            }
         }
-    }
-    else 
+        else 
+            if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+                if ((latitude <= (-34.883860))&(latitude >= (-34.883910)))   
+                    d.innerHTML = 'area 4';
+                else {
+                    if ((latitude < (-34.883910))&(latitude >= (-34.883958)))
+                        d.innerHTML = 'area 5';
+                    else 
+                        if ((latitude < (-34.883958))&(latitude >= (-34.884010)))
+                            d.innerHTML = 'area 6';
+                        else 
+                            d.innerHTML = 'sin area';    
+                }   
+            }
+    }else 
         d.innerHTML = 'sin area';
 
     removeAfter();
