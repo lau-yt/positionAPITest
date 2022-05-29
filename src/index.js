@@ -81,6 +81,68 @@ const options = {
     maximumAge: 20000,
     timeout: 10000,
 };
+
+// Funcion modulado de getPosition
+function cheack_area1(latitude, longitude){
+    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            
+        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+                    
+            return true;
+        }
+    }
+    return false;
+}
+function cheack_area2(latitude, longitude){
+    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
+            
+        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+function cheack_area3(latitude, longitude){
+    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
+        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
+            return true;
+        }
+    }
+    return false;
+}
+function cheack_area4(latitude, longitude){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+                
+        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
+                        
+            return true;
+        }
+
+    }
+    return false;
+}
+function cheack_area5(latitude, longitude){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
+        {
+            return true;
+        }
+    }
+    return false;
+                        
+    
+}
+function cheack_area6(latitude, longitude){
+    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
+        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 document.getElementById("button").addEventListener('click', ()=>{
     navigator.geolocation.clearWatch(id);
     console.log('congratulations, you deleted the id (: the end');
@@ -159,60 +221,7 @@ function getPosition(position){
     console.log(msg);
 }
 
-// Funcion modulado de getPosition
-function cheack_area1(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            
-        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                    
-            return true;
-        }
-    }
-}
-function cheack_area2(latitud, longitud){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-            
-        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
-        {
-            return true;
-        }
-    }
-}
-function cheack_area3(latitud, longitud){
-    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
-            return true;
-        }
-    }
-}
-function cheack_area4(latitud, longitud){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-                
-        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
-                        
-            return true;
-        }
 
-    }
-}
-function cheack_area5(latitud, longitud){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
-        {
-            return true;
-        }
-    }
-                        
-    
-}
-function cheack_area6(latitud, longitud){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-        {
-            return true;
-        }
-    }
-}
 /**
  * 
  * @param {GeolocationPositionError} error 
