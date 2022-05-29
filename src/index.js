@@ -185,27 +185,28 @@ function getPosition(position){
         else {
                 if (cheack_area1(latitude,longitude)) //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
                     d.innerHTML = 'area 1';
-                else {
+                else{
                     if (cheack_area2(latitude,longitude))
                         d.innerHTML = 'area 2';
-                }
-             
-                if (cheack_area4(latitude,longitude))
-                        d.innerHTML = 'area 4';
-                else {
-                    if(cheack_area5(latitude,longitude)){
-                            d.innerHTML = 'area 5';
-                        
-                    }
-                    else 
-                        if(cheack_area6(latitude,longitude)){    
-                               d.innerHTML = 'area 6';
-                        }
-                        else 
-                            d.innerHTML = 'sin area';    
-                }   
-                
+                    else{
+                        if (cheack_area4(latitude,longitude))
+                            d.innerHTML = 'area 4';
+                        else {
+                            if(cheack_area5(latitude,longitude)){
+                                    d.innerHTML = 'area 5';
+                                
+                            }
+                            else 
+                                if(cheack_area6(latitude,longitude)){    
+                                    d.innerHTML = 'area 6';
+                                }
+                                else 
+                                    d.innerHTML = 'sin area';    
+                        }   
+                    }    
+                }    
             }
+
         
 
 
