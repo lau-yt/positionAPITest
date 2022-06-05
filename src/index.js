@@ -261,11 +261,11 @@ function getPosition(position){
                 }    
             }
     
-      if(area in secciones){
-        //  actualizopila(area);
-        actualizopila(area);
-        //  almacenarEnCache();
-      }      
+    //   if(area in secciones){
+    //     //  actualizopila(area);
+    //     actualizopila(area);
+    //     //  almacenarEnCache();
+    //   }      
 
 
     removeAfter();
