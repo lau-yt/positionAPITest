@@ -191,7 +191,7 @@ function actualizopila(area){
 
     if(pila.tamanio()==1){
         console.log("tiene tamanio 1, la pila tiene ",pila);
-        alert("pila con tamanio 1"+pila.elementos())
+        alert("pila con tamanio 1"+pila.elementos)
         anterior=actual;
     }
     if(pila.tamanio() >=2){
@@ -199,7 +199,7 @@ function actualizopila(area){
         if(anterior+1 == actual){
             anterior=actual // luego continuo pusheando
             // estas en la seccion actual
-            alert("pila"+pila.elementos())
+            alert("pila"+pila.elementos)
             // alert("estas en la seccion "+(actual))
             if(pila.tamanio()==6){
                 //fin del recorrido
