@@ -8,7 +8,32 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
-let array_sections = [false,false,false,false,false,false];
+
+var anterior;
+var actual;
+var secciones=[1,2,3,4,5,6]
+
+class Pila {
+    elementos = [];
+    push = (elemento) => {
+        return this.elementos.push(elemento);
+    }
+    pop = () =>{
+        return this.elementos.pop();
+    }
+    esVacio = ()=>{
+        return this.elementos.length = 0;
+    }
+    vaciar = ()=>{
+        this.elementos.length = 0;
+    }
+    tamanio = ()=>{
+        return this.elementos.length;
+    }
+}
+
+const pila = new Pila();
+//let array_sections = [0,0,0,0,0,0];
 //puntos de secciones
 //primera sección 
 var pointList = [
@@ -158,17 +183,34 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-function actualizoVector(area){
-    array_sections[area]=true;
+function actualizopila(area){
+    
+    actual=area;
+    pila.push(area);
+    if(pila.length==1){
+        anterior=actual;
+    }
+    if(pila.length >=2){
+        if(anterior+1 == actual){
+            anterior=actual // luego continuo pusheando
+            // estas en la seccion actual
+            alert("estas en la seccion ",actual)
+            if(pila.length==6){
+                //fin del recorrido
+                alert("Fin del recorrido");
+                //limpieza de pila.
+                pila.vaciar();
+            }
+        }
+        else{
+            // se salteo una seccion
+            pila.pop();    //desapilo al actual
+            alert("Debe ir a la seccion ",anterior+1);
+
+        }
+    }
 }
-function chequeoVector(){ //ver donde invocarlo  (:
-    let indice; let array = [];
-    array_sections.forEach((element,index) => {
-        if (element) indice = index;
-    });
-    //indice me va a dar 1 seccion 1
-    // indice e va a dar 2 de la seccion 2
-}
+
 function almacenarEnCache(){
     localStorage.setItem(arraySections,array_sections);
 }
@@ -187,10 +229,13 @@ function getPosition(position){
         if  (cheack_area3(latitude,longitude)){
             d.innerHTML = 'area 3';
             area = 3;
+           
+        
         }
         else {
                 if (cheack_area1(latitude,longitude)){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
                     d.innerHTML = 'area 1'; area = 1;
+                    
                 }
                 else{
                     if (cheack_area2(latitude,longitude)){
@@ -215,8 +260,13 @@ function getPosition(position){
                     }    
                 }    
             }
-      //  actualizoVector(area);
-      //  almacenarEnCache();
+    
+      if(area in secciones){
+        //  actualizopila(area);
+        actualizopila(area);
+        //  almacenarEnCache();
+      }      
+
 
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
