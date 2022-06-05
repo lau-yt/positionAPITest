@@ -209,7 +209,7 @@ function actualizopila(area){
         else{
             // se salteo una seccion
             pila.pop();    //desapilo al actual
-            alert("pila"+pila.elementos())
+            // alert("pila"+pila.elementos())
             alert("Debe ir a la seccion "+(anterior+1));
 
         }
