@@ -232,14 +232,7 @@ function getPosition(position){
     let area;
         if  (cheack_area3(latitude,longitude)){
             d.innerHTML = 'area 3';
-            area = 3;
-            if(area in secciones){
-                //  actualizopila(area);
-        
-                actualizopila(area);
-                //  almacenarEnCache();
-              }      
-        
+            area = 3;        
         }
         else {
                 if (cheack_area1(latitude,longitude)){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
@@ -269,13 +262,14 @@ function getPosition(position){
                         }   
                     }    
                 }   
-                if(area in secciones){
-                    //  actualizopila(area);
-
-                    actualizopila(area);
-                    //  almacenarEnCache();
-                  }       
             }
+            
+        if(area in secciones){
+            //  actualizopila(area);
+    
+            actualizopila(area);
+            //  almacenarEnCache();
+            }      
     
 
 
