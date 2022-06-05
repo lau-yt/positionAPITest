@@ -121,6 +121,7 @@ function cheack_area2(latitude, longitude){
     if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
         if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
         {
+
             return true;
         }
     }
@@ -187,15 +188,18 @@ function actualizopila(area){
     
     actual=area;
     pila.push(area);
-    if(pila.length==1){
+
+    if(pila.tamanio()==1){
+        console.log("tiene tamanio 1, la pila tiene ",pila);
         anterior=actual;
     }
-    if(pila.length >=2){
+    if(pila.tamanio() >=2){
+        console.log("tiene tamanio mayor igual a 2");
         if(anterior+1 == actual){
             anterior=actual // luego continuo pusheando
             // estas en la seccion actual
-            alert("estas en la seccion ",actual)
-            if(pila.length==6){
+            alert("estas en la seccion "+(actual))
+            if(pila.tamanio()==6){
                 //fin del recorrido
                 alert("Fin del recorrido");
                 //limpieza de pila.
@@ -205,7 +209,7 @@ function actualizopila(area){
         else{
             // se salteo una seccion
             pila.pop();    //desapilo al actual
-            alert("Debe ir a la seccion ",anterior+1);
+            alert("Debe ir a la seccion "+(anterior+1));
 
         }
     }
@@ -229,7 +233,12 @@ function getPosition(position){
         if  (cheack_area3(latitude,longitude)){
             d.innerHTML = 'area 3';
             area = 3;
-           
+            if(area in secciones){
+                //  actualizopila(area);
+        
+                actualizopila(area);
+                //  almacenarEnCache();
+              }      
         
         }
         else {
@@ -240,6 +249,7 @@ function getPosition(position){
                 else{
                     if (cheack_area2(latitude,longitude)){
                         d.innerHTML = 'area 2'; area=2;
+                        
                     }
                     else{
                         if (cheack_area4(latitude,longitude)){
@@ -258,14 +268,16 @@ function getPosition(position){
                                     d.innerHTML = 'sin area';    
                         }   
                     }    
-                }    
+                }   
+                if(area in secciones){
+                    //  actualizopila(area);
+
+                    actualizopila(area);
+                    //  almacenarEnCache();
+                  }       
             }
     
-    //   if(area in secciones){
-    //     //  actualizopila(area);
-    //     actualizopila(area);
-    //     //  almacenarEnCache();
-    //   }      
+
 
 
     removeAfter();
