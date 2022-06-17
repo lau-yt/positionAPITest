@@ -11,7 +11,7 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var anterior;
 var actual;
-var secciones=[1,2,3,4,5,6]
+var secciones=[0,0,0,0,0,0];
 
 class Pila {
     elementos = [];
@@ -184,39 +184,69 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
+function historialVisitado (stand){
+    let ok = false;
+    if (stand >= 1 && stand <=6 )
+        ok = (secciones[stand].match(/\*/).length > 0);
+    return ok;
+}
+function estaVacioHistorial(){
+    let ok = true;
+    array.forEach(element => {
+       if (element != 0) {
+        return false;
+       } 
+    });
+}
 function actualizopila(area){
-    
-    actual=area;
-    pila.push(area);
-
-    if(pila.tamanio()==1){
-        console.log("tiene tamanio 1, la pila tiene ",pila);
-        alert("pila con tamanio 1"+pila.elementos)
-        anterior=actual;
-    }
-    if(pila.tamanio() >=2){
-        console.log("tiene tamanio mayor igual a 2");
-        if(anterior+1 == actual){
-            anterior=actual // luego continuo pusheando
-            // estas en la seccion actual
-            alert("pila"+pila.elementos)
-            // alert("estas en la seccion "+(actual))
-            if(pila.tamanio()==6){
-                //fin del recorrido
-                alert("Fin del recorrido");
-                //limpieza de pila.
-                pila.vaciar();
+    let expresion = '/\*/';
+    let d = document.getElementById('hist');
+    let areaEstoy = area;
+    if (estaVacioHistorial()) { //caso del historial vacio
+        if (areaEstoy == '1'){
+            d.innerHTML='visualiza area 1';
+            sectores[areaEstoy]=areaEstoy;
+        }
+        else
+            d.innerHTML='dirigirse al area 1';
+    }else{ //el historial tiene contenido
+        if((secciones[secciones.length-1] == area) | (secciones[secciones.length-1] == area+'*')){ //estoy en la misma seccion
+            console.log('no hago nada');
+        }
+        else{ //es un area diferente
+            if (secciones[secciones-length-1].match(/\*/) == null){ //NO fue visitado
+                if (secciones[secciones.length-1] < areaEstoy ){ //estoy en la siguiente seccion a visitar
+                    d.innerHTML='visualizar area',areaEstoy;
+                    sectores[areaEstoy]=areaEstoy;
+                }    
+                else { //es que volvi para atras (seccion ya visitada)
+                    if (secciones[secciones.length-1] > areaEstoy){
+                        sectores[areaEstoy]=areaEstoy+'*';
+                        d.innerHTML='ya visite el sector'+areaEstoy;
+                    }
+                    else d.innerHTML='no hago nada';
+                }
+            } 
+            else { //SI fue visitado
+                if (historialVisitado(areaEstoy)){ //me fijo si ya visite el stand anteriormente por el historial
+                    secciones[areaEstoy] = areaEstoy+'*';
+                    d.innerHTML='ya visite el stand';
+                }else{ //sino lo visite anteriormente
+                    var seccionComparar = secciones[secciones.length-1][0];
+                    seccionComparar = Number.parseInt(seccionComparar); 
+                    if (seccionComparar < areaEstoy){
+                        d.innerHTML='visualizar area '+areaEstoy;
+                        sectores[areaEstoy]=areaEstoy;
+                    } else {
+                        d.innerHTML ='error de sensado';
+                    }
+                }
             }
-        }
-        else{
-            // se salteo una seccion
-            alert("pila falla "+pila.elementos);
-            pila.pop();    //desapilo al actual
             
-            // alert("Debe ir a la seccion "+(anterior+1));
-
         }
+
     }
+    
 }
 
 function almacenarEnCache(){
@@ -235,45 +265,43 @@ function getPosition(position){
     let d = document.getElementById('title');
     let area;
         if  (cheack_area3(latitude,longitude)){
-            d.innerHTML = 'area 3';
+            //d.innerHTML = '3';
             area = 3;        
         }
         else {
                 if (cheack_area1(latitude,longitude)){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                    d.innerHTML = 'area 1'; area = 1;
+                    d.innerHTML = '1'; area = 1;
                     
                 }
                 else{
                     if (cheack_area2(latitude,longitude)){
-                        d.innerHTML = 'area 2'; area=2;
+                        d.innerHTML = '2'; area=2;
                         
                     }
                     else{
                         if (cheack_area4(latitude,longitude)){
-                            d.innerHTML = 'area 4';area=4;
+                            d.innerHTML = '4';area=4;
                         }
                         else {
                             if(cheack_area5(latitude,longitude)){
-                                    d.innerHTML = 'area 5';area=5;
+                                    d.innerHTML = '5';area=5;
                                 
                             }
                             else 
                                 if(cheack_area6(latitude,longitude)){    
-                                    d.innerHTML = 'area 6';area=6;
+                                    d.innerHTML = '6';area=6;
                                 }
                                 else 
-                                    d.innerHTML = 'sin area';    
+                                 d.innerHTML = 'sin area';    
                         }   
                     }    
                 }   
             }
 
-        if(area in secciones){
-            //  actualizopila(area);
-    
+       // if(area in secciones){
             actualizopila(area);
             //  almacenarEnCache();
-            }      
+        //    }      
     
 
 
