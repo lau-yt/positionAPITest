@@ -11,10 +11,12 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var anterior;
 var actual;
-var secciones=[0,0,0,0,0,0];
 
 class Pila {
     elementos = [];
+    top = ()=> {
+        return this.elementos[this.elementos.length-1];
+    }
     push = (elemento) => {
         return this.elementos.push(elemento);
     }
@@ -22,17 +24,20 @@ class Pila {
         return this.elementos.pop();
     }
     esVacio = ()=>{
-        return this.elementos.length = 0;
+        return (this.elementos.length == 0);
     }
     vaciar = ()=>{
-        this.elementos.length = 0;
+        this.elementos.length == 0;
     }
     tamanio = ()=>{
         return this.elementos.length;
     }
 }
 
-const pila = new Pila();
+var pila = new Pila();
+var pilaAux = new Pila();
+let stand = {numero:0,visitado:false}
+
 //let array_sections = [0,0,0,0,0,0];
 //puntos de secciones
 //primera sección 
@@ -184,60 +189,76 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-function historialVisitado (stand){
-    let ok = false;
-    if (stand >= 1 && stand <=6 )
-        ok = (secciones[stand].match(/\*/).length > 0);
+function historialNoVisitado (stand){
+    let aux; let ok = true;
+    for (let i=0;i<pila.tamanio()-1; i++){
+        aux = pila.pop();
+        pilaAux.push(aux);
+        if ((aux.numero == stand)&&(aux.visitado == true)) {
+            ok = false; 
+            break;
+        } 
+    }
+    pila = pilaAux;
     return ok;
 }
 function estaVacioHistorial(){
     let ok = true;
     secciones.forEach(element => {
        if (element != 0) {
-        return false;
+        ok = false;
        } 
     });
-    return true;
+    return ok;
 }
 function actualizopila(area){
     let expresion = '/\*/';
     let d = document.getElementById('hist');
     let areaEstoy = area;
-    if (estaVacioHistorial()) { //caso del historial vacio
-        if (areaEstoy == '1'){
+    if (pila.esVacio()) { //caso del historial vacio
+        if (areaEstoy == 1){
             d.innerHTML='visualiza area 1';
-            secciones[areaEstoy]=areaEstoy;
+            stand.numero = area;
+            stand.visitado = false;
+            pila.push(stand);
+            console.log(pila);
         }
         else
             d.innerHTML='dirigirse al area 1';
     }else{ //el historial tiene contenido
-        if((secciones[secciones.length-1] == area) | (secciones[secciones.length-1] == area+'*')){ //estoy en la misma seccion
-            console.log('no hago nada');
+        if( pila.top().numero == area ){ //estoy en la misma seccion
+           d.innerHTML='no hago nada';
         }
         else{ //es un area diferente
-            if (secciones[secciones-length-1].match(/\*/) == null){ //NO fue visitado
-                if (secciones[secciones.length-1] < areaEstoy ){ //estoy en la siguiente seccion a visitar
-                    d.innerHTML='visualizar area',areaEstoy;
-                    secciones[areaEstoy]=areaEstoy;
+            if (pila.top().visitado == false){ //NO fue visitado
+                if (pila.top().numero < area ){ //estoy en la siguiente seccion a visitar
+                    d.innerHTML='visualizar area '+area;
+                    stand.numero = area;
+                    stand.visitado = false;
+                    pila.push(stand);
                 }    
                 else { //es que volvi para atras (seccion ya visitada)
-                    if (secciones[secciones.length-1] > areaEstoy){
-                        secciones[areaEstoy]=areaEstoy+'*';
+                    if (pila.top().numero > area){ //marco como visitada
                         d.innerHTML='ya visite el sector'+areaEstoy;
+                        stand.numero = area;
+                        stand.visitado = true;
+                        pila.push(stand);
                     }
                     else d.innerHTML='no hago nada';
                 }
             } 
             else { //SI fue visitado
-                if (historialVisitado(areaEstoy)){ //me fijo si ya visite el stand anteriormente por el historial
-                    secciones[areaEstoy] = areaEstoy+'*';
+                if (historialNoVisitado(area)){ //me fijo si ya visite el stand anteriormente por el historial            
                     d.innerHTML='ya visite el stand';
+                    stand.numero = area;
+                    stand.visitado = true;
+                    pila.push(stand);
                 }else{ //sino lo visite anteriormente
-                    var seccionComparar = secciones[secciones.length-1][0];
-                    seccionComparar = Number.parseInt(seccionComparar); 
-                    if (seccionComparar < areaEstoy){
-                        d.innerHTML='visualizar area '+areaEstoy;
-                        secciones[areaEstoy]=areaEstoy;
+                    if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
+                        d.innerHTML='visualizar area '+area;
+                        stand.numero = area;
+                        stand.visitado = false;
+                        secciones.push(stand);
                     } else {
                         d.innerHTML ='error de sensado';
                     }
