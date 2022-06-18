@@ -43,7 +43,7 @@ class Pila {
 
 var pila = new Pila();
 var pilaAux = new Pila();
-var stand = {numero:0,visitado:false}
+
 
 //let array_sections = [0,0,0,0,0,0];
 //puntos de secciones
@@ -197,12 +197,13 @@ function removeAfter(){
     //if (circle) map.removeLayer(circle);
 }
 function historialNoVisitado (stand){
+    
     let aux; let ok = true; let i=0;
     while (i<pila.tamanio()){
         aux = pila.pop();
         pilaAux.push(aux);
         i++;
-        d.innerHTML="la pila tiene  historialNoVisitado : "+pilaAux.toString();
+        // d.innerHTML="la pila tiene  historialNoVisitado : "+pilaAux.toString();
         if ((aux.numero == stand)&&(aux.visitado == true)) {
             ok = false; 
             break;
@@ -221,6 +222,7 @@ function estaVacioHistorial(){
     return ok;
 }
 function actualizopila(area){
+    var stand = {numero:0,visitado:false}
     let expresion = '/\*/';
     let d = document.getElementById('hist');
     let areaEstoy = area;
@@ -230,34 +232,34 @@ function actualizopila(area){
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
-            d.innerHTML="la pila tiene: "+pila.toString();
+            // d.innerHTML="la pila tiene: "+pila.toString(); // ya no lo necsito
             console.log(pila);
         }
         else
-            d.innerHTML='dirigirse al area 1';
+            d.innerHTML='dirigirse al area 1'; //entra
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){ //estoy en la misma seccion
-           d.innerHTML='no hago nada loco';
+           d.innerHTML='Aun sigues en la misma posicion'; //entra
         }
         else{ //es un area diferente
             d.innerHTML='es un area diferente: stand= '+stand.numero+stand.visitado;
             if (pila.top().visitado == false){ //NO fue visitado
-                if (pila.top().numero < area ){ //estoy en la siguiente seccion a visitar
+                if ((pila.top().numero < area )&&(pila.top().numero+1 == area )){ //estoy en la siguiente seccion a visitar
                     d.innerHTML='visualizar area '+area;
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
-                    d.innerHTML="es un area diferente la pila tiene: "+pila.toString();
+                    d.innerHTML="Siguiente stand por visitar la pila tiene: "+pila.toString(); //entra
                 }    
                 else { //es que volvi para atras (seccion ya visitada)
-                    if (pila.top().numero > area){ //marco como visitada
-                        d.innerHTML='ya visite el sector'+areaEstoy;
+                    if (pila.top().numero-1==area){ //marco como visitada
+                        // d.innerHTML='ya visite el sector'+areaEstoy;
                         stand.numero = area;
                         stand.visitado = true;
-                        pila.push(stand);
-                        d.innerHTML="PUSHEO EN que volvi para atras (seccion ya visitada)";
+                        pila.push(stand);  //con este anda mal!!!!
+                        d.innerHTML="(Stand ya visitado) la pila poseee: "+pila.toString();
                     }
-                    else d.innerHTML='no hago nada volvi atras';
+                    else d.innerHTML='Error de sensado!!!!';// vamos a verificar si entra
                 }
             } 
             else { //SI fue visitado
@@ -265,8 +267,8 @@ function actualizopila(area){
                     d.innerHTML='ya visite el stand';
                     stand.numero = area;
                     stand.visitado = true;
-                    pila.push(stand);
-                    d.innerHTML="PUSHEO EN SI FUE VISITADO";
+                    // pila.push(stand);
+                    d.innerHTML="PUSHEO EN SI FUE VISITADO!!!";
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;  //funciona
@@ -302,7 +304,7 @@ function getPosition(position){
     let d = document.getElementById('title');
     let area;
         if  (cheack_area3(latitude,longitude)){
-            //d.innerHTML = '3';
+            d.innerHTML = '3';
             area = 3;        
         }
         else {
