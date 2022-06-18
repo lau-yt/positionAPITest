@@ -264,11 +264,11 @@ function actualizopila(area){
             } 
             else { //SI fue visitado
                 if (historialNoVisitado(area)){ //me fijo si ya visite el stand anteriormente por el historial            
-                    d.innerHTML='ya visite el stand';
+                    // d.innerHTML='ya visite el stand';
                     stand.numero = area;
                     stand.visitado = true;
                     // pila.push(stand);
-                    d.innerHTML="PUSHEO EN SI FUE VISITADO!!!";
+                    d.innerHTML="estoy por primera vez en el stand: "+stand.numero;
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;  //funciona
