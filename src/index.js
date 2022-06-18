@@ -227,7 +227,7 @@ function actualizopila(area){
             d.innerHTML='dirigirse al area 1';
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){ //estoy en la misma seccion
-           d.innerHTML='no hago nada';
+           d.innerHTML='no hago nada loco';
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -244,7 +244,7 @@ function actualizopila(area){
                         stand.visitado = true;
                         pila.push(stand);
                     }
-                    else d.innerHTML='no hago nada';
+                    else d.innerHTML='no hago nada volvi atras';
                 }
             } 
             else { //SI fue visitado
@@ -255,7 +255,7 @@ function actualizopila(area){
                     pila.push(stand);
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
-                        d.innerHTML='visualizar area '+area;
+                        d.innerHTML='visualizar area '+area;  //funciona
                         stand.numero = area;
                         stand.visitado = false;
                         secciones.push(stand);
