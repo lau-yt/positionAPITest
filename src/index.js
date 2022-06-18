@@ -268,7 +268,13 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); // este push no se si va. para mi no. ori lo dijo
-                    d.innerHTML="ya visite el stand: "+stand.numero;
+                    if(stand.numero in [1,2,3,4,5,6]){
+                        d.innerHTML="ya visite el stand: "+stand.numero;
+                    }
+                    else {
+                        d.innerHTML ='error de sensado';
+                    }
+                    
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;  //funciona
