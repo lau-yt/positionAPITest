@@ -197,10 +197,11 @@ function removeAfter(){
     //if (circle) map.removeLayer(circle);
 }
 function historialNoVisitado (stand){
-    let aux; let ok = true;
-    for (let i=0;i<pila.tamanio()-1; i++){
+    let aux; let ok = true; let i=0;
+    while (i<pila.tamanio()-1){
         aux = pila.pop();
         pilaAux.push(aux);
+        i++;
         d.innerHTML="la pila tiene  historialNoVisitado : "+pilaAux.toString();
         if ((aux.numero == stand)&&(aux.visitado == true)) {
             ok = false; 
