@@ -221,6 +221,7 @@ function actualizopila(area){
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
+            d.innerHTML="la pila tiene: "+pila.elementos;
             console.log(pila);
         }
         else
@@ -236,6 +237,7 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
+                    d.innerHTML="la pila tiene: "+pila.elementos;
                 }    
                 else { //es que volvi para atras (seccion ya visitada)
                     if (pila.top().numero > area){ //marco como visitada
@@ -243,6 +245,7 @@ function actualizopila(area){
                         stand.numero = area;
                         stand.visitado = true;
                         pila.push(stand);
+                        d.innerHTML="la pila tiene: "+pila.elementos;
                     }
                     else d.innerHTML='no hago nada volvi atras';
                 }
@@ -253,12 +256,14 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand);
+                    d.innerHTML="la pila tiene: "+pila.elementos;
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;  //funciona
                         stand.numero = area;
                         stand.visitado = false;
                         secciones.push(stand);
+                        d.innerHTML="la pila tiene: "+pila.elementos;
                     } else {
                         d.innerHTML ='error de sensado';
                     }
