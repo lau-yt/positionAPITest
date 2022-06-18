@@ -37,6 +37,7 @@ class Pila {
         for(let i=0;i<this.elementos.length;i++){
             char=char+this.elementos[i].numero+this.elementos[i].visitado;
         }
+        return char;
     }
 }
 
@@ -200,6 +201,7 @@ function historialNoVisitado (stand){
     for (let i=0;i<pila.tamanio()-1; i++){
         aux = pila.pop();
         pilaAux.push(aux);
+        d.innerHTML="la pila tiene  historialNoVisitado : "+pilaAux.toString();
         if ((aux.numero == stand)&&(aux.visitado == true)) {
             ok = false; 
             break;
@@ -237,13 +239,14 @@ function actualizopila(area){
            d.innerHTML='no hago nada loco';
         }
         else{ //es un area diferente
+            d.innerHTML='es un area diferente: stand= '+stand.numero+stand.visitado;
             if (pila.top().visitado == false){ //NO fue visitado
                 if (pila.top().numero < area ){ //estoy en la siguiente seccion a visitar
                     d.innerHTML='visualizar area '+area;
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
-                    d.innerHTML="la pila tiene: "+pila.toString();
+                    d.innerHTML="es un area diferente la pila tiene: "+pila.toString();
                 }    
                 else { //es que volvi para atras (seccion ya visitada)
                     if (pila.top().numero > area){ //marco como visitada
@@ -251,7 +254,7 @@ function actualizopila(area){
                         stand.numero = area;
                         stand.visitado = true;
                         pila.push(stand);
-                        d.innerHTML="la pila tiene: "+pila.toString();
+                        d.innerHTML="PUSHEO EN que volvi para atras (seccion ya visitada)";
                     }
                     else d.innerHTML='no hago nada volvi atras';
                 }
@@ -262,7 +265,7 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand);
-                    d.innerHTML="la pila tiene: "+pila.toString();
+                    d.innerHTML="PUSHEO EN SI FUE VISITADO";
                 }else{ //sino lo visite anteriormente
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;  //funciona
