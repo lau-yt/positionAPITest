@@ -254,7 +254,7 @@ function actualizopila(area){
                     stand.visitado = true;
                     pila.push(stand);
                 }else{ //sino lo visite anteriormente
-                    if ((pila.pop().visitado == true)&&(pila.pop().numero < area)){
+                    if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
                         d.innerHTML='visualizar area '+area;
                         stand.numero = area;
                         stand.visitado = false;
