@@ -43,7 +43,7 @@ class Pila {
 
 var pila = new Pila();
 var pilaAux = new Pila();
-let stand = {numero:0,visitado:false}
+var stand = {numero:0,visitado:false}
 
 //let array_sections = [0,0,0,0,0,0];
 //puntos de secciones
@@ -198,7 +198,7 @@ function removeAfter(){
 }
 function historialNoVisitado (stand){
     let aux; let ok = true; let i=0;
-    while (i<pila.tamanio()-1){
+    while (i<pila.tamanio()){
         aux = pila.pop();
         pilaAux.push(aux);
         i++;
