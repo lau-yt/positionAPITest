@@ -33,7 +33,10 @@ class Pila {
         return this.elementos.length;
     }
     toString = ()=>{
-        return this.elementos[this.elementos];
+        var char="";
+        for(let i=0;i<this.elementos.length;i++){
+            char=char+this.elementos[i].numero+this.elementos[i].visitado;
+        }
     }
 }
 
