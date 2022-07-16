@@ -8,10 +8,6 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
-
-var anterior;
-var actual;
-
 class Pila {
     elementos = [];
     top = ()=> {
@@ -44,8 +40,6 @@ class Pila {
 var pila = new Pila();
 var pilaAux = new Pila();
 
-
-//let array_sections = [0,0,0,0,0,0];
 //puntos de secciones
 //primera sección 
 var pointList = [
@@ -120,10 +114,9 @@ const options = {
     timeout: 10000,
 };
 
-// Funcion modulado de getPosition
 function cheack_area1(latitude, longitude){
     if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){            
-        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
+        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ 
             return true;
         }
     }
@@ -181,6 +174,7 @@ document.getElementById("button").addEventListener('click', ()=>{
     }    
 );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
+
 function getLocation(){
     if (navigator.geolocation){
         //setInterval(()=>{  navigator.geolocation.getCurrentPosition(getPosition,getPosError,options);
@@ -194,7 +188,6 @@ function getLocation(){
 }
 function removeAfter(){
     if (marker) map.removeLayer(marker);
-    //if (circle) map.removeLayer(circle);
 }
 function areaFueVisitada(stand){
     let aux; let ok = false; let i=0;
@@ -210,70 +203,59 @@ function areaFueVisitada(stand){
     pila = pilaAux;
     return ok;
 }
-function estaVacioHistorial(){
-    let ok = true;
-    secciones.forEach(element => {
-       if (element != 0) {
-        ok = false;
-       } 
-    });
-    return ok;
-}
+
 function actualizopila(area){
     var stand = {
         numero:0,
         visitado:false
     }
-    let d = document.getElementById('hist');
-    let t = document.getElementById('title');
     let areaEstoy = area;
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
-            d.innerHTML='Estas en el area 1';
+            console.log('Estas en el area 1');
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
         }
         else{
-            d.innerHTML='dirigirse al area 1 para iniciar'; 
+            console.log('dirigirse al area 1 para iniciar'); 
         }
     }else{ //el historial tiene contenido
-        if( pila.top().numero == area ){ //estoy en la misma seccion pero no cheque si fue visitada o no 
-           d.innerHTML='No hago nada porque esta mismo stand q visita '+area; 
-           t.innerHTML ='pila.top.nro: '+pila.top().numero+'pila.top.visit?: '+pila.top().visitado;
+        if( pila.top().numero == area ){  
+           console.log('No hago nada porque esta mismo stand q visita '+area); 
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
-                if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ //estoy en la siguiente seccion a visitar
-                    d.innerHTML='Estas en el area '+area;
+                if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ 
+                    console.log('Estas en el area '+area);
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
                 }    
                 else { 
-                    if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ //marco como visitada
-                        d.innerHTML='Ya ha visitado este stand ( stand nro.'+area+')';
+                    if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
+                        console.log('Ya ha visitado este stand ( stand nro.',area,' )');
                         stand.numero = area;
                         stand.visitado = true;
-                        pila.push(stand);  //con este andaba mal!!!! --ver
+                        pila.push(stand);  
                     }
-                    else d.innerHTML='Error de sensado!!!!';
+                    else console.log('Error de sensado!!!!');
                 }
             } 
-            else { //SI fue visitado
-                if (areaFueVisitada(area)){ //me fijo si ya visite el stand anteriormente por el historial            
-                    d.innerHTML='Ya ha visitado este stand ( stand nro.'+area+')';
+            else {
+                if (areaFueVisitada(area)){          
+                    console.log('Ya ha visitado este stand ( stand nro.',area,' )');
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); 
-                }else{ //sino lo visite anteriormente
+                }else{ 
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)&&(((pila.top().numero)+1) == area )){
-                        d.innerHTML='Estas en el area '+area;
+                        console.log('Estas en el area ',area);
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
                     } else {
-                        d.innerHTML ='error de sensado';
+                       console.log('error de sensado');
                     }
                 }
             }
@@ -284,62 +266,50 @@ function actualizopila(area){
     
 }
 
-function almacenarEnCache(){
-    localStorage.setItem(arraySections,array_sections);
-}
 /**
- * 
+ * Funcion modulado de getPosition
  * @param {GeolocationPosition} position 
  */
 function getPosition(position){
-    const { latitude, longitude} = position.coords; //lat es y, long es x  [lat,lng] -> [y,x]
-    var altitude = position.coords.altitude; 
-    var heading = position.coords.heading;
-    var speed = position.coords.speed;
-    var accuracy = position.coords.accuracy;
-    let d = document.getElementById('title');
+    const { latitude, longitude} = position.coords; 
     let area;
         if  (cheack_area3(latitude,longitude)){
-            d.innerHTML = '3';
+            console.log('3');
             area = 3;        
         }
         else {
-                if (cheack_area1(latitude,longitude)){ //Recordatorio para yani: -1 es mayor que -5, las comparaciones en nros negativos van al reves (:<  
-                    d.innerHTML = '1'; area = 1;
+                if (cheack_area1(latitude,longitude)){ 
+                    console.log('1'); area = 1;
                     
                 }
                 else{
                     if (cheack_area2(latitude,longitude)){
-                        d.innerHTML = '2'; area=2;
+                        console.log('2'); area=2;
                         
                     }
                     else{
                         if (cheack_area4(latitude,longitude)){
-                            d.innerHTML = '4';area=4;
+                            console.log('4');area=4;
                         }
                         else {
                             if(cheack_area5(latitude,longitude)){
-                                    d.innerHTML = '5';area=5;
+                                    console.log('5');area=5;
                                 
                             }
                             else 
                                 if(cheack_area6(latitude,longitude)){    
-                                    d.innerHTML = '6';area=6;
+                                    console.log('6');area=6;
                                 }
                                 else 
-                                 d.innerHTML = 'sin area';    
+                                 console.log('sin area');    
                         }   
                     }    
                 }   
             }
             actualizopila(area);
     removeAfter();
-    // Necesito que muestre mi ubicacion en el mapa
     marker = L.marker([latitude, longitude]).addTo(map)
-    let msg = 'Coordinate: Latitud: '+latitude+' Longitud: '+longitude+' Precision (m): '+accuracy+' Altitud: '+altitude+' Orientacion (grados): '+heading+' velocidad: '+speed;
-    console.log(msg);
 }
-
 
 /**
  * 
