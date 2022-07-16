@@ -196,7 +196,7 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-function historialNoVisitado (stand){
+function areaFueVisitada (stand){
     
     let aux; let ok = true; let i=0;
     while (i<pila.tamanio()){
@@ -222,66 +222,55 @@ function estaVacioHistorial(){
     return ok;
 }
 function actualizopila(area){
-    var stand = {numero:0,visitado:false}
-    let expresion = '/\*/';
+    var stand = {
+        numero:0,
+        visitado:false
+    }
     let d = document.getElementById('hist');
     let areaEstoy = area;
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
-            d.innerHTML='visualiza area 1';
+            d.innerHTML='Estas en el area 1';
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
-            // d.innerHTML="la pila tiene: "+pila.toString(); // ya no lo necsito
-            console.log(pila);
         }
         else
-            d.innerHTML='dirigirse al area 1'; //entra
+            d.innerHTML='dirigirse al area 1 para iniciar'; //entra
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){ //estoy en la misma seccion
-           d.innerHTML='Aun sigues en la misma posicion'; //entra
+           d.innerHTML='Aun sigues en el area: '+area; //entra
         }
         else{ //es un area diferente
-            d.innerHTML='es un area diferente: stand= '+stand.numero+stand.visitado;
             if (pila.top().visitado == false){ //NO fue visitado
-                if ((pila.top().numero < area )&&(pila.top().numero+1 == area )){ //estoy en la siguiente seccion a visitar
-                    d.innerHTML='visualizar area '+area;
+                if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ //estoy en la siguiente seccion a visitar
+                    d.innerHTML='Estas en el area '+area;
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
-                    d.innerHTML="Siguiente stand por visitar la pila tiene: "+pila.toString(); //entra
                 }    
-                else { //es que volvi para atras (seccion ya visitada)
-                    if (pila.top().numero-1==area){ //marco como visitada
-                        // d.innerHTML='ya visite el sector'+areaEstoy;
+                else { 
+                    if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ //marco como visitada
+                        d.innerHTML='Ya ha visitado este stand ( stand nro.'+area+')';
                         stand.numero = area;
                         stand.visitado = true;
-                        pila.push(stand);  //con este anda mal!!!!
-                        d.innerHTML="(Stand ya visitado) la pila poseee: "+pila.toString();
+                        pila.push(stand);  //con este andaba mal!!!! --ver
                     }
-                    else d.innerHTML='Error de sensado!!!!';// vamos a verificar si entra
+                    else d.innerHTML='Error de sensado!!!!';
                 }
             } 
             else { //SI fue visitado
-                if (historialNoVisitado(area)){ //me fijo si ya visite el stand anteriormente por el historial            
-                    // d.innerHTML='ya visite el stand';
+                if (areaFueVisitada(area)){ //me fijo si ya visite el stand anteriormente por el historial            
+                    d.innerHTML='Ya ha visitado este stand ( stand nro.'+area+')';
                     stand.numero = area;
                     stand.visitado = true;
-                    pila.push(stand); // este push no se si va. para mi no. ori lo dijo
-                    if(stand.numero in [1,2,3,4,5,6]){
-                        d.innerHTML="ya visite el stand: "+stand.numero;
-                    }
-                    else {
-                        d.innerHTML ='error de sensado';
-                    }
-                    
+                    pila.push(stand); 
                 }else{ //sino lo visite anteriormente
-                    if ((pila.pop().visitado == false)&&(pila.pop().numero < area)){
-                        d.innerHTML='visualizar area '+area;  //funciona
+                    if ((pila.pop().visitado == false)&&(pila.pop().numero < area)&&(((pila.top().numero)+1) == area )){
+                        d.innerHTML='Estas en el area '+area;
                         stand.numero = area;
                         stand.visitado = false;
-                        secciones.push(stand);
-                        d.innerHTML="la pila tiene: "+pila.toString();
+                        pila.push(stand);
                     } else {
                         d.innerHTML ='error de sensado';
                     }
