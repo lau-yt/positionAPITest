@@ -196,16 +196,14 @@ function removeAfter(){
     if (marker) map.removeLayer(marker);
     //if (circle) map.removeLayer(circle);
 }
-function areaFueVisitada (stand){
-    
-    let aux; let ok = true; let i=0;
+function areaFueVisitada(stand){
+    let aux; let ok = false; let i=0;
     while (i<pila.tamanio()){
         aux = pila.pop();
         pilaAux.push(aux);
         i++;
-        // d.innerHTML="la pila tiene  historialNoVisitado : "+pilaAux.toString();
         if ((aux.numero == stand)&&(aux.visitado == true)) {
-            ok = false; 
+            ok = true; 
             break;
         } 
     }
