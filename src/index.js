@@ -225,6 +225,7 @@ function actualizopila(area){
         visitado:false
     }
     let d = document.getElementById('hist');
+    let t = document.getElementById('title');
     let areaEstoy = area;
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
@@ -233,11 +234,13 @@ function actualizopila(area){
             stand.visitado = false;
             pila.push(stand);
         }
-        else
-            d.innerHTML='dirigirse al area 1 para iniciar'; //entra
+        else{
+            d.innerHTML='dirigirse al area 1 para iniciar'; 
+        }
     }else{ //el historial tiene contenido
-        if( pila.top().numero == area ){ //estoy en la misma seccion
-           d.innerHTML='Aun sigues en el area: '+area; //entra
+        if( pila.top().numero == area ){ //estoy en la misma seccion pero no cheque si fue visitada o no 
+           d.innerHTML='No hago nada porque esta mismo stand q visita '+area; 
+           t.innerHTML ='pila.top.nro: '+pila.top().numero+'pila.top.visit?: '+pila.top().visitado;
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -329,23 +332,10 @@ function getPosition(position){
                     }    
                 }   
             }
-
-       // if(area in secciones){
             actualizopila(area);
-            //  almacenarEnCache();
-        //    }      
-    
-
-
-
     removeAfter();
     // Necesito que muestre mi ubicacion en el mapa
     marker = L.marker([latitude, longitude]).addTo(map)
-          //  .bindPopup("Estas en la posición con latitud "+latitude+" y longitud "+longitude+". Con precisión de "+accuracy+" metros");
-    //circle = L.circle([latitude,longitude],{radius:accuracy});
-    //var group = L.featureGroup([marker,circle]).addTo(map);
-    //map.setView([latitude,longitude],13);
-    //map.fitBounds(group.getBounds()); //Sets a map view that contains the given geographical bounds with the maximum zoom level possible.
     let msg = 'Coordinate: Latitud: '+latitude+' Longitud: '+longitude+' Precision (m): '+accuracy+' Altitud: '+altitude+' Orientacion (grados): '+heading+' velocidad: '+speed;
     console.log(msg);
 }
