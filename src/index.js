@@ -11,7 +11,7 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 
 var anterior;
 var actual;
-
+var renderizar_stand;
 class Pila {
     elementos = [];
     top = ()=> {
@@ -229,6 +229,21 @@ function actualizopila(area){
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
             d.innerHTML='visualiza area 1';
+            // esconder mapa y mostrar stand 1
+
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            document.getElementById('rm').style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "../static/img/stand/s1.png";
+            
+            if( area==1 ){
+                deleteAllChildren();
+                createButton(area,1);
+                createButton(area,2);
+            }
+           
+            
+            // document.getElementById("esconderMapa").style.backgroundColor = "orange";
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
@@ -240,12 +255,20 @@ function actualizopila(area){
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){ //estoy en la misma seccion
            d.innerHTML='Aun sigues en la misma posicion'; //entra
+           
         }
         else{ //es un area diferente
             d.innerHTML='es un area diferente: stand= '+stand.numero+stand.visitado;
             if (pila.top().visitado == false){ //NO fue visitado
                 if ((pila.top().numero < area )&&(pila.top().numero+1 == area )){ //estoy en la siguiente seccion a visitar
                     d.innerHTML='visualizar area '+area;
+                    //mostrar el mapa del stand
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    document.getElementById("mostrarStand").style.backgroundColor = "orange";
+                    document.getElementById('rm').style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "../static/img/stand/s"+area+".png";
+                    dibujar(area);
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
@@ -254,6 +277,12 @@ function actualizopila(area){
                 else { //es que volvi para atras (seccion ya visitada)
                     if (pila.top().numero-1==area){ //marco como visitada
                         // d.innerHTML='ya visite el sector'+areaEstoy;
+                        //mostrar el mapa del stand
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        document.getElementById("mostrarStand").style.backgroundColor = "red";
+                        var logo = document.getElementById('rm');
+                    logo.src = "../static/img/stand/s"+area+".png";
+                    dibujar(area);
                         stand.numero = area;
                         stand.visitado = true;
                         pila.push(stand);  //con este anda mal!!!!
@@ -270,6 +299,8 @@ function actualizopila(area){
                     pila.push(stand); // este push no se si va. para mi no. ori lo dijo
                     if(stand.numero in [1,2,3,4,5,6]){
                         d.innerHTML="ya visite el stand: "+stand.numero;
+                        var logo = document.getElementById('rm');
+                        logo.src = "../static/img/stand/s"+area+".png";
                     }
                     else {
                         d.innerHTML ='error de sensado';
@@ -292,6 +323,71 @@ function actualizopila(area){
 
     }
     
+}
+
+function createButton(area,nroBoton) {
+    var punto1 = document.createElement("input");
+    var label1 = document.createElement("label");
+    var agregar = document.getElementsByClassName("altura_cont");
+
+    punto1.type = "checkbox";
+    punto1.classList.add("hidden");
+    punto1.id = "hotspots" + area + "_" + nroBoton;
+
+    agregar[0].appendChild(punto1);
+
+    label1.htmlFor = "hotspots" + area + "_" + nroBoton;
+    label1.id = "b" + area + "_" + nroBoton;
+    label1.classList.add("highlight");
+    label1.classList.add("absolute");
+
+    agregar[0].appendChild(label1);
+}
+
+function dibujar(area){
+    if( area==1 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+    }
+    if( area==2 ){
+        deleteAllChildren();
+        createButton(area,1);
+    }
+    if( area==3 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+        createButton(area,3);
+    }
+    if( area==4 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+        createButton(area,3);
+    }
+    if( area==5 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+
+    }
+    if( area==6 ){
+        deleteAllChildren();
+        createButton(area,1);
+
+    }
+
+}
+
+function deleteAllChildren(){
+    var aux = document.getElementsByClassName("altura_cont");
+    // aux.innerHTML="";
+    // var hijo = aux.hasChildNodes();
+    while (aux.hasChildNodes()) {
+        aux.removeChild(aux.firstChild);
+        // hijo = aux.hasChildNodes();
+    }
 }
 
 function almacenarEnCache(){

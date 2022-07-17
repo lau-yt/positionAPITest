@@ -1,0 +1,284 @@
+.highlight {
+    font-weight: bold;
+    display: inline-block;
+    background: #00ccff70;
+    color: #193549;
+    font-size: 20%;
+    padding: 4%;
+    border-radius: 999px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  .icono_info{
+    width: 80%;
+    height: 80%;
+  }
+  @media (max-width: 768px) {
+    .highlight {
+      padding: 0%;
+    }
+    .icono_info{
+      width: 50%;
+      height: 50%;
+    }
+  }
+
+  .highlight:hover {
+    background: #193549;
+    color: #ffdd00;
+  }
+
+  #content1_1,
+  #content1_2,
+
+  #content2_1,
+
+  #content3_1,
+  #content3_2,
+  #content3_3,
+
+  #content4_1,
+  #content4_2,
+  #content4_3,
+
+  #content5_1,
+  #content5_2,
+  
+  #content6_1,
+  #content6_2
+  {
+    position: absolute;
+    overflow: hidden;
+    padding-bottom: 1rem;
+    /* top: 5%; */
+  }
+
+ 
+  /* puntos de la seccion 1 */
+  #b1_1 {
+    left: 61%;
+    top: 24%;
+  }
+  #b1_2 {
+    left: 17%;
+    top: 33%;
+  }
+  /* puntos de la seccion 2 */
+  #b2_1 {
+    left: 29%;
+    top: 15%;
+  }
+
+  /* puntos de la seccion 3 */
+  #b3_1 {
+    left: 3%;
+    top: 55%;
+  }
+  #b3_2 {
+    left: 39%;
+    top: 42%;
+  }
+  #b3_3 {
+    left: 69%;
+    top: 21%;
+  }
+  /* puntos de la seccion 4 */
+  #b4_1 {
+    left: 65%;
+    top: 49%;
+  }
+  #b4_2 {
+    left: 11%;
+    top: 53%;
+  }
+  #b4_3 {
+    left: 30%;
+    top: 17%;
+  }
+  /* puntos de la seccion 5 */
+  #b5_1 {
+    left: 62%;
+    top: 59%;
+  }
+  #b5_2 {
+    left: 22%;
+    top: 58%;
+  }
+  /* puntos de la seccion 6 */
+  #b6_1 {
+    left: 31%;
+    top: 42%;
+  }
+ 
+
+  .hidden {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .text-s {
+    font-size: 1rem;
+  }
+
+  .text-m {
+    font-size: 2rem;
+  }
+
+  .leading-relaxed {
+    line-height: 1.625;
+  }
+
+  .text-grey {
+    color: #193549;
+  }
+
+  .text-blue {
+    color: #156bc1;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .m-2 {
+    margin: 1rem;
+  }
+
+  .w-90 {
+    width: 100%;
+  }
+
+  .mw-1200 {
+    max-width: 60%;
+  }
+
+  .rounded {
+    border-radius: 4px;
+  }
+
+  .shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .bg-white {
+    background: #ffffff;
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  body {
+    height: 100% !important;
+    margin: 5vh 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+
+  #hotspots1_1:checked~#content1_1,
+  #hotspots1_2:checked~#content1_2,
+
+  #hotspots2_1:checked~#content2_1,
+
+  #hotspots3_1:checked~#content3_1,
+  #hotspots3_2:checked~#content3_2,
+  #hotspots3_3:checked~#content3_3,
+
+  #hotspots4_1:checked~#content4_1,
+  #hotspots4_2:checked~#content4_2,
+  #hotspots4_3:checked~#content4_3,
+
+  #hotspots5_1:checked~#content5_1,
+  #hotspots5_2:checked~#content5_2,
+  
+  #hotspots6_1:checked~#content6_1,
+  #hotspots6_2:checked~#content6_2
+  {
+    display: block;
+    margin: 0rem;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    #hotspots1_1:checked~#content1_1,
+  #hotspots1_2:checked~#content1_2,
+
+  #hotspots2_1:checked~#content2_1,
+
+  #hotspots3_1:checked~#content3_1,
+  #hotspots3_2:checked~#content3_2,
+  #hotspots3_3:checked~#content3_3,
+
+  #hotspots4_1:checked~#content4_1,
+  #hotspots4_2:checked~#content4_2,
+  #hotspots4_3:checked~#content4_3,
+
+  #hotspots5_1:checked~#content5_1,
+  #hotspots5_2:checked~#content5_2,
+  
+  #hotspots6_1:checked~#content6_1,
+  #hotspots6_2:checked~#content6_2
+  {
+    display: block;
+    margin: 0rem;
+    width: 100%;
+    height: 100%;
+  }
+  }
+.imagen-forma{
+background-color: #156bc1;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;  
+}
+
+.altura_cont{
+padding-bottom: 40%; position: relative; overflow-y:scroll;
+z-index: 99;
+}
+
+@media (max-width: 768px) {
+.altura_cont{
+  padding-bottom: 100%;
+}
+}
+  @supports (position: absolute) {
+    #hotspots-container {
+      display: contents !important;
+      max-height: none !important;
+    }
+
+    #fallback {
+      display: none;
+    }
+  }
+
+  .altura_visor_img{
+    height: 30rem;
+  }
+
+  @media (max-width: 958px) {
+    .altura_visor_img{
+      height: 21rem;
+    }
+    
+  }
