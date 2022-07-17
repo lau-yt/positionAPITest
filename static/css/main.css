@@ -3,4 +3,23 @@
     height: 480px;
     background-color: dimgrey;
     margin: 1rem 0;
+    z-index: -1;
+    /* position: absolute; */
+}
+.mostrarStand{
+    background-color: aqua; 
+
+    width: 680px;
+    height: 480px;
+    left: -296px; top: -496px;
+    position:absolute;
+    z-index: 1;
+    visibility: hidden;
+}
+.imagen-forma{
+    width: 680px;
+    height: 480px;
+    position:absolute;
+    visibility: hidden;
+    z-index: 2;
 }

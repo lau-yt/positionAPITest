@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="./static/css/puntos.css">
 
     <title>GeoApi</title>
 </head>
@@ -32,8 +33,19 @@
             <button id="buttonStar">StarWatching</button>
         </div>
         <div id="map" class="mapa">
-
+                
         </div>
+        <div style="position: relative;">
+            <div class="mostrarStand" id="mostrarStand">
+                <img id="rm" class="imagen-forma" alt=""  style=" position: absolute;">
+                <div class="text-center">
+                    <!-- estructura 1 -->
+                    <div class="text-center altura_cont"></div>
+                      <img class="icono_info" src="./static/img/infog.png" alt=""> </label>
+                </div>               
+            </div>
+        </div>
+        
     </main>
     <footer>
         <div style="padding: 1.5rem 0; background-color: #676767; color: #ffffff; text-align: center; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">

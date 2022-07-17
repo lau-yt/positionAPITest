@@ -216,6 +216,11 @@ function actualizopila(area){
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
+            // dibujar el stand 1
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "./static/img/stands/s"+area+".png";
+            dibujar(area);
         }
         else{
             console.log('dirigirse al area 1 para iniciar'); 
@@ -231,13 +236,24 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
                         console.log('Ya ha visitado este stand ( stand nro.',area,' )');
                         stand.numero = area;
                         stand.visitado = true;
-                        pila.push(stand);  
+                        pila.push(stand);
+                        // dibujar el stand
+                        // document.getElementById("mostrarStand").style.visibility = "visible ";
+                        // document.getElementById("mostrarStand").style.backgroundColor = "red";
+                        // var logo = document.getElementById('rm');
+                        // logo.src = "../static/img/stand/s"+area+".png";
+                        // dibujar(area);  
+
                     }
                     else console.log('Error de sensado!!!!');
                 }
@@ -248,12 +264,24 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); 
+                    //redibujar stand
+                    // document.getElementById("mostrarStand").style.visibility = "visible ";
+                    // document.getElementById("mostrarStand").style.backgroundColor = "red";
+                    // var logo = document.getElementById('rm');
+                    // logo.src = "../static/img/stand/s"+area+".png";
+                    // dibujar(area);
                 }else{ 
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)&&(((pila.top().numero)+1) == area )){
                         console.log('Estas en el area ',area);
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
+                        //redibujar stand
+                        // document.getElementById("mostrarStand").style.visibility = "visible ";
+                        // document.getElementById("mostrarStand").style.backgroundColor = "red";
+                        // var logo = document.getElementById('rm');
+                        // logo.src = "../static/img/stand/s"+area+".png";
+                        // dibujar(area);
                     } else {
                        console.log('error de sensado');
                     }
@@ -265,6 +293,75 @@ function actualizopila(area){
     }
     
 }
+
+function createButton(area,nroBoton) {
+    var punto1 = document.createElement("input");
+    var label1 = document.createElement("label");
+    var agregar = document.getElementsByClassName("altura_cont");
+
+    punto1.type = "checkbox";
+    punto1.classList.add("hidden");
+    punto1.id = "hotspots" + area + "_" + nroBoton;
+
+    agregar[0].appendChild(punto1);
+
+    label1.htmlFor = "hotspots" + area + "_" + nroBoton;
+    label1.id = "b" + area + "_" + nroBoton;
+    label1.classList.add("highlight");
+    label1.classList.add("absolute");
+
+    agregar[0].appendChild(label1);
+}
+
+function dibujar(area){
+    if( area==1 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+    }
+    if( area==2 ){
+        deleteAllChildren();
+        createButton(area,1);
+    }
+    if( area==3 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+        createButton(area,3);
+    }
+    if( area==4 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+        createButton(area,3);
+    }
+    if( area==5 ){
+        deleteAllChildren();
+        createButton(area,1);
+        createButton(area,2);
+
+    }
+    if( area==6 ){
+        deleteAllChildren();
+        createButton(area,1);
+
+    }
+
+}
+
+function deleteAllChildren(){
+    var aux = document.getElementsByClassName("altura_cont");
+    // aux.innerHTML="";
+    // var hijo = aux.hasChildNodes();
+    console.log("hey estoy en la funcion eliminar")
+    console.log(aux[0])
+    while (aux.hasChildNodes) {
+        aux.removeChild(aux.firstChild);
+        console.log(aux)
+        // hijo = aux.hasChildNodes();
+    }
+}
+
 
 /**
  * Funcion modulado de getPosition
