@@ -58,7 +58,7 @@
   #b1_1 {
     left: 61%;
     top: 24%;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #b1_2 {
     left: 17%;
