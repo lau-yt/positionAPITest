@@ -297,7 +297,8 @@ function actualizopila(area){
 function createButton(area,nroBoton) {
     var punto1 = document.createElement("input");
     var label1 = document.createElement("label");
-    var agregar = document.getElementsByClassName("altura_cont");
+    var agregar = document.getElementsByClassName("altura_cont"+area);
+    agregar.id="area";
 
     punto1.type = "checkbox";
     punto1.classList.add("hidden");
@@ -315,13 +316,17 @@ function createButton(area,nroBoton) {
 
 function dibujar(area){
     if( area==1 ){
-        deleteAllChildren();
-        createButton(area,1);
-        createButton(area,2);
+
+        // createButton(area,1);
+        // createButton(area,2);
+        mostrarPuntos(area,1);
+        mostrarPuntos(area,2);
+        
     }
     if( area==2 ){
-        deleteAllChildren();
-        createButton(area,1);
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+        // createButton(area,1);
     }
     if( area==3 ){
         deleteAllChildren();
@@ -348,6 +353,145 @@ function dibujar(area){
     }
 
 }
+function mostrarPuntos(area, nroBoton){
+    var punto1 = document.getElementById("b" + area + "_" + nroBoton);
+    punto1.style.visibility='visible';
+    if(area==1){
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+    }
+    if(area==2){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+    }
+    if(area==3){
+
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==4){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==5){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==6){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+
+    }
+
+
+        // // esconder los puntos del stand 1
+        // esconderPuntos(1,1);
+        // esconderPuntos(1,2);
+        // //esconder los puntos del stand 2
+        // esconderPuntos(2,1);
+        // //esconder los puntos del stand 3
+        // esconderPuntos(3,1);
+        // esconderPuntos(3,2);
+        // esconderPuntos(3,3);
+        // //esconder los puntos del stand 4
+        // esconderPuntos(4,1);
+        // esconderPuntos(4,2);
+        // esconderPuntos(4,3);
+        // //esconder los puntos del stand 5
+        // esconderPuntos(5,1);
+        // esconderPuntos(5,2);
+        // //esconder los puntos del stand 6
+        // esconderPuntos(6,1);
+
+}
+
+function esconderPuntos(area,nroBoton){
+    var puntos = document.getElementById("b" + area + "_" + nroBoton);
+    puntos.style.visibility='hidden';
+
+
+}
 
 function deleteAllChildren(){
     var aux = document.getElementsByClassName("altura_cont");
@@ -355,11 +499,15 @@ function deleteAllChildren(){
     // var hijo = aux.hasChildNodes();
     console.log("hey estoy en la funcion eliminar")
     console.log(aux[0])
-    while (aux.hasChildNodes) {
+    while (aux.selectedNode.selectedNode.firstChild.length >0) {
+    // while (aux.selectedNode.children.length > 0) {
         aux.removeChild(aux.firstChild);
         console.log(aux)
+
         // hijo = aux.hasChildNodes();
     }
+    // while (elemBefore.hasChildNodes())
+    // elemBefore.removeChild(elemBefore.firstChild);
 }
 
 

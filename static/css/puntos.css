@@ -58,56 +58,69 @@
   #b1_1 {
     left: 61%;
     top: 24%;
+    visibility: hidden;
   }
   #b1_2 {
     left: 17%;
     top: 33%;
+    visibility: hidden;
   }
   /* puntos de la seccion 2 */
   #b2_1 {
     left: 29%;
     top: 15%;
+    visibility: hidden;
   }
 
   /* puntos de la seccion 3 */
   #b3_1 {
     left: 3%;
     top: 55%;
+    visibility: hidden;
   }
   #b3_2 {
     left: 39%;
     top: 42%;
+    visibility: hidden;
   }
   #b3_3 {
     left: 69%;
     top: 21%;
+    visibility: hidden;
   }
   /* puntos de la seccion 4 */
   #b4_1 {
     left: 65%;
     top: 49%;
+    visibility: hidden;
   }
   #b4_2 {
     left: 11%;
     top: 53%;
+    visibility: hidden;
   }
   #b4_3 {
     left: 30%;
     top: 17%;
+    visibility: hidden;
   }
   /* puntos de la seccion 5 */
   #b5_1 {
     left: 62%;
     top: 59%;
+    visibility: hidden;
   }
   #b5_2 {
     left: 22%;
     top: 58%;
+    /* lol */
+    visibility: hidden;
   }
   /* puntos de la seccion 6 */
   #b6_1 {
     left: 31%;
     top: 42%;
+    visibility: hidden;
   }
  
 
@@ -251,13 +264,15 @@ top: 0;
 left: 0;  
 }
 
-.altura_cont{
+.altura_cont1{
 padding-bottom: 40%; position: relative; overflow-y:scroll;
 z-index: 99;
+width: 200px;
+height: 200px;
 }
 
 @media (max-width: 768px) {
-.altura_cont{
+.altura_cont1{
   padding-bottom: 100%;
 }
 }
