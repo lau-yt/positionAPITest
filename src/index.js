@@ -216,6 +216,12 @@ function actualizopila(area){
             stand.numero = area;
             stand.visitado = false;
             pila.push(stand);
+
+             // dibujar el stand 1
+             document.getElementById("mostrarStand").style.visibility = "visible ";
+             var logo = document.getElementById('rm');
+             logo.src = "./static/img/stands/s"+area+".png";
+             dibujar(area);
         }
         else{
             console.log('dirigirse al area 1 para iniciar'); 
@@ -231,6 +237,10 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
@@ -324,4 +334,184 @@ function getPosError(error){
         default: mensaje = "Error desconocido"; break;
     }
     alert(mensaje);
+}
+
+function dibujar(area){
+    if( area==1 ){
+
+        // createButton(area,1);
+        // createButton(area,2);
+        mostrarPuntos(area,1);
+        mostrarPuntos(area,2);
+        
+    }
+    if( area==2 ){
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+        // createButton(area,1);
+    }
+    if( area==3 ){
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+        mostrarPuntos(area,2);
+        mostrarPuntos(area,3);
+    }
+    if( area==4 ){
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+        mostrarPuntos(area,2);
+        mostrarPuntos(area,3);
+    }
+    if( area==5 ){
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+        mostrarPuntos(area,2);
+
+    }
+    if( area==6 ){
+        // deleteAllChildren();
+        mostrarPuntos(area,1);
+
+    }
+
+}
+
+function mostrarPuntos(area, nroBoton){
+    var punto1 = document.getElementById("b" + area + "_" + nroBoton);
+    punto1.style.visibility='visible';
+    if(area==1){
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+    }
+    if(area==2){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+    }
+    if(area==3){
+
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==4){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==5){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+
+    }
+    if(area==6){
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
+
+    }
+
+
+        // // esconder los puntos del stand 1
+        // esconderPuntos(1,1);
+        // esconderPuntos(1,2);
+        // //esconder los puntos del stand 2
+        // esconderPuntos(2,1);
+        // //esconder los puntos del stand 3
+        // esconderPuntos(3,1);
+        // esconderPuntos(3,2);
+        // esconderPuntos(3,3);
+        // //esconder los puntos del stand 4
+        // esconderPuntos(4,1);
+        // esconderPuntos(4,2);
+        // esconderPuntos(4,3);
+        // //esconder los puntos del stand 5
+        // esconderPuntos(5,1);
+        // esconderPuntos(5,2);
+        // //esconder los puntos del stand 6
+        // esconderPuntos(6,1);
+
+}
+
+function esconderPuntos(area,nroBoton){
+    var puntos = document.getElementById("b" + area + "_" + nroBoton);
+    puntos.style.visibility='hidden';
+
+
 }
