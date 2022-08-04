@@ -251,8 +251,11 @@ function actualizopila(area){
                         pila.push(stand);  
 
                         const p = document.getElementById("mensaje_visitado");
-                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' )';
-                        
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' ). ¿Quiere visitarlo de nuevo?';
+                        const button_si = document.getElementById("button_si");
+                        const button_no = document.getElementById("button_no");
+                        button_si.style.visibility='visible';
+                        button_no.style.visibility='visible';
                     }
                     else console.log('Error de sensado!!!!');
                 }
