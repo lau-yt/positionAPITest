@@ -245,9 +245,14 @@ function actualizopila(area){
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
                         console.log('Ya ha visitado este stand ( stand nro.',area,' )');
+
                         stand.numero = area;
                         stand.visitado = true;
                         pila.push(stand);  
+
+                        const p = document.getElementById("mensaje_visitado");
+                        p.innerText='Ya ha visitado este stand ( stand nro.',area,' )';
+                        document.body.appendChild(p);
                     }
                     else console.log('Error de sensado!!!!');
                 }
