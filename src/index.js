@@ -251,8 +251,8 @@ function actualizopila(area){
                         pila.push(stand);  
 
                         const p = document.getElementById("mensaje_visitado");
-                        p.innerText='Ya ha visitado este stand ( stand nro.',area,' )';
-                        document.body.appendChild(p);
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' )';
+                        
                     }
                     else console.log('Error de sensado!!!!');
                 }
