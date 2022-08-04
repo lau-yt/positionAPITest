@@ -1,3 +1,4 @@
+var area_global;
 var map = L.map('map').setView([-34.884032, -58.019961], 20);
 
 var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -250,13 +251,16 @@ function actualizopila(area){
                         stand.visitado = true;
                         pila.push(stand);  
 
+                        area_global=area;
+
                         const p = document.getElementById("mensaje_visitado");
                         p.innerText='Ya ha visitado este stand ( stand nro.'+area+' ). ¿Quiere visitarlo de nuevo?';
                         const button_si = document.getElementById("button_si");
                         const button_no = document.getElementById("button_no");
                         button_si.style.visibility='visible';
                         button_no.style.visibility='visible';
-                    }
+                        button_si.addEventListener('click',mostrarEstand());
+                    }   
                     else console.log('Error de sensado!!!!');
                 }
             } 
@@ -282,6 +286,14 @@ function actualizopila(area){
 
     }
     
+}
+
+// funcion de mostrar area visitada
+var mostrarEstand = function (){
+    document.getElementById("mostrarStand").style.visibility = "visible ";
+    var logo = document.getElementById('rm');
+    logo.src = "./static/img/stands/s"+area_global+".png";
+    dibujar(area_global);
 }
 
 /**
@@ -325,6 +337,7 @@ function getPosition(position){
                 }   
             }
             actualizopila(area);
+            area_global=area;
     removeAfter();
     marker = L.marker([latitude, longitude]).addTo(map)
 }
