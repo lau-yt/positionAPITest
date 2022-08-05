@@ -240,11 +240,11 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
-                    //no funciona el dibujar
-                    // document.getElementById("mostrarStand").style.visibility = "visible ";
-                    // var logo = document.getElementById('rm');
-                    // logo.src = "./static/img/stands/s"+area+".png";
-                    // dibujar(area);
+
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
