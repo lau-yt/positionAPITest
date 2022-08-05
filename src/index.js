@@ -231,10 +231,7 @@ function actualizopila(area){
         if( pila.top().numero == area ){  
            console.log('No hago nada porque esta mismo stand q visita '+area); 
            //dibujar no funciona
-           document.getElementById("mostrarStand").style.visibility = "visible ";
-           var logo = document.getElementById('rm');
-           logo.src = "./static/img/stands/s"+area+".png";
-           dibujar(area);
+           
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -243,10 +240,11 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = false;
                     pila.push(stand);
-                    document.getElementById("mostrarStand").style.visibility = "visible ";
-                    var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
-                    dibujar(area);
+                    //no funciona el dibujar
+                    // document.getElementById("mostrarStand").style.visibility = "visible ";
+                    // var logo = document.getElementById('rm');
+                    // logo.src = "./static/img/stands/s"+area+".png";
+                    // dibujar(area);
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
@@ -338,8 +336,11 @@ function getPosition(position){
                                 if(cheack_area6(latitude,longitude)){    
                                     console.log('6');area=6;
                                 }
-                                else 
-                                 console.log('sin area');    
+                                else{
+                                    area=0;
+                                    console.log('sin area');
+                                } 
+    
                         }   
                     }    
                 }   
