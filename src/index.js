@@ -270,17 +270,18 @@ function actualizopila(area){
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); 
-                    //dibujar
-                    document.getElementById("mostrarStand").style.visibility = "visible ";
-                    var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
-                    dibujar(area);
+                    
                 }else{ 
                     if ((pila.pop().visitado == false)&&(pila.pop().numero < area)&&(((pila.top().numero)+1) == area )){
                         console.log('Estas en el area ',area);
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
+                        //dibujar no funciona
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
                     } else {
                        console.log('error de sensado');
                     }
