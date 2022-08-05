@@ -260,6 +260,11 @@ function actualizopila(area){
                         button_si.style.visibility='visible';
                         button_no.style.visibility='visible';
                         button_si.addEventListener('click',mostrarEstand());
+                        //dibujar no funciona
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
                     }   
                     else console.log('Error de sensado!!!!');
                 }
@@ -277,11 +282,7 @@ function actualizopila(area){
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
-                        //dibujar no funciona
-                        document.getElementById("mostrarStand").style.visibility = "visible ";
-                        var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
-                        dibujar(area);
+                        
                     } else {
                        console.log('error de sensado');
                     }
