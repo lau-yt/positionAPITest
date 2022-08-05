@@ -230,6 +230,11 @@ function actualizopila(area){
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){  
            console.log('No hago nada porque esta mismo stand q visita '+area); 
+           //dibujar no funciona
+           document.getElementById("mostrarStand").style.visibility = "visible ";
+           var logo = document.getElementById('rm');
+           logo.src = "./static/img/stands/s"+area+".png";
+           dibujar(area);
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -260,11 +265,7 @@ function actualizopila(area){
                         button_si.style.visibility='visible';
                         button_no.style.visibility='visible';
                         button_si.addEventListener('click',mostrarEstand());
-                        //dibujar no funciona
-                        document.getElementById("mostrarStand").style.visibility = "visible ";
-                        var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
-                        dibujar(area);
+                        
                     }   
                     else console.log('Error de sensado!!!!');
                 }
