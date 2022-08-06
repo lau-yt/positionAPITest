@@ -586,8 +586,8 @@ null != e &&
       buttonsStyling: false,
   
       title: titulo,
-      icon: "warning",
-      iconColor:"#E10000",
+    //   icon: "warning",
+    //   iconColor:"#E10000",
       showCloseButton: !0,
       showDenyButton: !0,
       focusConfirm: !1,
@@ -600,7 +600,10 @@ null != e &&
       width: "auto",
       height: "auto",
       color: '#000',
-    //   background: '#FBFFF0 url(./static/images/greeb.jpg) no-repeat left center/contain' ,
+      imageUrl: './static/img/stands/s1.png',
+      imageHeight: 200,
+      imageAlt: 'A tall image',
+    //   background: '#FBFFF0 url(./static/img/stands/s1.png) no-repeat left center/contain' ,
       
     //   backdrop: `
     //     rgba(0,0,123,0.4)
