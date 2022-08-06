@@ -555,3 +555,58 @@ function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
 }
+
+
+//mostrar sweet alert en los puntos
+//  busqueda y asignacion de puntos...-
+const title_1_1='soy el texto 1_1';
+const title_1_2='soy el texto 1_2';
+var e = document.getElementById("b1_1");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_1_1);
+  });
+
+
+  e = document.getElementById("b1_2");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_1_2);
+  });
+
+
+  function custom_popup(titulo) {
+    Swal.fire({
+      customClass: {
+        confirmButton: 'alert-btn confirm-btn',
+        denyButton: 'alert-btn cancel-btn',
+        closeButton: 'cancel-btn',
+        popup: 'swal2-pop-style',
+      },
+      buttonsStyling: false,
+  
+      title: titulo,
+      icon: "warning",
+      iconColor:"#E10000",
+      showCloseButton: !0,
+      showDenyButton: !0,
+      focusConfirm: !1,
+      confirmButtonText: "Si.",
+      denyButtonText: "No.",
+      confirmButtonAriaLabel: "Si.",
+      denyButtonAriaLabel: "No.",
+      // width: "70rem",
+      // height: "35rem",
+      width: "auto",
+      height: "auto",
+      color: '#000',
+    //   background: '#FBFFF0 url(./static/images/greeb.jpg) no-repeat left center/contain' ,
+      
+    //   backdrop: `
+    //     rgba(0,0,123,0.4)
+    //     url("./static/images/demo-256x256.gif")
+    //     left top
+    //     no-repeat
+    //   `
+    });
+  }
