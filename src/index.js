@@ -231,14 +231,7 @@ function actualizopila(area){
     }else{ //el historial tiene contenido
         if( pila.top().numero == area ){  
            console.log('No hago nada porque esta mismo stand q visita '+area); 
-           //colocar el texto aqui
-           const p = document.getElementById("mensaje_visitado");
-           p.innerText='Ya ha visitado este stand ( stand nro.'+area_global+' ). ¿Quiere visitarlo de nuevo?';
-           const button_si = document.getElementById("button_si");
-           const button_no = document.getElementById("button_no");
-           button_si.style.visibility='visible';
-           button_no.style.visibility='visible';
-           button_si.addEventListener('click',mostrarEstand);
+           //colocar el texto aqui no funciona
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -260,11 +253,16 @@ function actualizopila(area){
                         stand.numero = area;
                         stand.visitado = true;
                         pila.push(stand);  
-                        // antes estaba los botones pero el texto que mostraaba estaba  mal
+                        // texto para actualizar imagen
                         area_global=area;
-                        
-                        
-
+                        const p = document.getElementById("mensaje_visitado");
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' ). ¿Quiere visitarlo de nuevo?';             
+                    
+                        const button_si = document.getElementById("button_si");
+                        const button_no = document.getElementById("button_no");
+                        button_si.style.visibility='visible';
+                        button_no.style.visibility='visible';
+                        button_si.addEventListener('click',mostrarEstand);
                         
                     }   
                     else console.log('Error de sensado!!!!');
