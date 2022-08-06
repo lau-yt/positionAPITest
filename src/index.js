@@ -248,7 +248,7 @@ function actualizopila(area){
                 if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ 
                     console.log('Estas en el area '+area);
                     stand.numero = area; 
-                    area_novisitado = area;
+                    area_novisitado = stand.numero;
                     stand.visitado = false;
                     pila.push(stand);
 
@@ -257,6 +257,7 @@ function actualizopila(area){
                     logo.src = "./static/img/stands/s"+area+".png";
                     dibujar(area);
                     //borrar mensaje de fue visitado
+                    const p = document.getElementById("mensaje_visitado").innerText=" ";
                     // const p = document.getElementById("mensaje_visitado");
                     // p.style.visibility='hidden';
                     // const button_si = document.getElementById("button_si");
@@ -274,7 +275,7 @@ function actualizopila(area){
                         // texto para actualizar imagen
                         area_global=area;
                         const p = document.getElementById("mensaje_visitado");
-                        p.innerText='Ya ha visitado este stand ( stand nro.'+area_novisitado+' ). ¿Quiere visitarlo de nuevo?';             
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+stand.numero+' ). ¿Quiere visitarlo de nuevo?';             
                         p.style.visibility='visible';
                         const button_si = document.getElementById("button_si");
                         const button_no = document.getElementById("button_no");
