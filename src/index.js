@@ -246,7 +246,8 @@ function actualizopila(area){
             if (pila.top().visitado == false){ //NO fue visitado
                 if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ 
                     console.log('Estas en el area '+area);
-                    stand.numero = area;
+                    stand.numero = area; 
+                    var area_novisitado=area;
                     stand.visitado = false;
                     pila.push(stand);
 
@@ -272,7 +273,7 @@ function actualizopila(area){
                         // texto para actualizar imagen
                         area_global=area;
                         const p = document.getElementById("mensaje_visitado");
-                        p.innerText='Ya ha visitado este stand ( stand nro.'+area_global+' ). ¿Quiere visitarlo de nuevo?';             
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+area_novisitado+' ). ¿Quiere visitarlo de nuevo?';             
                         p.style.visibility='visible';
                         const button_si = document.getElementById("button_si");
                         const button_no = document.getElementById("button_no");
