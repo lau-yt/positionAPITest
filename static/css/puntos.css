@@ -18,7 +18,7 @@
   }
   @media (max-width: 768px) {
     .highlight {
-      padding: 0%;
+      padding: 12%;
     }
     .icono_info{
       width: 50%;
@@ -66,13 +66,13 @@
   #b1_2 {
     left: 17%;
     top: 33%;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   /* puntos de la seccion 2 */
   #b2_1 {
     left: 29%;
     top: 15%;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
 
   /* puntos de la seccion 3 */
