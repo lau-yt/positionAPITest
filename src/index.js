@@ -206,6 +206,7 @@ function areaFueVisitada(stand){
 }
 
 function actualizopila(area){
+    console.log("esta es la pila: ",pila.toString());
     var stand = {
         numero:0,
         visitado:false
@@ -262,7 +263,7 @@ function actualizopila(area){
                         const button_no = document.getElementById("button_no");
                         button_si.style.visibility='visible';
                         button_no.style.visibility='visible';
-                        button_si.addEventListener('click',mostrarEstand());
+                        button_si.addEventListener('click',mostrarEstand);
                         
                     }   
                     else console.log('Error de sensado!!!!');
@@ -276,11 +277,16 @@ function actualizopila(area){
                     pila.push(stand); 
                     
                 }else{ 
-                    if ((pila.pop().visitado == false)&&(pila.pop().numero < area)&&(((pila.top().numero)+1) == area )){
+                    if ((pila.top().visitado == false)&&(pila.top().numero < area)&&(((pila.top().numero)+1) == area )){
                         console.log('Estas en el area ',area);
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
+
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
                         
                     } else {
                        console.log('error de sensado');
@@ -345,6 +351,7 @@ function getPosition(position){
                     }    
                 }   
             }
+            console.log('area antes de actualizoPila: ',area);
             actualizopila(area);
             area_global=area;
     removeAfter();
