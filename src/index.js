@@ -327,12 +327,12 @@ var mostrarEstand = function (){
     dibujar(area_global);
     console.log("el valor de global_area=  es  " + area_global)
     //borrar mensaje
-    const p = document.getElementById("mensaje_visitado");
-                    p.style.visibility='hidden';
-                    const button_si = document.getElementById("button_si");
-                    const button_no = document.getElementById("button_no");
-                    button_si.style.visibility='hidden';
-                    button_no.style.visibility='hidden';
+    // const p = document.getElementById("mensaje_visitado");
+    //                 p.style.visibility='hidden';
+    //                 const button_si = document.getElementById("button_si");
+    //                 const button_no = document.getElementById("button_no");
+    //                 button_si.style.visibility='hidden';
+    //                 button_no.style.visibility='hidden';
 }
 
 /**
