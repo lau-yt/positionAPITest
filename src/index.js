@@ -1,4 +1,5 @@
 var area_global;
+var area_novisitado;
 var map = L.map('map').setView([-34.884032, -58.019961], 20);
 
 var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -247,7 +248,7 @@ function actualizopila(area){
                 if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ 
                     console.log('Estas en el area '+area);
                     stand.numero = area; 
-                    var area_novisitado=area;
+                    area_novisitado = area;
                     stand.visitado = false;
                     pila.push(stand);
 
@@ -265,7 +266,7 @@ function actualizopila(area){
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
-                        console.log('Ya ha visitado este stand ( stand nro.',area,' )');
+                        console.log('Ya ha visitado este stand ( stand nro.'+area+' )');
 
                         stand.numero = area;
                         stand.visitado = true;
@@ -287,7 +288,7 @@ function actualizopila(area){
             } 
             else {
                 if (areaFueVisitada(area)){          
-                    console.log('Ya ha visitado este stand ( stand nro.',area,' )');
+                    console.log('Ya ha visitado este stand ( stand nro.'+area+' )');
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); 
