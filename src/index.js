@@ -305,10 +305,6 @@ function actualizopila(area){
                         
                     } else {
                        console.log('error de sensado');
-                       //colocar casos de muestra
-                       if(area==2 || area==1){
-                            mostrarEstand();
-                       }
                     }
                 }
             }
