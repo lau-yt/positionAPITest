@@ -174,6 +174,7 @@ document.getElementById("button").addEventListener('click', ()=>{
     console.log('congratulations, you deleted the id (: the end');
     }    
 );
+
 document.getElementById("buttonStar").addEventListener('click', getLocation);
 
 function getLocation(){
@@ -190,6 +191,7 @@ function getLocation(){
 function removeAfter(){
     if (marker) map.removeLayer(marker);
 }
+
 function areaFueVisitada(stand){
     let aux; let ok = false; let i=0;
     while (i<pila.tamanio()){
@@ -232,15 +234,13 @@ function actualizopila(area){
         if( pila.top().numero == area ){  
            console.log('No hago nada porque esta mismo stand q visita '+area); 
            //colocar el texto aqui no funciona
-           area_global=area;
-                        const p = document.getElementById("mensaje_visitado");
-                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' ). ¿Quiere visitarlo de nuevo?';             
-                    
-                        const button_si = document.getElementById("button_si");
-                        const button_no = document.getElementById("button_no");
-                        button_si.style.visibility='visible';
-                        button_no.style.visibility='visible';
-                        button_si.addEventListener('click',mostrarEstand);
+                               //borrar mensaje de fue visitado
+                            //    const p = document.getElementById("mensaje_visitado");
+                            //    p.style.visibility='hidden';
+                            //    const button_si = document.getElementById("button_si");
+                            //    const button_no = document.getElementById("button_no");
+                            //    button_si.style.visibility='hidden';
+                            //    button_no.style.visibility='hidden';
         }
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
@@ -254,6 +254,13 @@ function actualizopila(area){
                     var logo = document.getElementById('rm');
                     logo.src = "./static/img/stands/s"+area+".png";
                     dibujar(area);
+                    //borrar mensaje de fue visitado
+                    // const p = document.getElementById("mensaje_visitado");
+                    // p.style.visibility='hidden';
+                    // const button_si = document.getElementById("button_si");
+                    // const button_no = document.getElementById("button_no");
+                    // button_si.style.visibility='hidden';
+                    // button_no.style.visibility='hidden';
                 }    
                 else { 
                     if ((pila.top().numero > area)&&(((pila.top().numero)-1)==area)){ 
@@ -263,7 +270,15 @@ function actualizopila(area){
                         stand.visitado = true;
                         pila.push(stand);  
                         // texto para actualizar imagen
-                        
+                        area_global=area;
+                        const p = document.getElementById("mensaje_visitado");
+                        p.innerText='Ya ha visitado este stand ( stand nro.'+area+' ). ¿Quiere visitarlo de nuevo?';             
+                        p.style.visibility='visible';
+                        const button_si = document.getElementById("button_si");
+                        const button_no = document.getElementById("button_no");
+                        button_si.style.visibility='visible';
+                        button_no.style.visibility='visible';
+                        button_si.addEventListener('click',mostrarEstand);
                         
                     }   
                     else console.log('Error de sensado!!!!');
@@ -278,7 +293,6 @@ function actualizopila(area){
                     
                 }else{ 
                     if ((pila.top().visitado == false)&&(pila.top().numero < area)&&(((pila.top().numero)+1) == area )){
-                        console.log('Estas en el area ',area);
                         stand.numero = area;
                         stand.visitado = false;
                         pila.push(stand);
@@ -290,6 +304,10 @@ function actualizopila(area){
                         
                     } else {
                        console.log('error de sensado');
+                       //colocar casos de muestra
+                       if(area==2 || area==1){
+                            mostrarEstand();
+                       }
                     }
                 }
             }
@@ -302,10 +320,19 @@ function actualizopila(area){
 
 // funcion de mostrar area visitada
 var mostrarEstand = function (){
+    
     document.getElementById("mostrarStand").style.visibility = "visible ";
     var logo = document.getElementById('rm');
     logo.src = "./static/img/stands/s"+area_global+".png";
     dibujar(area_global);
+    console.log("el valor de global_area=  es  " + area_global)
+    //borrar mensaje
+    const p = document.getElementById("mensaje_visitado");
+                    p.style.visibility='hidden';
+                    const button_si = document.getElementById("button_si");
+                    const button_no = document.getElementById("button_no");
+                    button_si.style.visibility='hidden';
+                    button_no.style.visibility='hidden';
 }
 
 /**
@@ -523,32 +550,9 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(5,2);
 
     }
-
-
-        // // esconder los puntos del stand 1
-        // esconderPuntos(1,1);
-        // esconderPuntos(1,2);
-        // //esconder los puntos del stand 2
-        // esconderPuntos(2,1);
-        // //esconder los puntos del stand 3
-        // esconderPuntos(3,1);
-        // esconderPuntos(3,2);
-        // esconderPuntos(3,3);
-        // //esconder los puntos del stand 4
-        // esconderPuntos(4,1);
-        // esconderPuntos(4,2);
-        // esconderPuntos(4,3);
-        // //esconder los puntos del stand 5
-        // esconderPuntos(5,1);
-        // esconderPuntos(5,2);
-        // //esconder los puntos del stand 6
-        // esconderPuntos(6,1);
-
 }
 
 function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
-
-
 }
