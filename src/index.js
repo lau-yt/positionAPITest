@@ -559,23 +559,114 @@ function esconderPuntos(area,nroBoton){
 
 //mostrar sweet alert en los puntos
 //  busqueda y asignacion de puntos...-
-const title_1_1='soy el texto 1_1';
-const title_1_2='soy el texto 1_2';
+
+/**
+ * [titulo del punto 1]
+ */
+const title_1_1='Conocé 4 casos testimoniales impactantes.';
+const title_1_2='Conocé las noticias de la inundación en la TV en ese momento.';
 var e = document.getElementById("b1_1");
 null != e &&
   e.addEventListener("click", (e) => {
-    custom_popup(title_1_1);
+    custom_popup(title_1_1,"1_1");
   });
 
+ e = document.getElementById("b1_2");
+ null != e &&
+   e.addEventListener("click", (e) => {
+     custom_popup(title_1_2,"1_2");
+   });
 
-  e = document.getElementById("b1_2");
+/**
+ * [titulo del punto 2]
+ */
+
+ const title_2_1='El peor momento de la inundación. Accedé a las entrevistas realizadas por zonas inundadas.';
+ e = document.getElementById("b2_1");
+ null != e &&
+   e.addEventListener("click", (e) => {
+     custom_popup(title_2_1,"2_1");
+   });
+/**
+ * [titulo del punto 3]
+ */
+ const title_3_1='Observá el simulador de nivel de agua de inundación.';
+ const title_3_2='Observá un compilado de fotos impactantes de la inundación.';
+ const title_3_3='Jugá con la Sandbox AR y explora el efecto según el tipo de relieve.';
+ var e = document.getElementById("b3_1");
+ null != e &&
+   e.addEventListener("click", (e) => {
+     custom_popup(title_3_1,"3_1");
+   });
+   e = document.getElementById("b3_2");
+ null != e &&
+   e.addEventListener("click", (e) => {
+     custom_popup(title_3_2,"3_2");
+   });
+   e = document.getElementById("b3_3");
+ null != e &&
+   e.addEventListener("click", (e) => {
+     custom_popup(title_3_3,"3_3");
+   });
+  
+ /**
+ * [titulo del punto 4]
+ */
+const title_4_1='Descubrí los diarios del momento, mirá las fotos compartidas por las personas damnificadas.';
+const title_4_2='Informate sobre los motivos de por qué se inundan estas zonas.';
+const title_4_3='Prepararse es fundamental. Aprendé recomendaciones de como actuar, y conocé los centros de evacuación más cercanos.';
+
+var e = document.getElementById("b4_1");
 null != e &&
   e.addEventListener("click", (e) => {
-    custom_popup(title_1_2);
+    custom_popup(title_4_1,"4_1");
+  });
+
+  e = document.getElementById("b4_2");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_4_2,"4_2");
+  });
+
+  e = document.getElementById("b4_3");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_4_3,"4_3");
+  });
+  
+  /**
+ * [titulo del punto 5]
+ */
+const title_5_1='Se debe pensar antes de actuar. Prepará de manera correacta tu mochila de emergencia.';
+const title_5_2='Accedé a juegos educativos realizados por estudiantes de la UNLP.';
+var e = document.getElementById("b5_1");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_5_1,"5_1");
+  });
+
+  e = document.getElementById("b5_2");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_5_2,"5_2");
+  });
+
+  /**
+ * [titulo del punto 6]
+ */
+const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza. Conocé más sobre las inundaciones urbanas en el exterior.';
+var e = document.getElementById("b6_1");
+null != e &&
+  e.addEventListener("click", (e) => {
+    custom_popup(title_6_1,"6_1");
   });
 
 
-  function custom_popup(titulo) {
+
+/**
+ * Funcion:   custom_popup(titulo)
+ */
+  function custom_popup(titulo,nom_img) {
     Swal.fire({
       customClass: {
         confirmButton: 'alert-btn confirm-btn',
@@ -600,10 +691,21 @@ null != e &&
       width: "auto",
       height: "auto",
       color: '#000',
-      imageUrl: './static/img/stands/s1.png',
+      imageUrl: './static/img/visor/s'+nom_img+'plano.jpg',
       imageHeight: 200,
       imageAlt: 'A tall image',
-    //   background: '#FBFFF0 url(./static/img/stands/s1.png) no-repeat left center/contain' ,
+      html:`
+      <figure class='visor'>
+
+      <img class="altura_visor_img" src='./static/img/visor/s`+nom_img+`plano.jpg' alt='imagen panoramica del Stand 1.' />
+      
+      <figcaption>
+        <h2>`+titulo+`</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+      </figcaption>
+    </figure>
+      `
+    //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
       
     //   backdrop: `
     //     rgba(0,0,123,0.4)
