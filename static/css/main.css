@@ -1,6 +1,24 @@
 .mapa{
-    width: 80%;
-    height: 280px;
+    display: flex;
+    width: 85%;
+    height: 200px;
     background-color: dimgrey;
-    margin: 1rem 0;
+    margin: .5rem auto;
+}
+
+.main-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-footer{
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+button{
+    padding: .5rem;
 }

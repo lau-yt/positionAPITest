@@ -18,7 +18,7 @@
   }
   @media (max-width: 768px) {
     .highlight {
-      padding: 12%;
+      padding: 7%;
     }
     .icono_info{
       width: 50%;
@@ -200,14 +200,14 @@
     position: absolute;
   }
 
-  body {
+  /* body {
     height: 100% !important;
     margin: 5vh 0 !important;
     padding: 0 !important;
     width: 100% !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  }
+  } */
 
   #hotspots1_1:checked~#content1_1,
   #hotspots1_2:checked~#content1_2,
@@ -268,10 +268,7 @@ left: 0;
 }
 
 .altura_cont1{
-padding-bottom: 40%; position: relative; overflow-y:scroll;
-z-index: 99;
-width: 200px;
-height: 200px;
+  z-index: 99;
 }
 
 @media (max-width: 768px) {
@@ -300,4 +297,8 @@ height: 200px;
       height: 21rem;
     }
     
+  }
+
+  .mostrarStand{
+    width: 100%;
   }
