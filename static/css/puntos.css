@@ -276,7 +276,8 @@ height: 200px;
 
 @media (max-width: 768px) {
 .altura_cont1{
-  padding-bottom: 100%;
+  width: 18rem;
+  overflow: hidden;
 }
 }
   @supports (position: absolute) {
