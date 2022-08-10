@@ -18,6 +18,7 @@ class Pila {
     }
 }
 
+//main testeo de pila
 const pila = new Pila();
 
 pila.push(1)
