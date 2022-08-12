@@ -1,12 +1,10 @@
-var area_global;
-var area_novisitado;
-
 import { map } from "../models/map.js";
 
 import { Pila } from "../models/stack.js";
 
 var pila = new Pila();
 var pilaAux = new Pila();
+var area_global;
 
 //puntos de secciones
 //primera sección 
@@ -146,10 +144,8 @@ document.getElementById("buttonStar").addEventListener('click', getLocation);
 
 function getLocation(){
     if (navigator.geolocation){
-        //setInterval(()=>{  navigator.geolocation.getCurrentPosition(getPosition,getPosError,options);
             id = navigator.geolocation.watchPosition(getPosition,getPosError,options);
             console.log(id);
-        //},5000);
     }
     else{
         alert('geolocation is not suuported!');
@@ -157,6 +153,9 @@ function getLocation(){
 }
 function removeAfter(){
     if (marker) map.removeLayer(marker);
+}
+function drawMarker(){
+    marker = L.marker([latitude, longitude]).addTo(map)
 }
 
 function areaFueVisitada(stand){
@@ -335,7 +334,6 @@ function getPosition(position){
                                     console.log('6');area=6;
                                 }
                                 else{
-                                    area=0;
                                     console.log('sin area');
                                 } 
     
@@ -346,8 +344,9 @@ function getPosition(position){
             console.log('area antes de actualizoPila: ',area);
             actualizopila(area);
             area_global = area
-    removeAfter();
-    marker = L.marker([latitude, longitude]).addTo(map)
+            //Ambas funciones son para la vista
+            removeAfter(); 
+            drawMarker();
 }
 
 /**
@@ -375,32 +374,24 @@ function dibujar(area){
         
     }
     if( area==2 ){
-        // deleteAllChildren();
         mostrarPuntos(area,1);
-        // createButton(area,1);
     }
     if( area==3 ){
-        // deleteAllChildren();
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
         mostrarPuntos(area,3);
     }
     if( area==4 ){
-        // deleteAllChildren();
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
         mostrarPuntos(area,3);
     }
     if( area==5 ){
-        // deleteAllChildren();
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
-
     }
     if( area==6 ){
-        // deleteAllChildren();
         mostrarPuntos(area,1);
-
     }
 
 }
@@ -444,7 +435,6 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(6,1);
     }
     if(area==3){
-
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
