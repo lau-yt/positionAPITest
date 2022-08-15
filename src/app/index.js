@@ -366,49 +366,42 @@ function getPosError(error){
 }
 
 function dibujar(area){
-    if( area==1 ){
-
-        // createButton(area,1);
-        // createButton(area,2);
+    if( area == 1 ){
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
-        
     }
-    if( area==2 ){
-        // deleteAllChildren();
+    if( area == 2 ){
         mostrarPuntos(area,1);
-        // createButton(area,1);
     }
-    if( area==3 ){
-        // deleteAllChildren();
+    if( area == 3 ){
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
         mostrarPuntos(area,3);
     }
-    if( area==4 ){
-        // deleteAllChildren();
+    if( area == 4 ){
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
         mostrarPuntos(area,3);
     }
-    if( area==5 ){
-        // deleteAllChildren();
+    if( area == 5 ){
         mostrarPuntos(area,1);
         mostrarPuntos(area,2);
-
     }
-    if( area==6 ){
-        // deleteAllChildren();
+    if( area == 6 ){
         mostrarPuntos(area,1);
-
     }
-
 }
 
+/**
+ * esta funcion sirve para mostrar los puntos interactivos de la imagen
+ * @param1 --> area area visible
+ * @param2 --> nroBoton numero de boton asociado
+ * @return --> don't return anything
+*/
 function mostrarPuntos(area, nroBoton){
     var punto1 = document.getElementById("b" + area + "_" + nroBoton);
     punto1.style.visibility='visible';
-    if(area==1){
+    if(area == 1){
         //esconder los puntos del stand 2
         esconderPuntos(2,1);
         //esconder los puntos del stand 3
@@ -425,7 +418,7 @@ function mostrarPuntos(area, nroBoton){
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
     }
-    if(area==2){
+    if(area == 2){
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -443,8 +436,7 @@ function mostrarPuntos(area, nroBoton){
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
     }
-    if(area==3){
-
+    if(area == 3){
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -459,9 +451,8 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-
     }
-    if(area==4){
+    if(area == 4){
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -478,7 +469,7 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(6,1);
 
     }
-    if(area==5){
+    if(area == 5){
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -494,9 +485,8 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(4,3);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-
     }
-    if(area==6){
+    if(area == 6){
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -513,10 +503,15 @@ function mostrarPuntos(area, nroBoton){
         //esconder los puntos del stand 5
         esconderPuntos(5,1);
         esconderPuntos(5,2);
-
     }
 }
 
+/**
+ * esta funcion sirve para esconder puntos interactivos de la imagen
+ * @param1 --> area area visible
+ * @param2 --> nroBoton numero de boton asociado
+ * @return --> don't return anything
+*/
 function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
