@@ -1,79 +1,11 @@
-import { map } from "../models/map.js";
-
-import { Pila } from "../models/stack.js";
-
+import Mapa from "../models/map.js";
+import Pila from "../models/stack.js";
 var pila = new Pila();
 var pilaAux = new Pila();
+var mapa = new Mapa();
 var area_global;
+var marker,id;
 
-//puntos de secciones
-//primera sección 
-var pointList = [
-    [-34.884010,-58.020020], 
-    [-34.883958,-58.020020],
-    [-34.883958, -58.019937],
-    [-34.884010, -58.019937]
-];
-//segunda sección 
-let pointList2 = [
-    [-34.883958,-58.02002],
-    [-34.883958, -58.019937],
-    [-34.883860, -58.019937],
-    [-34.883860,-58.02002],
-];
-//tercera sección 
-let pointList3 = [
-    [-34.883860, -58.019854],
-    [-34.883860,-58.02002],
-    [-34.883800, -58.02002],
-    [-34.883800, -58.019854]
-];
-//cuarta sección 
-let pointList4 = [
-    [-34.883860, -58.019937],
-    [-34.883860,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//quinta sección 
-let pointList5 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//sexta sección 
-let pointList6 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.884010, -58.019854],
-    [-34.884010, -58.019937]
-];
-let custome = {
-    color: 'red',
-    weight: 1,
-    opacity: 1,
-    smoothFactor: 1
-}
-var firstpolyline = new L.polygon(pointList,custome);
-firstpolyline.addTo(map);
-custome.color = 'blue'
-firstpolyline = new L.polygon(pointList2, custome);
-firstpolyline.addTo(map);
-custome.color = 'green'
-firstpolyline = new L.polygon(pointList3, custome);
-firstpolyline.addTo(map);
-custome.color = 'yellow'
-firstpolyline = new L.polygon(pointList4, custome);
-firstpolyline.addTo(map);
-custome.color = 'orange'
-firstpolyline = new L.polygon(pointList5, custome);
-firstpolyline.addTo(map);
-custome.color = 'black'
-firstpolyline = new L.polygon(pointList6, custome);
-firstpolyline.addTo(map);
-
-var marker, circle,id;
 const options = {
     enableHighAccuracy: true,
     maximumAge: 20000,
@@ -152,10 +84,10 @@ function getLocation(){
     }
 }
 function removeAfter(){
-    if (marker) map.removeLayer(marker);
+    if (marker) mapa.removeLayer(marker);
 }
 function drawMarker(){
-    marker = L.marker([latitude, longitude]).addTo(map)
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
 function areaFueVisitada(stand){
@@ -346,7 +278,7 @@ function getPosition(position){
             actualizopila(area);
             area_global = area
     removeAfter();
-    marker = L.marker([latitude, longitude]).addTo(map)
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
 /**

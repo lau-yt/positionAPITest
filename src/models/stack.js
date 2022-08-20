@@ -1,4 +1,4 @@
-export class Pila {
+export default class Pila {
     elementos = [];
     top = ()=> {
         return this.elementos[this.elementos.length-1];
