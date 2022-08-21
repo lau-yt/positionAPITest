@@ -57,7 +57,7 @@ export function actualizopila(area){
         else{ //es un area diferente
             if (pila.top().visitado == false){ //NO fue visitado
                 if ((pila.top().numero < area )&&(((pila.top().numero)+1) == area )){ 
-                    console.log('Estas en el area '+area);
+                    console.log('-Estas en el area '+area);
                     stand.numero = area; 
                     stand.visitado = false;
                     pila.push(stand);
@@ -74,14 +74,16 @@ export function actualizopila(area){
             } 
             else {
                 if (areaFueVisitada(area) || visitaIncompleta(area)){          
-                    console.log('--Ya ha visitado este stand ( stand nro.'+area+' )');
+                    console.log('--Ya ha visitado este stand ( stand nro.'+area+' )'); //ingresa por aca, el problema ocurre cuando viene el siguiente y visitado esta en true
                     stand.numero = area;
                     stand.visitado = true;
                     pila.push(stand); 
                     
-                }else{ 
-                    if ((pila.top().visitado == false)&&(pila.top().numero < area)&&(((pila.top().numero)+1) == area )){
-                        stand.numero = area;
+                }else{ //no ingresa por este if de aca abajo sino que va por else con error de sensado
+                    //if ((pila.top().visitado == false)&&(pila.top().numero < area)&&(((pila.top().numero)+1) == area )){
+                    if ((pila.top().numero < area)&&(((pila.top().numero)+1) == area )){
+                        console.log('Estas en el area '+area);
+                        stand.numero = area; 
                         stand.visitado = false;
                         pila.push(stand);                        
                     } else {
