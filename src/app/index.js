@@ -1,5 +1,6 @@
 import Mapa from "../models/map.js";
 import Pila from "../models/stack.js";
+import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
 var pila = new Pila();
 var pilaAux = new Pila();
 var mapa = new Mapa();
@@ -11,60 +12,6 @@ const options = {
     maximumAge: 20000,
     timeout: 10000,
 };
-
-function cheack_area1(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){            
-        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ 
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area2(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
-        {
-
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area3(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area4(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){       
-        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
-                        
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area5(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area6(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 document.getElementById("button").addEventListener('click', ()=>{
     navigator.geolocation.clearWatch(id);

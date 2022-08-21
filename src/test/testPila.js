@@ -23,8 +23,12 @@ const pila = new Pila();
 
 pila.push(1)
 pila.push(2)
+pila.push(2)
 pila.push(5)
 pila.push(7)
+pila.push(7)
+pila.push(3)
+pila.push(1)
 
 let result = pila.pop();
 

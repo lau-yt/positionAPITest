@@ -18,6 +18,9 @@ export default class Pila {
     tamanio = ()=>{
         return this.elementos.length;
     }
+    copia = ()=>{
+        return [...this.elementos];
+    }
     toString = ()=>{
         var char="";
         for(let i=0;i<this.elementos.length;i++){
