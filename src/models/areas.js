@@ -10,7 +10,6 @@ function cheack_area2(latitude, longitude){
     if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
         if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
         {
-
             return true;
         }
     }
@@ -26,8 +25,8 @@ function cheack_area3(latitude, longitude){
 }
 function cheack_area4(latitude, longitude){
     if ((longitude <= (-58.019854))&(longitude > (-58.019937))){       
-        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
-                        
+        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))
+        {                 
             return true;
         }
     }

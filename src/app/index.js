@@ -1,42 +1,62 @@
+// importando modulos
 import Mapa from "../models/map.js";
 import Pila from "../models/stack.js";
 import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
+
+// creacion/instanciamiento de variables globales en el contexto de index.js
 var pila = new Pila();
 var pilaAux = new Pila();
 var mapa = new Mapa();
 var area_global;
 var marker,id;
 
+// configuracion para geopisition
 const options = {
     enableHighAccuracy: true,
     maximumAge: 20000,
     timeout: 10000,
 };
 
-document.getElementById("button").addEventListener('click', ()=>{
-    navigator.geolocation.clearWatch(id);
-    console.log('congratulations, you deleted the id (: the end');
-    }    
-);
-
+// bucar botones para añadir eventos
+document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
 
+/**
+ * Funcion encargada de inicilizar la deteccion de posicion
+ * @params none
+ * @return none
+*/
 function getLocation(){
     if (navigator.geolocation){
             id = navigator.geolocation.watchPosition(getPosition,getPosError,options);
             console.log(id);
     }
     else{
-        alert('geolocation is not suuported!');
+        alert('geolocation is not supported!');
     }
 }
+/**
+ * Funcion encargada de eliminar un marcador del mapa
+ * @params none
+ * @return none
+ */
 function removeAfter(){
     if (marker) mapa.removeLayer(marker);
 }
+/**
+ * Funcion encargada de dibujar un marcador del mapa
+ * @params none
+ * @return none
+ */
 function drawMarker(){
     marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
+/**
+ * Funcion encargada de comprobar si un area fue visitada
+ * @param {Number} stand
+ * @return {Boolean} true | false
+ */
 function areaFueVisitada(stand){
     let aux; let ok = false; let i=0;
     while (i<pila.tamanio()){
@@ -52,6 +72,11 @@ function areaFueVisitada(stand){
     return ok;
 }
 
+/**
+ * Funcion encargada de verificar si debe o no actualizar la pila 
+ * ademas hace algo para saber si el area fue visitada o no mmm revisar esto tiene mas de una funcionalidad?(descomponer?)
+ * @param {Number} area 
+ */
 function actualizopila(area){
     console.log("esta es la pila: ",pila.toString());
     var stand = {
@@ -161,7 +186,9 @@ function actualizopila(area){
     
 }
 
-// funcion de mostrar area visitada
+/**
+ * Funcion encargada visualizar stand 
+ */
 var mostrarEstand = function (){
     
     document.getElementById("mostrarStand").style.visibility = "visible ";
@@ -243,6 +270,10 @@ function getPosError(error){
     alert(mensaje);
 }
 
+/**
+ * funcion encargada de dibujar segun el area que reciba
+ * @param {Number} area 
+ */
 function dibujar(area){
     if( area==1 ){
 
@@ -285,14 +316,15 @@ function dibujar(area){
 
 /**
  * esta funcion sirve para mostrar los puntos interactivos de la imagen
- * @param1 --> area area visible
- * @param2 --> nroBoton numero de boton asociado
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
  * @return --> don't return anything
 */
 function mostrarPuntos(area, nroBoton){
     var punto1 = document.getElementById("b" + area + "_" + nroBoton);
     punto1.style.visibility='visible';
-    if(area==1){
+    switch (area) {
+      case 1:
         //esconder los puntos del stand 2
         esconderPuntos(2,1);
         //esconder los puntos del stand 3
@@ -308,8 +340,8 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-    }
-    if(area==2){
+        break;
+      case 2:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -326,9 +358,8 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-    }
-    if(area==3){
-
+        break;
+      case 3:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -343,75 +374,81 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-
-    }
-    if(area==4){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==5){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==6){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-
+        break;
+      case 4:
+      // esconder los puntos del stand 1
+      esconderPuntos(1,1);
+      esconderPuntos(1,2);
+      //esconder los puntos del stand 2
+      esconderPuntos(2,1);
+      //esconder los puntos del stand 3
+      esconderPuntos(3,1);
+      esconderPuntos(3,2);
+      esconderPuntos(3,3);
+      //esconder los puntos del stand 5
+      esconderPuntos(5,1);
+      esconderPuntos(5,2);
+      //esconder los puntos del stand 6
+      esconderPuntos(6,1);
+      break;
+      case 5:
+      // esconder los puntos del stand 1
+      esconderPuntos(1,1);
+      esconderPuntos(1,2);
+      //esconder los puntos del stand 2
+      esconderPuntos(2,1);
+      //esconder los puntos del stand 3
+      esconderPuntos(3,1);
+      esconderPuntos(3,2);
+      esconderPuntos(3,3);
+      //esconder los puntos del stand 4
+      esconderPuntos(4,1);
+      esconderPuntos(4,2);
+      esconderPuntos(4,3);
+      //esconder los puntos del stand 6
+      esconderPuntos(6,1);
+      break;
+      case 6:
+      // esconder los puntos del stand 1
+      esconderPuntos(1,1);
+      esconderPuntos(1,2);
+      //esconder los puntos del stand 2
+      esconderPuntos(2,1);
+      //esconder los puntos del stand 3
+      esconderPuntos(3,1);
+      esconderPuntos(3,2);
+      esconderPuntos(3,3);
+      //esconder los puntos del stand 4
+      esconderPuntos(4,1);
+      esconderPuntos(4,2);
+      esconderPuntos(4,3);
+      //esconder los puntos del stand 5
+      esconderPuntos(5,1);
+      esconderPuntos(5,2);
+      break;
+      default:
+        console.log("ERROR: area no valida");
+      break;
     }
 }
 
 /**
  * esta funcion sirve para esconder puntos interactivos de la imagen
- * @param1 --> area area visible
- * @param2 --> nroBoton numero de boton asociado
- * @return --> don't return anything
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
+ * @return none
 */
 function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
 }
 
+
+/**
+ * ---------COMIENZO EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * 
+ * NOTA: es posible transferir esto a otro modulo?, para no mezclar la logica del modulo principal con logica personalizada que aplica a otros componentes.
+ */
 
 //mostrar sweet alert en los puntos
 //  busqueda y asignacion de puntos...-
@@ -427,43 +464,33 @@ null != e &&
     custom_popup(title_1_1,"1_1");
   });
 
+/**
+ * [titulo del punto 1]
+ */
  e = document.getElementById("b1_2");
- null != e &&
-   e.addEventListener("click", (e) => {
-     custom_popup(title_1_2,"1_2");
-   });
+ null != e && e.addEventListener("click", (e) => { custom_popup(title_1_2,"1_2"); });
 
 /**
  * [titulo del punto 2]
  */
-
  const title_2_1='El peor momento de la inundación. Accedé a las entrevistas realizadas por zonas inundadas.';
  e = document.getElementById("b2_1");
- null != e &&
-   e.addEventListener("click", (e) => {
-     custom_popup(title_2_1,"2_1");
-   });
+ null != e && e.addEventListener("click", (e) => { custom_popup(title_2_1,"2_1"); });
 /**
  * [titulo del punto 3]
  */
  const title_3_1='Observá el simulador de nivel de agua de inundación.';
  const title_3_2='Observá un compilado de fotos impactantes de la inundación.';
  const title_3_3='Jugá con la Sandbox AR y explora el efecto según el tipo de relieve.';
+ 
  var e = document.getElementById("b3_1");
- null != e &&
-   e.addEventListener("click", (e) => {
-     custom_popup(title_3_1,"3_1");
-   });
-   e = document.getElementById("b3_2");
- null != e &&
-   e.addEventListener("click", (e) => {
-     custom_popup(title_3_2,"3_2");
-   });
-   e = document.getElementById("b3_3");
- null != e &&
-   e.addEventListener("click", (e) => {
-     custom_popup(title_3_3,"3_3");
-   });
+ null != e && e.addEventListener("click", (e) => { custom_popup(title_3_1,"3_1"); });
+   
+ e = document.getElementById("b3_2");
+ null != e && e.addEventListener("click", (e) => { custom_popup(title_3_2,"3_2"); });
+
+ e = document.getElementById("b3_3");
+ null != e && e.addEventListener("click", (e) => { custom_popup(title_3_3,"3_3"); });
   
  /**
  * [titulo del punto 4]
@@ -473,56 +500,44 @@ const title_4_2='Informate sobre los motivos de por qué se inundan estas zonas.
 const title_4_3='Prepararse es fundamental. Aprendé recomendaciones de como actuar, y conocé los centros de evacuación más cercanos.';
 
 var e = document.getElementById("b4_1");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_4_1,"4_1");
-  });
+null != e && e.addEventListener("click", (e) => { custom_popup(title_4_1,"4_1"); });
 
-  e = document.getElementById("b4_2");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_4_2,"4_2");
-  });
+e = document.getElementById("b4_2"); 
+null != e && e.addEventListener("click", (e) => { custom_popup(title_4_2,"4_2"); });
 
-  e = document.getElementById("b4_3");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_4_3,"4_3");
-  });
+e = document.getElementById("b4_3");
+null != e && e.addEventListener("click", (e) => { custom_popup(title_4_3,"4_3"); });
   
-  /**
- * [titulo del punto 5]
- */
+/**
+* [titulo del punto 5]
+*/
 const title_5_1='Se debe pensar antes de actuar. Prepará de manera correacta tu mochila de emergencia.';
 const title_5_2='Accedé a juegos educativos realizados por estudiantes de la UNLP.';
+
 var e = document.getElementById("b5_1");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_5_1,"5_1");
-  });
+null != e && e.addEventListener("click", (e) => { custom_popup(title_5_1,"5_1"); });
 
-  e = document.getElementById("b5_2");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_5_2,"5_2");
-  });
-
-  /**
- * [titulo del punto 6]
- */
-const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza. Conocé más sobre las inundaciones urbanas en el exterior.';
-var e = document.getElementById("b6_1");
-null != e &&
-  e.addEventListener("click", (e) => {
-    custom_popup(title_6_1,"6_1");
-  });
-
-
+e = document.getElementById("b5_2");
+null != e && e.addEventListener("click", (e) => { custom_popup(title_5_2,"5_2"); });
 
 /**
- * Funcion:   custom_popup(titulo)
+* [titulo del punto 6]
+*/
+const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza. Conocé más sobre las inundaciones urbanas en el exterior.';
+var e = document.getElementById("b6_1");
+null != e && e.addEventListener("click", (e) => { custom_popup(title_6_1,"6_1"); });
+
+/**
+ * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
  */
-  function custom_popup(titulo,nom_img) {
+
+/**
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
+function custom_popup(titulo,nom_img) {
     Swal.fire({
       customClass: {
         confirmButton: 'alert-btn confirm-btn',
