@@ -13,7 +13,7 @@ export default class Stand {
      * devuelve el numero del stand
      * @return {Number} numero de stand
      */
-    get getNumero(){
+    get numero(){
         return this.numero;
     }
 
@@ -21,7 +21,7 @@ export default class Stand {
      * devuelve el estado del stand (visitado/no visitado)(true/false)
      * @return {Boolean} estado de visita
      */
-    get getVisitado(){
+    get visitado(){
         return this.visitado
     }
 
@@ -38,9 +38,9 @@ export default class Stand {
      * marca el stand como visitado
      * @return none
      */
-         visitado = ()=>{
-            this.visitado = true;
-        }
+    MarcarVisitado = ()=>{
+        this.visitado = true;
+    }
 
     /**
      * retorna el estado del stand 
