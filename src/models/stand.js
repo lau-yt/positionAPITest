@@ -2,13 +2,14 @@ export default class Stand {
     /**
      * constructor de la clase
      * @param {Number} numero 
-     * @param {Boolean} visitado 
+     * @param {Boolean} estado 
      */
+
     constructor (numero, visitado) {
         this.numero = numero;
         this.visitado = visitado;
       }
-    
+
     /**
      * devuelve el numero del stand
      * @return {Number} numero de stand
@@ -21,24 +22,15 @@ export default class Stand {
      * devuelve el estado del stand (visitado/no visitado)(true/false)
      * @return {Boolean} estado de visita
      */
-    get visitado(){
-        return this.visitado
-    }
-
-    /**
-     * visita un nuevo stand por primera vez por lo que asigna numero y pone stan en falso (no visitado)
-     * @param {Number} numero 
-     */
-    visitarStand = (numero)=>{
-        this.numero = numero;
-        this.visitado = false;
+    get estado(){
+        return this.estado
     }
 
     /**
      * marca el stand como visitado
      * @return none
      */
-    MarcarVisitado = ()=>{
+    tickVisitado = ()=>{
         this.visitado = true;
     }
 
@@ -46,18 +38,26 @@ export default class Stand {
      * retorna el estado del stand 
      * @returns {Boolean} visitado -> true , CC -> false
      */
-    fueVisitado = () => {
+    isVisitado = () => {
         return this.visitado;
     }
 
     /**
      * compara numeros de stand para ver si son iguales
+     * realiza una resta entre numeros de stand (param - this.numero)
      * @param {Number} numero numero a comparar
-     * @returns {Boolean} resultado_comparacion: son iguales -> true , CC -> false
+     * @returns {Boolean} resultado_comparacion:    result -> 0  son iguales
+     *                                              result >  0  es el siguente
+     *                                              result <  0  es el anterior
      */
-    compareStand = (numero)=>{
-        return (this.numero == numero);
+    compareStands = (numero)=>{
+        return (numero - this.numero);
     }
+
+    /**
+     * 
+     */
+
 
     /**
      * esta funcion verifica si fue visitado y es el mismo numero
@@ -65,7 +65,7 @@ export default class Stand {
      * @returns {Boolean} resultado: es el mismo numero y fue visitado -> true;
      */
     mismoNumeroVisitado = (numero)=>{
-        return (this.compareStand(numero) && this.fueVisitado);
+        return ( (this.compareStands(numero) == 0) && this.isVisitado());
     }
 
     /**
@@ -74,7 +74,7 @@ export default class Stand {
      * @returns {Boolean} resultado: es el mismo numero y no visitado -> true;
      */
     mismoNumeroNoVisitado = (numero)=>{
-        return (this.compareStand(numero) && (!this.fueVisitado));
+        return ((this.compareStands(numero) == 0) && !this.isVisitado());
     }
 
 }

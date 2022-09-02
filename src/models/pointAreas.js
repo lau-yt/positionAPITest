@@ -61,12 +61,19 @@ class Points {
         return this.list_points.length;
     }
 
-    // dado un numero devuelve una lista de puntos
+    /**
+     * dado un numero devuelve una lista de puntos
+     * @param {Number} index 
+     * @returns {[number[][]]} 
+     * devuelve una lista de coordenadas
+     */
     getPoint (index){
         return this.listPoints[index];
     }
 
-    // funcion encargada de mostrar el contenido de pointAreas
+    /**
+     * funcion encargada de mostrar el contenido de pointAreas
+     */
     verContenido () {
         console.log("impresion de lista de puntos por area");
         list_points.forEach((area,indice) => {

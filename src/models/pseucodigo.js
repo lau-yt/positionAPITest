@@ -1,19 +1,35 @@
 import Pila from "./stack.js";
+import Stand from "./stand";
+
 var pila = new Pila();
 
+/**
+ * genera una copia de la pila y la recorre hasta encontrar la primera ocurrencia en el historial
+ * @param {Number} stand 
+ * @return {boolean} 
+ *  TRUE -  _se ha encontrado el stan en la pila_
+ * 
+ *  FALSE - _no se encontro ningun stand en la pila_
+ */
 function areaFueVisitada(stand){
     var pilaAux = pila.copia();
-    let aux; let ok = false; let i=0;
+    let aux = new Stand(); 
+    let ok = false; 
+    let i=0;
+
     while (i<pilaAux.length){
         aux = pilaAux.pop();
         i++;
-        if ((aux.numero == stand)&&(aux.visitado == true)) {
+        if ( (aux.compareStands(stand) ==0 ) && aux.isVisitado()) {
             ok = true; 
             break;
         } 
     }
     return ok;
 }
+
+
+// realizar revision de esta funcion ..............
 function visitaIncompleta(stand){
     //si es incompleta entonces.. stand actual tiene que estar en el historial y ademas en false
     // tambien el anterior stand deberia estar en el historial con valor true 
@@ -33,6 +49,9 @@ function visitaIncompleta(stand){
     }
     return (ok1 && ok2);
 }
+
+//cambio la estructura de los stands por una clase 
+//entonces hay que modificar esta funcion para acoplar la nueva estructura
 export function actualizopila(area){
     console.log("esta es la pila: ",pila.toString());
     var stand = {
