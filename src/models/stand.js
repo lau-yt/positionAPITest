@@ -55,11 +55,6 @@ export default class Stand {
     }
 
     /**
-     * 
-     */
-
-
-    /**
      * esta funcion verifica si fue visitado y es el mismo numero
      * @param {Number} numero numero de stand a comparar
      * @returns {Boolean} resultado: es el mismo numero y fue visitado -> true;

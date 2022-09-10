@@ -14,18 +14,13 @@ var pila = new Pila();
 function areaFueVisitada(stand){
     var pilaAux = pila.copia();
     let aux = new Stand(); 
-    let ok = false; 
-    let i=0;
-
-    while (i<pilaAux.length){
+    while (!pilaAux.esVacio()){
         aux = pilaAux.pop();
-        i++;
-        if ( (aux.compareStands(stand) ==0 ) && aux.isVisitado()) {
-            ok = true; 
-            break;
+        if ( (aux.compareStands(stand) == 0 ) && aux.isVisitado()) {
+            return true;
         } 
     }
-    return ok;
+    return false;
 }
 
 
@@ -33,11 +28,10 @@ function areaFueVisitada(stand){
 function visitaIncompleta(stand){
     //si es incompleta entonces.. stand actual tiene que estar en el historial y ademas en false
     // tambien el anterior stand deberia estar en el historial con valor true 
-    let aux; let ok = false; let i=0; let ok1= false; let ok2 = false;
+    let aux = new Stand(); let ok1= false; let ok2 = false;
     var pilaAux = pila.copia();
-    while (i<pilaAux.length){
+    while (!pilaAux.esVacio()){
         aux = pilaAux.pop();
-        i++;
         if ((ok1 != true)&&(aux.numero == stand)&&(aux.visitado == false)) {
             ok1 = true; 
         }        
