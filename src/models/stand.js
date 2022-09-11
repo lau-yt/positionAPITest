@@ -5,8 +5,8 @@ export default class Stand {
      * @param {Boolean} estado 
      */
 
-    constructor (numero, visitado) {
-        this.numero = numero;
+    constructor (nro, visitado) {
+        this.numero = nro;
         this.visitado = visitado;
       }
 
@@ -14,7 +14,7 @@ export default class Stand {
      * devuelve el numero del stand
      * @return {Number} numero de stand
      */
-    get numero(){
+    getNumero = ()=>{
         return this.numero;
     }
 
@@ -22,10 +22,25 @@ export default class Stand {
      * devuelve el estado del stand (visitado/no visitado)(true/false)
      * @return {Boolean} estado de visita
      */
-    get estado(){
+    getEstado=()=>{
         return this.estado
     }
 
+    /**
+     * setea el estado del stand (visitado/no visitado)(true/false)
+     * @return none
+     */
+    setEstado = (estado) => {
+        this.estado = estado;
+    }
+
+    /**
+     * setea el numero del stand
+     * @return none
+     */
+    setNumero = (nro)=>{
+        this.numero = nro;
+    }
     /**
      * marca el stand como visitado
      * @return none

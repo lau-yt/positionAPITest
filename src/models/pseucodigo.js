@@ -1,5 +1,5 @@
 import Pila from "./stack.js";
-import Stand from "./stand";
+import Stand from "./stand.js";
 
 var pila = new Pila();
 
@@ -14,7 +14,7 @@ var pila = new Pila();
 function areaFueVisitada(stand){
     var pilaAux = pila.copia();
     let aux = new Stand(); 
-    while (!pilaAux.esVacio()){
+    while (pilaAux.length != 0){
         aux = pilaAux.pop();
         if ( (aux.compareStands(stand) == 0 ) && aux.isVisitado()) {
             return true;
@@ -30,7 +30,7 @@ function visitaIncompleta(stand){
     // tambien el anterior stand deberia estar en el historial con valor true 
     let aux = new Stand(); let ok1= false; let ok2 = false;
     var pilaAux = pila.copia();
-    while (!pilaAux.esVacio()){
+    while (pilaAux != 0){
         aux = pilaAux.pop();
         if ((ok1 != true)&&(aux.numero == stand)&&(aux.visitado == false)) {
             ok1 = true; 
@@ -105,6 +105,53 @@ export function actualizopila(area){
                 }
             }
             
+        }
+
+    }
+    
+}
+
+export function actualizopila2(area){
+    let areaEstoy = area;
+    if (pila.esVacio()) { //caso del historial vacio
+        if (areaEstoy == 1){
+            console.log('Estas en el area 1');
+            pila.push(new Stand(area,false));
+        }
+        else{
+            console.log('dirigirse al area 1 para iniciar'); 
+        }
+    }else{ //el historial tiene contenido
+        if(pila.top().compareStands(area) == 0){  
+           console.log('No hago nada porque esta mismo stand q visita '+area); 
+        }
+        else{ //es un area diferente
+            //realizo el cálculo si el stand es uno anterior a el o bien uno posterior
+            //si es EL stand siguiente al que tengo de la pila debo verificar 4 condiciones
+            if ((pila.top().compareStands(area) > 0) && (Math.abs(pila.top().compareStands(area) == 1))) {
+                if (areaFueVisitada(area)){  //si esta dentro de la pila entonces ya pase por ahi y lo apilo con marca de visitado
+                    console.log('es un siguiente de la pila ya visitado');
+                    pila.push(new Stand(area,true));
+                }
+                else { // es un nuevo stand 
+                    if (visitaIncompleta(area)){
+                        console.log('visita incompleta!!');
+                        pila.push(new Stand(area,false));
+                    }
+                    else {
+                        console.log('nuevo stand!!');
+                        pila.push(new Stand(area-1,true));
+                        pila.push(new Stand(area,false));
+                    }
+                }
+            }   
+            //si es EL stand anterior , aplico en el historial como visitado (true)
+            else {
+                if ((Math.abs(pila.top().compareStands(area)) == 1)){
+                    console.log('stand anterior!');
+                    pila.push(new Stand(area,true));
+                }
+            }
         }
 
     }
