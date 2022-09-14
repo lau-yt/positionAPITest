@@ -1,199 +1,62 @@
-var area_global;
-var area_novisitado;
-var map = L.map('map').setView([-34.884032, -58.019961], 20);
+// importando modulos
+import Mapa from "../models/map.js";
+import Pila from "../models/stack.js";
+import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
 
-var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(map);
-class Pila {
-    elementos = [];
-    top = ()=> {
-        return this.elementos[this.elementos.length-1];
-    }
-    push = (elemento) => {
-        return this.elementos.push(elemento);
-    }
-    pop = () =>{
-        return this.elementos.pop();
-    }
-    esVacio = ()=>{
-        return (this.elementos.length == 0);
-    }
-    vaciar = ()=>{
-        this.elementos.length == 0;
-    }
-    tamanio = ()=>{
-        return this.elementos.length;
-    }
-    toString = ()=>{
-        var char="";
-        for(let i=0;i<this.elementos.length;i++){
-            char=char+this.elementos[i].numero+this.elementos[i].visitado;
-        }
-        return char;
-    }
-}
-
+// creacion/instanciamiento de variables globales en el contexto de index.js
 var pila = new Pila();
 var pilaAux = new Pila();
+var mapa = new Mapa();
+var area_global;
+var marker,id;
 
-//puntos de secciones
-//primera sección 
-var pointList = [
-    [-34.884010,-58.020020], 
-    [-34.883958,-58.020020],
-    [-34.883958, -58.019937],
-    [-34.884010, -58.019937]
-];
-//segunda sección 
-let pointList2 = [
-    [-34.883958,-58.02002],
-    [-34.883958, -58.019937],
-    [-34.883860, -58.019937],
-    [-34.883860,-58.02002],
-];
-//tercera sección 
-let pointList3 = [
-    [-34.883860, -58.019854],
-    [-34.883860,-58.02002],
-    [-34.883800, -58.02002],
-    [-34.883800, -58.019854]
-];
-//cuarta sección 
-let pointList4 = [
-    [-34.883860, -58.019937],
-    [-34.883860,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//quinta sección 
-let pointList5 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//sexta sección 
-let pointList6 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.884010, -58.019854],
-    [-34.884010, -58.019937]
-];
-let custome = {
-    color: 'red',
-    weight: 1,
-    opacity: 1,
-    smoothFactor: 1
-}
-var firstpolyline = new L.polygon(pointList,custome);
-firstpolyline.addTo(map);
-custome.color = 'blue'
-firstpolyline = new L.polygon(pointList2, custome);
-firstpolyline.addTo(map);
-custome.color = 'green'
-firstpolyline = new L.polygon(pointList3, custome);
-firstpolyline.addTo(map);
-custome.color = 'yellow'
-firstpolyline = new L.polygon(pointList4, custome);
-firstpolyline.addTo(map);
-custome.color = 'orange'
-firstpolyline = new L.polygon(pointList5, custome);
-firstpolyline.addTo(map);
-custome.color = 'black'
-firstpolyline = new L.polygon(pointList6, custome);
-firstpolyline.addTo(map);
-
-var marker, circle,id;
+// configuracion para geopisition
 const options = {
     enableHighAccuracy: true,
     maximumAge: 20000,
     timeout: 10000,
 };
 
-function cheack_area1(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){            
-        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ 
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area2(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
-        {
-
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area3(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area4(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){       
-        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
-                        
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area5(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area6(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-document.getElementById("button").addEventListener('click', ()=>{
-    navigator.geolocation.clearWatch(id);
-    console.log('congratulations, you deleted the id (: the end');
-    }    
-);
-
+// bucar botones para añadir eventos
+document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
 
+/**
+ * Funcion encargada de inicilizar la deteccion de posicion
+ * @params none
+ * @return none
+*/
 function getLocation(){
     if (navigator.geolocation){
-        //setInterval(()=>{  navigator.geolocation.getCurrentPosition(getPosition,getPosError,options);
             id = navigator.geolocation.watchPosition(getPosition,getPosError,options);
             console.log(id);
-        //},5000);
     }
     else{
-        alert('geolocation is not suuported!');
+        alert('geolocation is not supported!');
     }
 }
+/**
+ * Funcion encargada de eliminar un marcador del mapa
+ * @params none
+ * @return none
+ */
 function removeAfter(){
-    if (marker) map.removeLayer(marker);
+    if (marker) mapa.removeLayer(marker);
 }
-
-function areaFueVisitada(stand){
+/**
+ * Funcion encargada de dibujar un marcador del mapa
+ * @params none
+ * @return none
+ */
+ function drawMarker(){
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
+}
+/**
+ * Funcion encargada de comprobar si un area fue visitada
+ * @param {Number} stand
+ * @return {Boolean} true | false
+ */
+ function areaFueVisitada(stand){
     let aux; let ok = false; let i=0;
     while (i<pila.tamanio()){
         aux = pila.pop();
@@ -208,6 +71,11 @@ function areaFueVisitada(stand){
     return ok;
 }
 
+/**
+ * Funcion encargada de verificar si debe o no actualizar la pila 
+ * ademas hace algo para saber si el area fue visitada o no mmm revisar esto tiene mas de una funcionalidad?(descomponer?)
+ * @param {Number} area 
+ */
 function actualizopila(area){
     console.log("esta es la pila: ",pila.toString());
     var stand = {
@@ -317,8 +185,10 @@ function actualizopila(area){
     
 }
 
-// funcion de mostrar area visitada
-var mostrarEstand = function (){
+/**
+ * Funcion encargada visualizar stand 
+ */
+ var mostrarEstand = function (){
     
     document.getElementById("mostrarStand").style.visibility = "visible ";
     var logo = document.getElementById('rm');
@@ -338,7 +208,7 @@ var mostrarEstand = function (){
  * Funcion modulado de getPosition
  * @param {GeolocationPosition} position 
  */
-function getPosition(position){
+ function getPosition(position){
     const { latitude, longitude} = position.coords; 
     let area;
         if  (cheack_area3(latitude,longitude)){
@@ -381,7 +251,7 @@ function getPosition(position){
             actualizopila(area);
             area_global = area
     removeAfter();
-    marker = L.marker([latitude, longitude]).addTo(map)
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
 /**
@@ -399,6 +269,10 @@ function getPosError(error){
     alert(mensaje);
 }
 
+/**
+ * funcion encargada de dibujar segun el area que reciba
+ * @param {Number} area 
+ */
 function dibujar(area){
     if( area==1 ){
 
@@ -439,80 +313,68 @@ function dibujar(area){
 
 }
 
+/**
+ * esta funcion sirve para mostrar los puntos interactivos de la imagen
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
+ * @return --> don't return anything
+*/
 function mostrarPuntos(area, nroBoton){
     var punto1 = document.getElementById("b" + area + "_" + nroBoton);
     punto1.style.visibility='visible';
-    if(area==1){
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-    }
-    if(area==2){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-    }
-    if(area==3){
-
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==4){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==5){
+    switch (area) {
+        case 1:
+          //esconder los puntos del stand 2
+          esconderPuntos(2,1);
+          //esconder los puntos del stand 3
+          esconderPuntos(3,1);
+          esconderPuntos(3,2);
+          esconderPuntos(3,3);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 2:
+          // esconder los puntos del stand 1
+          esconderPuntos(1,1);
+          esconderPuntos(1,2);
+          //esconder los puntos del stand 3
+          esconderPuntos(3,1);
+          esconderPuntos(3,2);
+          esconderPuntos(3,3);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 3:
+          // esconder los puntos del stand 1
+          esconderPuntos(1,1);
+          esconderPuntos(1,2);
+          //esconder los puntos del stand 2
+          esconderPuntos(2,1);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 4:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -522,15 +384,13 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(3,1);
         esconderPuntos(3,2);
         esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-
-    }
-    if(area==6){
+        break;
+        case 5:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -544,19 +404,50 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(4,1);
         esconderPuntos(4,2);
         esconderPuntos(4,3);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+        break;
+        case 6:
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
         //esconder los puntos del stand 5
         esconderPuntos(5,1);
         esconderPuntos(5,2);
-
-    }
+        break;
+        default:
+          console.log("ERROR: area no valida");
+        break;
+      }
 }
 
+/**
+ * esta funcion sirve para esconder puntos interactivos de la imagen
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
+ * @return none
+*/
 function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
 }
 
 
+/**
+ * ---------COMIENZO EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * 
+ * NOTA: es posible transferir esto a otro modulo?, para no mezclar la logica del modulo principal con logica personalizada que aplica a otros componentes.
+ */
 //mostrar sweet alert en los puntos
 //  busqueda y asignacion de puntos...-
 
@@ -661,11 +552,16 @@ null != e &&
     custom_popup(title_6_1,"6_1");
   });
 
-
+/**
+ * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ */
 
 /**
- * Funcion:   custom_popup(titulo)
- */
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
   function custom_popup(titulo,nom_img) {
     Swal.fire({
       customClass: {
