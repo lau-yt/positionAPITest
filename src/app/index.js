@@ -208,6 +208,8 @@ function actualizopila(area){
 
 function actualizopila2(area){
     let areaEstoy = area;
+    document.getElementById("title").innerHTML = "ENTRE!";
+
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
             console.log('Estas en el area 1');
