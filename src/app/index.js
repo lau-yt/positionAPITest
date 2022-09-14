@@ -21,6 +21,14 @@ const options = {
 // bucar botones para añadir eventos
 document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
+// PARA BORRAR SI FUNCIONA EL POPUP (:
+// document.getElementById("button_si").addEventListener('click', () =>{  
+//     console.log("SIII!!");
+//     document.getElementById("mostrarStand").style.visibility = "visible ";
+//     var logo = document.getElementById('rm');
+//     logo.src = "./static/img/stands/s"+area_global+".png";
+//     dibujar(area_global);
+// });
 
 /**
  * Funcion encargada de inicilizar la deteccion de posicion
@@ -209,7 +217,7 @@ function actualizopila(area){
 
 function actualizopila2(area){
     let areaEstoy = area;
-
+    area_global = area;
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
             console.log('Estas en el area 1');
@@ -242,7 +250,7 @@ function actualizopila2(area){
                     logo.src = "./static/img/stands/s"+area+".png";
                     dibujar(area);
                     //borrar mensaje de fue visitado
-                    const p = document.getElementById("mensaje_visitado").innerText=" "; 
+                    // const p = document.getElementById("mensaje_visitado").innerText=" "; 
                     // const p = document.getElementById("mensaje_visitado");
                     // p.style.visibility='hidden';
                     // const button_si = document.getElementById("button_si");
@@ -261,7 +269,7 @@ function actualizopila2(area){
                         logo.src = "./static/img/stands/s"+area+".png";
                         dibujar(area);
                         //borrar mensaje de fue visitado
-                        const p = document.getElementById("mensaje_visitado").innerText=" "; 
+                        // const p = document.getElementById("mensaje_visitado").innerText=" "; 
                         // const p = document.getElementById("mensaje_visitado");
                         // p.style.visibility='hidden';
                         // const button_si = document.getElementById("button_si");
@@ -280,7 +288,7 @@ function actualizopila2(area){
                         logo.src = "./static/img/stands/s"+area+".png";
                         dibujar(area);
                         //borrar mensaje de fue visitado
-                        const p = document.getElementById("mensaje_visitado").innerText=" "; 
+                        // const p = document.getElementById("mensaje_visitado").innerText=" "; 
                         // const p = document.getElementById("mensaje_visitado");
                         // p.style.visibility='hidden';
                         // const button_si = document.getElementById("button_si");
@@ -296,11 +304,14 @@ function actualizopila2(area){
                     console.log('stand anterior!');
                     pila.push(new Stand(area,true));
 
-                    document.getElementById("mostrarStand").style.visibility = "visible ";
-                    var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
-                    dibujar(area);
+                    // const p = document.getElementById("mensaje_visitado");
+                    // p.style.visibility='hidden';
+                    // const button_si = document.getElementById("button_si");
+                    // const button_no = document.getElementById("button_no");
+                    // button_si.style.visibility='visible';
+                    // button_no.style.visibility='visible';
 
+                    custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
                 }
             }
         }
@@ -308,6 +319,10 @@ function actualizopila2(area){
     }
     
 }
+
+function resultado_botonSi(){
+    console.log('SI!!!!!');
+ }
 
 /**
  * Funcion encargada visualizar stand 
@@ -734,4 +749,36 @@ null != e &&
     //     no-repeat
     //   `
     });
+  }
+
+  //esto es para stand anterior alerta
+  function custom_popup_standAnterior(titulo) {
+    Swal.fire({
+      customClass: {
+        confirmButton: 'alert-btn confirm-btn',
+        denyButton: 'alert-btn cancel-btn',
+        closeButton: 'cancel-btn',
+        popup: 'swal2-pop-style',
+      },
+      buttonsStyling: false,
+  
+      title: titulo,
+    //   icon: "warning",
+    //   iconColor:"#E10000",
+      showCloseButton: !0,
+      showDenyButton: !0,
+      focusConfirm: !1,
+      confirmButtonText: "Si.",
+      denyButtonText: "No.",
+      confirmButtonAriaLabel: "Si.",
+      denyButtonAriaLabel: "No.",
+    }).then((result)=>{
+        if (result.isConfirmed){
+            console.log("CONFIRME EL POPUP");
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "./static/img/stands/s"+area_global+".png";
+            dibujar(area_global);
+        }
+    })
   }
