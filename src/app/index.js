@@ -51,24 +51,45 @@ function removeAfter(){
  function drawMarker(){
     marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
+
 /**
- * Funcion encargada de comprobar si un area fue visitada
- * @param {Number} stand
- * @return {Boolean} true | false
+ * genera una copia de la pila y la recorre hasta encontrar la primera ocurrencia en el historial
+ * @param {Number} stand 
+ * @return {boolean} 
+ *  TRUE -  _se ha encontrado el stan en la pila_
+ * 
+ *  FALSE - _no se encontro ningun stand en la pila_
  */
  function areaFueVisitada(stand){
-    let aux; let ok = false; let i=0;
-    while (i<pila.tamanio()){
-        aux = pila.pop();
-        pilaAux.push(aux);
-        i++;
-        if ((aux.numero == stand)&&(aux.visitado == true)) {
-            ok = true; 
-            break;
+    var pilaAux = pila.copia();
+    let aux = new Stand(); 
+    while (pilaAux.length != 0){
+        aux = pilaAux.pop();
+        if ( (aux.compareStands(stand) == 0 ) && aux.isVisitado()) {
+            return true;
         } 
     }
-    pila = pilaAux;
-    return ok;
+    return false;
+}
+
+// realizar revision de esta funcion ..............
+function visitaIncompleta(stand){
+    //si es incompleta entonces.. stand actual tiene que estar en el historial y ademas en false
+    // tambien el anterior stand deberia estar en el historial con valor true 
+    let aux = new Stand(); let ok1= false; let ok2 = false;
+    var pilaAux = pila.copia();
+    while (pilaAux != 0){
+        aux = pilaAux.pop();
+        if ((ok1 != true)&&(aux.numero == stand)&&(aux.visitado == false)) {
+            ok1 = true; 
+        }        
+
+        if ((ok2 != true)&&(aux.numero == (stand-1))&&(aux.visitado == true)) {
+            ok2 = true; 
+        }
+        if (ok1 && ok2) break; 
+    }
+    return (ok1 && ok2);
 }
 
 /**
@@ -185,6 +206,103 @@ function actualizopila(area){
     
 }
 
+function actualizopila2(area){
+    let areaEstoy = area;
+    if (pila.esVacio()) { //caso del historial vacio
+        if (areaEstoy == 1){
+            console.log('Estas en el area 1');
+            pila.push(new Stand(area,false));
+
+            // dibujar el stand 1
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "./static/img/stands/s"+area+".png";
+            dibujar(area);
+        }
+        else{
+            console.log('dirigirse al area 1 para iniciar'); 
+        }
+    }else{ //el historial tiene contenido
+        if(pila.top().compareStands(area) == 0){  
+           console.log('No hago nada porque esta mismo stand q visita '+area); 
+        }
+        else{ //es un area diferente
+            //realizo el cálculo si el stand es uno anterior a el o bien uno posterior
+            //si es EL stand siguiente al que tengo de la pila debo verificar 4 condiciones
+            if ((pila.top().compareStands(area) > 0) && (Math.abs(pila.top().compareStands(area) == 1))) {
+                if (areaFueVisitada(area)){  //si esta dentro de la pila entonces ya pase por ahi y lo apilo con marca de visitado
+                    console.log('es un siguiente de la pila ya visitado');
+                    pila.push(new Stand(area,true));
+
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
+                    //borrar mensaje de fue visitado
+                    const p = document.getElementById("mensaje_visitado").innerText=" ";
+                    // const p = document.getElementById("mensaje_visitado");
+                    // p.style.visibility='hidden';
+                    // const button_si = document.getElementById("button_si");
+                    // const button_no = document.getElementById("button_no");
+                    // button_si.style.visibility='hidden';
+                    // button_no.style.visibility='hidden';
+                }
+                else { // es un nuevo stand 
+                    if (visitaIncompleta(area)){
+                        console.log('visita incompleta!!');
+                        pila.push(new Stand(area,false));
+
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
+                        //borrar mensaje de fue visitado
+                        const p = document.getElementById("mensaje_visitado").innerText=" ";
+                        // const p = document.getElementById("mensaje_visitado");
+                        // p.style.visibility='hidden';
+                        // const button_si = document.getElementById("button_si");
+                        // const button_no = document.getElementById("button_no");
+                        // button_si.style.visibility='hidden';
+                        // button_no.style.visibility='hidden';
+                    }
+                    else {
+                        console.log('nuevo stand!!');
+                        pila.push(new Stand(area-1,true));
+                        pila.push(new Stand(area,false));
+                        
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
+                        //borrar mensaje de fue visitado
+                        const p = document.getElementById("mensaje_visitado").innerText=" ";
+                        // const p = document.getElementById("mensaje_visitado");
+                        // p.style.visibility='hidden';
+                        // const button_si = document.getElementById("button_si");
+                        // const button_no = document.getElementById("button_no");
+                        // button_si.style.visibility='hidden';
+                        // button_no.style.visibility='hidden';
+                    }
+                }
+            }   
+            //si es EL stand anterior , aplico en el historial como visitado (true)
+            else {
+                if ((Math.abs(pila.top().compareStands(area)) == 1)){
+                    console.log('stand anterior!');
+                    pila.push(new Stand(area,true));
+
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
+                }
+            }
+        }
+
+    }
+    
+}
+
 /**
  * Funcion encargada visualizar stand 
  */
@@ -248,7 +366,7 @@ function actualizopila(area){
                 }   
             }
             console.log('area antes de actualizoPila: ',area);
-            actualizopila(area);
+            actualizopila2(area);
             area_global = area
     removeAfter();
     marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
