@@ -378,7 +378,6 @@ function resultado_botonSi(){
                                     console.log('6');area=6;
                                 }
                                 else{
-                                    area=0;
                                     console.log('sin area');
                                 } 
     
