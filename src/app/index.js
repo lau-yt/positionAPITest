@@ -704,7 +704,7 @@ null != e &&
   function custom_popup(titulo,nom_img) {
     Swal.fire({
       customClass: {
-        confirmButton: 'alert-btn confirm-btn',
+        // confirmButton: 'alert-btn confirm-btn',
         denyButton: 'alert-btn cancel-btn',
         closeButton: 'cancel-btn',
         popup: 'swal2-pop-style',
@@ -714,13 +714,14 @@ null != e &&
       title: titulo,
     //   icon: "warning",
     //   iconColor:"#E10000",
-      showCloseButton: !0,
-      showDenyButton: !0,
-      focusConfirm: !1,
-      confirmButtonText: "Si.",
-      denyButtonText: "No.",
-      confirmButtonAriaLabel: "Si.",
-      denyButtonAriaLabel: "No.",
+      // showCloseButton: !0,
+      // showDenyButton: !0,
+      // focusConfirm: !1,
+      // confirmButtonText: "Si",
+      // denyButtonText: "No.",
+      // confirmButtonAriaLabel: "Si",
+      // denyButtonAriaLabel: "No.",
+
       // width: "70rem",
       // height: "35rem",
       width: "auto",
@@ -729,17 +730,17 @@ null != e &&
       imageUrl: './static/img/visor/s'+nom_img+'plano.jpg',
       imageHeight: 200,
       imageAlt: 'A tall image',
-      html:`
-      <figure class='visor'>
+    //   html:`
+    //   <figure class='visor'>
 
-      <img class="altura_visor_img" src='./static/img/visor/s`+nom_img+`plano.jpg' alt='imagen panoramica del Stand 1.' />
+    //   <img class="altura_visor_img" src='./static/img/visor/s`+nom_img+`plano.jpg' alt='imagen panoramica del Stand 1.' />
       
-      <figcaption>
-        <h2>`+titulo+`</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-      </figcaption>
-    </figure>
-      `
+    //   <figcaption>
+    //     <h2>`+titulo+`</h2>
+    //     <p></p>
+    //   </figcaption>
+    // </figure>
+    //   `
     //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
       
     //   backdrop: `

@@ -79,3 +79,26 @@ a {
     }
     
   }
+
+  .swal2-confirm{
+    padding: 1rem 2rem;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,109,1) 40%, rgba(0,212,255,1) 83%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 1.6rem;
+    transition: all .3s ease-in-out;
+  }
+
+  .swal2-confirm:hover{
+    opacity: .8;
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+
+  .swal2-pop-style{
+    background-color: #15C1F0;
+    border-radius: 2rem;
+    border: 4px solid #000;
+  }

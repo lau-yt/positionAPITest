@@ -278,6 +278,15 @@ top: 0;
 left: 0;  
 }
 
+/* @media (orientation: landscape) {
+    .imagen-forma{
+        background-image: url("../img/mapaH.png");
+    }
+    .contenedor-image{
+      width: 512px;
+    }
+} */
+
 .altura_cont1{
 padding-bottom: 40%; position: relative; 
 /* overflow-y:scroll; */
