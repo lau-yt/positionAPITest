@@ -1,6 +1,7 @@
 // importando modulos
 import Mapa from "../models/map.js";
 import Pila from "../models/stack.js";
+import Stand from "../models/stand.js";
 import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
 
 // creacion/instanciamiento de variables globales en el contexto de index.js
@@ -208,7 +209,6 @@ function actualizopila(area){
 
 function actualizopila2(area){
     let areaEstoy = area;
-    document.getElementById("title").innerHTML = "ENTRE!";
 
     if (pila.esVacio()) { //caso del historial vacio
         if (areaEstoy == 1){
@@ -216,11 +216,10 @@ function actualizopila2(area){
             pila.push(new Stand(area,false));
 
             // dibujar el stand 1
-            // document.getElementById("mostrarStand").style.visibility = "visible ";
-            // var logo = document.getElementById('rm');
-            // logo.src = "./static/img/stands/s"+area+".png";
-            // dibujar(area);
-            document.getElementById("title").innerHTML = "stand "+area
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "./static/img/stands/s"+area+".png";
+            dibujar(area);
 
         }
         else{
@@ -238,33 +237,31 @@ function actualizopila2(area){
                     console.log('es un siguiente de la pila ya visitado');
                     pila.push(new Stand(area,true));
 
-                    // document.getElementById("mostrarStand").style.visibility = "visible ";
-                    // var logo = document.getElementById('rm');
-                    // logo.src = "./static/img/stands/s"+area+".png";
-                    // dibujar(area);
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
                     //borrar mensaje de fue visitado
-                    // const p = document.getElementById("mensaje_visitado").innerText=" "; --
+                    const p = document.getElementById("mensaje_visitado").innerText=" "; 
                     // const p = document.getElementById("mensaje_visitado");
                     // p.style.visibility='hidden';
                     // const button_si = document.getElementById("button_si");
                     // const button_no = document.getElementById("button_no");
                     // button_si.style.visibility='hidden';
                     // button_no.style.visibility='hidden';
-                    document.getElementById("title").innerHTML = "stand "+area
                 }
                 else { // es un nuevo stand 
                     if (visitaIncompleta(area)){
                         console.log('visita incompleta!!');
                         pila.push(new Stand(area,false));
 
-                        document.getElementById("title").innerHTML = "stand "+area
 
-                        // document.getElementById("mostrarStand").style.visibility = "visible ";
-                        // var logo = document.getElementById('rm');
-                        // logo.src = "./static/img/stands/s"+area+".png";
-                        // dibujar(area);
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
                         //borrar mensaje de fue visitado
-                        // const p = document.getElementById("mensaje_visitado").innerText=" "; --
+                        const p = document.getElementById("mensaje_visitado").innerText=" "; 
                         // const p = document.getElementById("mensaje_visitado");
                         // p.style.visibility='hidden';
                         // const button_si = document.getElementById("button_si");
@@ -277,14 +274,13 @@ function actualizopila2(area){
                         pila.push(new Stand(area-1,true));
                         pila.push(new Stand(area,false));
 
-                        document.getElementById("title").innerHTML = "stand "+area
 
-                        // document.getElementById("mostrarStand").style.visibility = "visible ";
-                        // var logo = document.getElementById('rm');
-                        // logo.src = "./static/img/stands/s"+area+".png";
-                        // dibujar(area);
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".png";
+                        dibujar(area);
                         //borrar mensaje de fue visitado
-                        // const p = document.getElementById("mensaje_visitado").innerText=" "; --
+                        const p = document.getElementById("mensaje_visitado").innerText=" "; 
                         // const p = document.getElementById("mensaje_visitado");
                         // p.style.visibility='hidden';
                         // const button_si = document.getElementById("button_si");
@@ -300,11 +296,10 @@ function actualizopila2(area){
                     console.log('stand anterior!');
                     pila.push(new Stand(area,true));
 
-                    // document.getElementById("mostrarStand").style.visibility = "visible ";
-                    // var logo = document.getElementById('rm');
-                    // logo.src = "./static/img/stands/s"+area+".png";
-                    // dibujar(area);
-                    document.getElementById("title").innerHTML = "stand "+area
+                    document.getElementById("mostrarStand").style.visibility = "visible ";
+                    var logo = document.getElementById('rm');
+                    logo.src = "./static/img/stands/s"+area+".png";
+                    dibujar(area);
 
                 }
             }
