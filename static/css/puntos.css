@@ -265,6 +265,13 @@
   }
 .imagen-forma{
 background-color: #156bc1;
+
+background-image: url("../img/mapa.png");
+background-repeat: no-repeat;
+background-position: center center;
+
+/* transform: rotate(90deg); */
+
 width: 100%;
 height: 100%;
 top: 0;
@@ -272,10 +279,14 @@ left: 0;
 }
 
 .altura_cont1{
-padding-bottom: 40%; position: relative; overflow-y:scroll;
+padding-bottom: 40%; position: relative; 
+/* overflow-y:scroll; */
 z-index: 99;
-width: 200px;
-height: 200px;
+/* width: 200px;
+height: 200px; */
+
+width: 277px;
+height: 324px;
 }
 
 @media (max-width: 768px) {
