@@ -232,6 +232,7 @@ function actualizopila2(area){
         }
         else{
             console.log('dirigirse al area 1 para iniciar'); 
+            custom_popup_Alerta("Debe dirigirse al stand 1 para iniciar");
         }
     }else{ //el historial tiene contenido
         if(pila.top().compareStands(area) == 0){  
@@ -319,10 +320,6 @@ function actualizopila2(area){
     }
     
 }
-
-function resultado_botonSi(){
-    console.log('SI!!!!!');
- }
 
 /**
  * Funcion encargada visualizar stand 
@@ -782,3 +779,26 @@ null != e &&
         }
     })
   }
+
+  /**
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
+function custom_popup_Alerta(titulo) {
+  Swal.fire({
+    customClass: {
+      // confirmButton: 'alert-btn confirm-btn',
+      denyButton: 'alert-btn cancel-btn',
+      closeButton: 'cancel-btn',
+      popup: 'swal2-pop-style',
+    },
+    buttonsStyling: false,
+
+    title: titulo,
+    width: "auto",
+    height: "auto",
+    color: '#000',
+  });
+}
