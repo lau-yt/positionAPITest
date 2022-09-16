@@ -10,6 +10,7 @@ var pilaAux = new Pila();
 var mapa = new Mapa();
 var area_global;
 var marker,id;
+var flagAlert = false;
 
 // configuracion para geopisition
 const options = {
@@ -232,7 +233,10 @@ function actualizopila2(area){
         }
         else{
             console.log('dirigirse al area 1 para iniciar'); 
-            custom_popup_Alerta("Debe dirigirse al stand 1 para iniciar");
+            if (!flagAlert){
+              custom_popup_Alerta("Debe dirigirse al stand 1 para iniciar");
+              flagAlert = true;
+            }
         }
     }else{ //el historial tiene contenido
         if(pila.top().compareStands(area) == 0){  
