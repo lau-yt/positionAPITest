@@ -270,7 +270,7 @@ background-color: #156bc1;
 background-image: url("../img/mapa.webp");
 background-repeat: no-repeat;
 background-position: center center;
-background-size: cover;
+background-size: contain;
 
 /* transform: rotate(90deg); */
 
