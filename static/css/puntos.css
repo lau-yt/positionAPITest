@@ -293,12 +293,16 @@ left: 0;
     /* acomodar los siguientes puntos */
     /* seccion 1 */
     #b1_1 {
-      left: 134%;
-      top: 9%;
+      /* left: 134%;
+      top: 9%; */
+      left: 133em;
+      top: 7em;
     }
     #b1_2 {
-      left: 27%;
-      top: 9%;
+      /* left: 27%;
+      top: 9%; */
+      left: 8em;
+      top: 17em;
     }
     /* seccion 2 */
     #b2_1 {
