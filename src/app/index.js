@@ -727,7 +727,7 @@ null != e &&
       width: "auto",
       height: "auto",
       color: '#000',
-      imageUrl: './static/img/visor/s'+nom_img+'plano.jpg',
+      imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
       imageHeight: 200,
       imageAlt: 'A tall image',
     //   html:`
