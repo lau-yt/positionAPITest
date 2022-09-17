@@ -1,6 +1,44 @@
 .mapa{
-    width: 80%;
-    height: 280px;
+    width: 86%;
+    height: 8rem!important;
     background-color: dimgrey;
     margin: 1rem 0;
+}
+
+@media (min-width: 768px){
+    .mapa{
+        width: 50%;
+        height: 280px;
+    }
+}
+
+.btn-style {
+    margin: 0 7.5%;
+    width: 85%;
+    padding: 1rem 2rem; 
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 1.6rem;
+    transition: all .3s ease-in-out;
+  }
+
+  @media (min-width: 768px){
+    .btn-style {
+        margin: 0 25%;
+        width: 50%;
+      }   
+  }
+
+
+
+  .btn-style:hover{
+    opacity: .8;
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+
+.btn-color-1{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(49, 46, 92, 0.644) 0%, rgba(9,121,109,1) 40%, rgba(0,212,255,1) 83%);
 }
