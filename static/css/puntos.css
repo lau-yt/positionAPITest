@@ -65,18 +65,18 @@
   #b1_1 {
     left: 61%;
     top: 24%;
-    /* visibility: hidden; */
+    visibility: hidden;
   }
   #b1_2 {
     left: 17%;
     top: 33%;
-    /* visibility: hidden; */
+    visibility: hidden; 
   }
   /* puntos de la seccion 2 */
   #b2_1 {
     left: 29%;
     top: 15%;
-    /* visibility: hidden; */
+    visibility: hidden;
   }
 
   /* puntos de la seccion 3 */
@@ -342,22 +342,38 @@ left: 0;
       left: 44%;
       top: 12%;
     }
-} 
-
-.altura_cont1{
-padding-bottom: 40%; position: relative; 
-/* overflow-y:scroll; */
-z-index: 99;
-/* width: 200px;
-height: 200px; */
-
-width: 277px;
-height: 324px;
 }
 
-@media (max-width: 768px) {
+  .altura_cont1{
+    padding-bottom: 40%; position: relative; 
+    /* overflow-y:scroll; */
+    z-index: 99;
+    /* width: 200px;
+    height: 200px; */
+    
+    width: 277px;
+    height: 550px;
+    } 
+
+@media ((max-width: 768px)and(orientation: portrait)){
+  .altura_cont1{
+    padding-bottom: 40%; position: relative; 
+    /* overflow-y:scroll; */
+    z-index: 99;
+    /* width: 200px;
+    height: 200px; */
+    
+    width: 277px;
+    height: 550px;
+    }
+    
+}
+
+@media ((orientation: landscape)) {
 .altura_cont1{
-  padding-bottom: 100%;
+  padding-bottom: 0%;
+  height: 0px;
+  background-color: #ffdd00;
 }
 }
   @supports (position: absolute) {
