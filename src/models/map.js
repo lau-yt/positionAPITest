@@ -2,7 +2,9 @@ import Points from "./pointAreas.js";
 const points = new Points();
 class Mapa {
     constructor() {
-        this.map = L.map('map').setView([-34.883919, -58.019961], 19);
+        this.map = L.map('map',{
+            dragging: false
+        }).setView([-34.883919, -58.019961], 19);
         // seteando configuraciones de mapa (ubicacion,tamaño,setteo para hacer print del mapa configurado)
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 19,
