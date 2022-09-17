@@ -752,7 +752,11 @@ null != e &&
     });
   }
 
-  //esto es para stand anterior alerta
+  /**
+   * @brief popup para el stand anterior
+   * @param {String} titulo 
+   * @return none
+   */
   function custom_popup_standAnterior(titulo) {
     Swal.fire({
       customClass: {
