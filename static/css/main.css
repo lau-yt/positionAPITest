@@ -32,11 +32,11 @@
 
 
 
-  .btn-style:hover{
+  /* .btn-style:hover{
     opacity: .8;
     transform: scale(1.15);
     cursor: pointer;
-  }
+  } */
 
 .btn-color-1{
     background: rgb(2,0,36);
