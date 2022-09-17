@@ -263,6 +263,7 @@
     height: 100%;
   }
   }
+
 .imagen-forma{
 background-color: #156bc1;
 
@@ -285,8 +286,9 @@ left: 0;
         background-image: url("../img/mapaH.webp");
     }
     .contenedor-image{
-      width: 512px;
-      height: 212px;
+      /* width: 512px; */
+      width: 100%;
+      height: 17rem;
     }
     /* acomodar los siguientes puntos */
     /* seccion 1 */
