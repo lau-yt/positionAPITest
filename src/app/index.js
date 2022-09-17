@@ -4,6 +4,11 @@ import Pila from "../models/stack.js";
 import Stand from "../models/stand.js";
 import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
 
+const MSG_ERR_PERMISSION_DENIED = "No hay permiso para obtener la posicion";
+const MSG_ERR_POSITION_UNAVAILABLE = "Posicion actual no disponible";
+const MSG_ERR_TIMEOUT = "No se pudo obtener la posicion en un tiempo";
+const MSG_ERR_UNKNOW = "Error desconocido";
+
 // creacion/instanciamiento de variables globales en el contexto de index.js
 var pila = new Pila();
 var pilaAux = new Pila();
@@ -401,10 +406,10 @@ function actualizopila2(area){
 function getPosError(error){
     console.warn(error.message); let mensaje;
     switch(error.code){
-        case error.PERMISSION_DENIED: mensaje = "No hay permiso para obtener la posicion"; break;
-        case error.POSITION_UNAVAILABLE: mensaje = "Posicion actual no disponible"; break;
-        case error.TIMEOUT: mensaje = "No se pudo obtener la posicion en un tiempo"; break;
-        default: mensaje = "Error desconocido"; break;
+        case error.PERMISSION_DENIED: mensaje = MSG_ERR_PERMISSION_DENIED; break;
+        case error.POSITION_UNAVAILABLE: mensaje = MSG_ERR_POSITION_UNAVAILABLE; break;
+        case error.TIMEOUT: mensaje = MSG_ERR_TIMEOUT; break;
+        default: mensaje = MSG_ERR_UNKNOW; break;
     }
     alert(mensaje);
 }
