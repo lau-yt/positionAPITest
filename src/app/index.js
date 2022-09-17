@@ -250,10 +250,11 @@ function actualizopila2(area){
                     console.log('es un siguiente de la pila ya visitado');
                     pila.push(new Stand(area,true));
 
-                    document.getElementById("mostrarStand").style.visibility = "visible ";
-                    var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".webp";
-                    dibujar(area);
+                    // document.getElementById("mostrarStand").style.visibility = "visible ";
+                    // var logo = document.getElementById('rm');
+                    // logo.src = "./static/img/stands/s"+area+".webp";
+                    // dibujar(area);
+                    custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
                     //borrar mensaje de fue visitado
                     // const p = document.getElementById("mensaje_visitado").innerText=" "; 
                     // const p = document.getElementById("mensaje_visitado");
