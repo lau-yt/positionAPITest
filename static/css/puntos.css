@@ -265,7 +265,7 @@
   }
 
 .imagen-forma{
-background-color: #156bc1;
+background-color: #156bc100;
 
 background-image: url("../img/mapa.webp");
 background-repeat: no-repeat;
@@ -287,8 +287,8 @@ left: 0;
     }
     .contenedor-image{
       /* width: 512px; */
-      width: 100%;
-      height: 17rem;
+      width: 90%;
+      height: 15rem;
     }
     /* acomodar los siguientes puntos */
     /* seccion 1 */
