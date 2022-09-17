@@ -48,13 +48,13 @@ a {
 @media ((max-width: 768px) and (orientation: landscape)) {
   
   .swal2-popup{
-    max-width: 75%;
-    font-size: 0.5rem;
-    padding: 8px 0 1.25em;
+    max-width: 75% !important;
+    font-size: 0.5rem !important;
+    padding: 8px 0 1.25em !important;
   }
   .swal2-title{
 
-    font-size: 1.875em;  
+    font-size: 1.875em !important;  
     /* no funciona */
   }
 } 
