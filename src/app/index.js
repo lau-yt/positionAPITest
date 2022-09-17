@@ -124,7 +124,7 @@ function actualizopila(area){
              // dibujar el stand 1
              document.getElementById("mostrarStand").style.visibility = "visible ";
              var logo = document.getElementById('rm');
-             logo.src = "./static/img/stands/s"+area+".png";
+             logo.src = "./static/img/stands/s"+area+".webp";
              dibujar(area);
         }
         else{
@@ -153,7 +153,7 @@ function actualizopila(area){
 
                     document.getElementById("mostrarStand").style.visibility = "visible ";
                     var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
+                    logo.src = "./static/img/stands/s"+area+".webp";
                     dibujar(area);
                     //borrar mensaje de fue visitado
                     const p = document.getElementById("mensaje_visitado").innerText=" ";
@@ -201,7 +201,7 @@ function actualizopila(area){
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
                         var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
+                        logo.src = "./static/img/stands/s"+area+".webp";
                         dibujar(area);
                         
                     } else {
@@ -227,7 +227,7 @@ function actualizopila2(area){
             // dibujar el stand 1
             document.getElementById("mostrarStand").style.visibility = "visible ";
             var logo = document.getElementById('rm');
-            logo.src = "./static/img/stands/s"+area+".png";
+            logo.src = "./static/img/stands/s"+area+".webp";
             dibujar(area);
 
         }
@@ -252,7 +252,7 @@ function actualizopila2(area){
 
                     document.getElementById("mostrarStand").style.visibility = "visible ";
                     var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
+                    logo.src = "./static/img/stands/s"+area+".webp";
                     dibujar(area);
                     //borrar mensaje de fue visitado
                     // const p = document.getElementById("mensaje_visitado").innerText=" "; 
@@ -271,7 +271,7 @@ function actualizopila2(area){
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
                         var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
+                        logo.src = "./static/img/stands/s"+area+".webp";
                         dibujar(area);
                         //borrar mensaje de fue visitado
                         // const p = document.getElementById("mensaje_visitado").innerText=" "; 
@@ -290,7 +290,7 @@ function actualizopila2(area){
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
                         var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
+                        logo.src = "./static/img/stands/s"+area+".webp";
                         dibujar(area);
                         //borrar mensaje de fue visitado
                         // const p = document.getElementById("mensaje_visitado").innerText=" "; 
@@ -332,7 +332,7 @@ function actualizopila2(area){
     
     document.getElementById("mostrarStand").style.visibility = "visible ";
     var logo = document.getElementById('rm');
-    logo.src = "./static/img/stands/s"+area_global+".png";
+    logo.src = "./static/img/stands/s"+area_global+".webp";
     dibujar(area_global);
     console.log("el valor de global_area=  es  " + area_global)
     //borrar mensaje
@@ -778,7 +778,7 @@ null != e &&
             console.log("CONFIRME EL POPUP");
             document.getElementById("mostrarStand").style.visibility = "visible ";
             var logo = document.getElementById('rm');
-            logo.src = "./static/img/stands/s"+area_global+".png";
+            logo.src = "./static/img/stands/s"+area_global+".webp";
             dibujar(area_global);
         }
     })

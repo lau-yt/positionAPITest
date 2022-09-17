@@ -266,7 +266,7 @@
 .imagen-forma{
 background-color: #156bc1;
 
-background-image: url("../img/mapa.png");
+background-image: url("../img/mapa.webp");
 background-repeat: no-repeat;
 background-position: center center;
 
@@ -281,7 +281,7 @@ left: 0;
  /* @media ((max-width: 768px) and (orientation: landscape)) {< */
   @media ((orientation: landscape)) {
     .imagen-forma{
-        background-image: url("../img/mapaH.png");
+        background-image: url("../img/mapaH.webp");
     }
     .contenedor-image{
       width: 512px;
