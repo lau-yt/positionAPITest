@@ -121,6 +121,8 @@ a {
   .swal2-close{
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(108, 9, 121) 40%, rgb(255, 0, 85) 83%) !important;
     padding: 1rem 1rem !important;
+    margin: 1rem!important;
+    /* margin-top: 1rem!important; */
   }
 
   .cancel-btn{
