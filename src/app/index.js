@@ -806,3 +806,12 @@ function custom_popup_Alerta(titulo) {
     color: '#000',
   });
 }
+
+
+// REGISTRAMOS EL SERVICE WORKER
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('../sw.js').catch(error => {
+      console.log(error);
+  })
+}
