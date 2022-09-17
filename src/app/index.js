@@ -25,7 +25,7 @@ const options = {
 };
 
 // bucar botones para añadir eventos
-document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
+// document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
 // PARA BORRAR SI FUNCIONA EL POPUP (:
 // document.getElementById("button_si").addEventListener('click', () =>{  
