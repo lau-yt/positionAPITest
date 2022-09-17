@@ -240,7 +240,6 @@ function getPosition(position){
                                     console.log('6');area=6;
                                 }
                                 else{
-                                    area=0;
                                     console.log('sin area');
                                 } 
     
@@ -248,7 +247,7 @@ function getPosition(position){
                     }    
                 }   
             }
-            console.log('area antes de actualizoPila: ',area);
+            console.log('<getPosition> area',area);
             actualizopila(area);
             area_global = area
     removeAfter();
