@@ -278,7 +278,8 @@ top: 0;
 left: 0;  
 }
 
- @media ((max-width: 768px) and (orientation: landscape)) {
+ /* @media ((max-width: 768px) and (orientation: landscape)) {< */
+  @media ((orientation: landscape)) {
     .imagen-forma{
         background-image: url("../img/mapaH.png");
     }
