@@ -260,14 +260,6 @@ function actualizopila2(area){
                     // logo.src = "./static/img/stands/s"+area+".webp";
                     // dibujar(area);
                     custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
-                    //borrar mensaje de fue visitado
-                    // const p = document.getElementById("mensaje_visitado").innerText=" "; 
-                    // const p = document.getElementById("mensaje_visitado");
-                    // p.style.visibility='hidden';
-                    // const button_si = document.getElementById("button_si");
-                    // const button_no = document.getElementById("button_no");
-                    // button_si.style.visibility='hidden';
-                    // button_no.style.visibility='hidden';
                 }
                 else { // es un nuevo stand 
                     if (visitaIncompleta(area)){
@@ -291,7 +283,7 @@ function actualizopila2(area){
                     else {
                         console.log('nuevo stand!!');
                         pila.push(new Stand(area-1,true));
-                        pila.push(new Stand(area,false));
+                        pila.push(new Stand(area,true));
 
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
