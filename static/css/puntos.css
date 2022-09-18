@@ -69,7 +69,7 @@
   }
   #b1_2 {
     left: 17%;
-    top: 33%;
+    top: 40%;
     visibility: hidden; 
   }
   /* puntos de la seccion 2 */
@@ -100,7 +100,7 @@
   /* puntos de la seccion 4 */
   #b4_1 {
     left: 65%;
-    top: 49%;
+    top: 33%;
     visibility: hidden;
   }
   #b4_2 {
@@ -109,26 +109,26 @@
     visibility: hidden;
   }
   #b4_3 {
-    left: 30%;
-    top: 17%;
+    left: 26%;
+    top: 33%;
     visibility: hidden;
   }
   /* puntos de la seccion 5 */
   #b5_1 {
     left: 62%;
-    top: 59%;
+    top: 40%;
     visibility: hidden;
   }
   #b5_2 {
-    left: 22%;
+    left: 10%;
     top: 58%;
     /* lol */
     visibility: hidden;
   }
   /* puntos de la seccion 6 */
   #b6_1 {
-    left: 31%;
-    top: 42%;
+    left: 21%;
+    top: 52%;
     visibility: hidden;
   }
  
@@ -335,30 +335,30 @@ left: 0;
     }
     /* seccion 4 */
     #b4_3 {
-      left: 47%;
-      top: 8%;
+      left: 47em;
+      top: 21em;
     }
     #b4_2 {
-      left: 11%;
-      top: 15%;
+      left: 18em;
+      top: 39em;
     }
     #b4_1 {
-      left: 118%;
-      top: 12%;
+      left: 118em;
+      top: 12em;
     }
      /* seccion 5 */
      #b5_1 {
-      left: 115%;
-      top: 13%;
+      left: 115em;
+      top: 13em;
     }
     #b5_2 {
-      left: 34%;
-      top: 16%;
+      left: 27em;
+      top: 45em;
     }
     /* seccion 6 */
     #b6_1 {
-      left: 44%;
-      top: 12%;
+      left: 44em;
+      top: 36em;
     }
 }
 

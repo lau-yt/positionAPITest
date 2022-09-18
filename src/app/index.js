@@ -682,7 +682,7 @@ null != e &&
   /**
  * [titulo del punto 6]
  */
-const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza. Conocé más sobre las inundaciones urbanas en el exterior.';
+const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza.';
 var e = document.getElementById("b6_1");
 null != e &&
   e.addEventListener("click", (e) => {
