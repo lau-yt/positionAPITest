@@ -31,13 +31,13 @@ async function precache() {
         '/src/models/stand.js',
         '/src/app/index.js',
         '/src/sweetalert2@11.js',
-        '/static/js/leaflet.js',
+        
 
 // CSS FILES
         '/static/css/main.css',
         '/static/css/puntos.css',
         '/static/css/sweet_alert.css',
-        '/static/css/leaflet.css',
+        
         
 // STAND's
         '/static/img/stands/s1.webp',
@@ -76,8 +76,6 @@ async function precache() {
         '/static/img/mapa.png',
         '/static/img/mapaH.png',
         '/static/img/mapaH.webp',
-        '/static/img/marker-icon.png',
-        '/static/img/marker-shadow.png',
         '/static/img/satelite.png',
         '/static/img/number-1.png',
     ]);
