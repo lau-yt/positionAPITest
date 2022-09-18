@@ -39,6 +39,13 @@ class Mapa {
             firstpolyline = new L.polygon(points.getPoint(i), customProperties);
             firstpolyline.addTo(this.map);
         }
+
+        var Area1Icon = L.icon({
+            iconUrl: '../../static/img/number-1.png',
+            iconSize: [15, 15]
+        });
+        L.marker([-34.88399282067345,-58.01998972892761], {icon: Area1Icon}).addTo(this.map);
+
     }
 
     getMapa(){
