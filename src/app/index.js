@@ -726,7 +726,7 @@ null != e &&
       height: "auto",
       color: '#000',
       imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
-      imageHeight: 200,
+      imageHeight: 80,
       imageAlt: 'A tall image',
     //   html:`
     //   <figure class='visor'>
