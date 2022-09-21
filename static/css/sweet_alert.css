@@ -100,7 +100,7 @@ a {
 }
 .container-grid{
   display: grid!important;
-  grid-template-columns: 1fr .4fr!important;
+  grid-template-rows: 1fr .4fr!important;
   justify-content: space-between!important;
   /* margin: -1rem 1rem 0rem 0rem; */
 }
