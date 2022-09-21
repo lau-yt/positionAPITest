@@ -76,8 +76,14 @@ a {
 
   .div-card img {
     max-width: 100%;
+    height: 100px;
     /* object-fit: initial; */
 }
+  .div-card_p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
 
   /* .img-size{

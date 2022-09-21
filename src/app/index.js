@@ -721,7 +721,7 @@ null != e &&
         <div class="div-card">
             <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp'/>
         </div>  
-        <div class="div-card">
+        <div class="div-card_p">
             <p>`+titulo+`</p>
         </div>
     </div>
