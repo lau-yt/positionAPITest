@@ -642,7 +642,7 @@ null != e &&
  */
 const title_4_1='Descubrí los diarios del momento, mirá las fotos compartidas por las personas damnificadas.';
 const title_4_2='Informate sobre los motivos de por qué se inundan estas zonas.';
-const title_4_3='Prepararse es fundamental. Aprendé recomendaciones de como actuar, y conocé los centros de evacuación más cercanos.';
+const title_4_3='Aprendé recomendaciones de como actuar y conocé los centros de evacuación más cercanos.';
 
 var e = document.getElementById("b4_1");
 null != e &&
@@ -709,36 +709,23 @@ null != e &&
       },
       buttonsStyling: false,
   
-      title: titulo,
-    //   icon: "warning",
-    //   iconColor:"#E10000",
-      // showCloseButton: !0,
-      // showDenyButton: !0,
-      // focusConfirm: !1,
-      // confirmButtonText: "Si",
-      // denyButtonText: "No.",
-      // confirmButtonAriaLabel: "Si",
-      // denyButtonAriaLabel: "No.",
-
-      // width: "70rem",
-      // height: "35rem",
+      // title: titulo,
       width: "auto",
       height: "auto",
       color: '#000',
-      imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
-      imageHeight: 80,
-      imageAlt: 'A tall image',
-    //   html:`
-    //   <figure class='visor'>
-
-    //   <img class="altura_visor_img" src='./static/img/visor/s`+nom_img+`plano.jpg' alt='imagen panoramica del Stand 1.' />
-      
-    //   <figcaption>
-    //     <h2>`+titulo+`</h2>
-    //     <p></p>
-    //   </figcaption>
-    // </figure>
-    //   `
+      // imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
+      // imageHeight: 80,
+      // imageAlt: 'A tall image',
+       html:`
+    <div class="container-grid">
+        <div class="div-card">
+            <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp'/>
+        </div>  
+        <div class="div-card">
+            <p>`+titulo+`</p>
+        </div>
+    </div>
+       `
     //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
       
     //   backdrop: `
@@ -771,10 +758,10 @@ null != e &&
       showCloseButton: !0,
       showDenyButton: !0,
       focusConfirm: !1,
-      confirmButtonText: "Si.",
-      denyButtonText: "No.",
-      confirmButtonAriaLabel: "Si.",
-      denyButtonAriaLabel: "No.",
+      confirmButtonText: "Si",
+      denyButtonText: "No",
+      confirmButtonAriaLabel: "Si",
+      denyButtonAriaLabel: "No",
     }).then((result)=>{
         if (result.isConfirmed){
             console.log("CONFIRME EL POPUP");
