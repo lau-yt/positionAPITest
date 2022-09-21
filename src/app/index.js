@@ -609,7 +609,7 @@ null != e &&
  * [titulo del punto 2]
  */
 
- const title_2_1='El peor momento de la inundación. Accedé a las entrevistas realizadas por zonas inundadas.';
+ const title_2_1='Accedé a las entrevistas realizadas por zonas inundadas.';
  e = document.getElementById("b2_1");
  null != e &&
    e.addEventListener("click", (e) => {
