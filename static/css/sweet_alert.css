@@ -101,14 +101,15 @@ a {
   }
 
   .swal2-confirm{
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,109,1) 40%, rgba(0,212,255,1) 83%);
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 1.6rem;
     transition: all .3s ease-in-out;
+    margin: 0em auto 1em;
   }
 
   .swal2-confirm:hover{
