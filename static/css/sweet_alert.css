@@ -138,7 +138,7 @@ a {
     font-size: 1rem;
     border-radius: 1.6rem;
     transition: all .3s ease-in-out;
-    margin: 0em auto 1em;
+    margin: 0em auto 0em;
   }
 
   .swal2-confirm:hover{
