@@ -82,6 +82,7 @@ a {
   display: flex!important;
   flex-direction: column!important;
   justify-content: center!important;
+  font-size: 0.8rem;
 }
 /* fin del modo vertical */
 .swal2-html-container {
