@@ -212,8 +212,18 @@ a {
 /* popalert si no */
 
 .swal2-pop-style_si_no{
+  display: flex!important;
   background-color: #15C1F0!important;
   border-radius: 2rem!important;
   border: 4px solid #000!important;
-  height: 65%;
+  height: 57%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+@media (orientation: landscape){
+  .swal2-pop-style_si_no{
+    height: 90%!important;
+  }
 }
