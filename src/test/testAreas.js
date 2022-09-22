@@ -196,3 +196,18 @@ position.latitude = -34.88383825314777 ;
 position.longitude = -58.01997061818839;
 area = getPosition(position);
 actualizopila2(area);
+//stand 3
+position.latitude = -34.88383825314777 ;
+position.longitude = -58.01997061818839;
+area = getPosition(position);
+actualizopila2(area);
+//stand 5 
+position.latitude = -34.8839452403095 ;
+position.longitude = -58.01989953964949;
+area = getPosition(position);
+actualizopila2(area);
+//stand 4
+position.latitude = -34.88389683482428 ;
+position.longitude = -58.01990188658237;
+area = getPosition(position);
+actualizopila2(area);
