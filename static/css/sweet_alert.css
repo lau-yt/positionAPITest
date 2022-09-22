@@ -227,3 +227,22 @@ a {
     height: 90%!important;
   }
 }
+
+
+.irStand1{
+  display: flex!important;
+  background-color: #15C1F0!important;
+  border-radius: 2rem!important;
+  border: 4px solid #000!important;
+  height: 57%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+
+@media (orientation: landscape){
+  .irStand1{
+    height: 90%!important;
+  }
+}
