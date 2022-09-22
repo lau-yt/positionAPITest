@@ -783,9 +783,9 @@ function custom_popup_Alerta(titulo) {
   Swal.fire({
     customClass: {
       // confirmButton: 'alert-btn confirm-btn',
-      denyButton: 'alert-btn cancel-btn',
-      closeButton: 'cancel-btn',
-      popup: 'swal2-pop-style',
+      // denyButton: 'alert-btn cancel-btn',
+      // closeButton: 'cancel-btn',
+      // popup: 'swal2-pop-style',
     },
     buttonsStyling: false,
 

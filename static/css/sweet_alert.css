@@ -194,18 +194,18 @@ a {
   }
   .swal2-close{
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(108, 9, 121) 40%, rgb(255, 0, 85) 83%) !important;
-    padding: 1rem 1rem !important;
-    margin: 1rem!important;
+    /* padding: 1rem 1rem !important; */
+    margin-right: 1rem!important;
     /* margin-top: 1rem!important; */
   }
 
   .cancel-btn{
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(108, 9, 121) 40%, rgb(255, 0, 85) 83%);
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 1.6rem;
     transition: all .3s ease-in-out;
   }
