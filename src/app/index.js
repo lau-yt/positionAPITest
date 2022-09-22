@@ -786,12 +786,13 @@ function custom_popup_Alerta(titulo) {
       // denyButton: 'alert-btn cancel-btn',
       // closeButton: 'cancel-btn',
       // popup: 'swal2-pop-style',
+      popup: 'swal2-pop-title',
     },
     buttonsStyling: false,
 
     title: titulo,
     width: "auto",
-    height: "auto",
+    height: "65%",
     color: '#000',
   });
 }
