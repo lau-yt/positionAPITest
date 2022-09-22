@@ -786,7 +786,7 @@ function custom_popup_Alerta(titulo) {
       // confirmButton: 'alert-btn confirm-btn',
       denyButton: 'alert-btn cancel-btn',
       closeButton: 'cancel-btn',
-      popup: 'swal2-pop-style',
+      popup: 'irStand1',
     },
     buttonsStyling: false,
 
