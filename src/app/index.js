@@ -748,10 +748,11 @@ null != e &&
         confirmButton: 'alert-btn confirm-btn',
         denyButton: 'alert-btn cancel-btn',
         closeButton: 'cancel-btn',
-        popup: 'swal2-pop-style',
+        popup: 'swal2-pop-style_si_no',
       },
       buttonsStyling: false,
-  
+      width: "auto",
+      height: "65%",
       title: titulo,
     //   icon: "warning",
     //   iconColor:"#E10000",
@@ -783,16 +784,15 @@ function custom_popup_Alerta(titulo) {
   Swal.fire({
     customClass: {
       // confirmButton: 'alert-btn confirm-btn',
-      // denyButton: 'alert-btn cancel-btn',
-      // closeButton: 'cancel-btn',
-      // popup: 'swal2-pop-style',
-      popup: 'swal2-pop-title',
+      denyButton: 'alert-btn cancel-btn',
+      closeButton: 'cancel-btn',
+      popup: 'swal2-pop-style',
     },
     buttonsStyling: false,
 
     title: titulo,
     width: "auto",
-    height: "65%",
+    height: "auto",
     color: '#000',
   });
 }
