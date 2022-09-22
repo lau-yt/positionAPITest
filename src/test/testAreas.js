@@ -67,15 +67,100 @@ var area;
 }*/
 // pruebas con coordenadas manuales 
 //stand 1
-position.latitude = -34.88399282067345 ;
-position.longitude = -58.01998972892761;
-area = getPosition(position);
-actualizopila2(area);
-//stand 2 
-position.latitude = -34.8839306636607 ;
-position.longitude = -58.0199846997857;
-area = getPosition(position);
-actualizopila2(area);
+// position.latitude = -34.88399282067345 ;
+// position.longitude = -58.01998972892761;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 2 
+// position.latitude = -34.8839306636607 ;
+// position.longitude = -58.0199846997857;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 1
+// position.latitude = -34.88399282067345 ;
+// position.longitude = -58.01998972892761;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 2 
+// position.latitude = -34.8839306636607 ;
+// position.longitude = -58.0199846997857;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 3
+// position.latitude = -34.88383825314777 ;
+// position.longitude = -58.01997061818839;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 3
+// position.latitude = -34.88383825314777 ;
+// position.longitude = -58.01997061818839;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 3
+// position.latitude = -34.88383825314777 ;
+// position.longitude = -58.01997061818839;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);//stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);
+
+// console.log('PRUEBAS NUEVAS!!');
+// //stand 3
+// position.latitude = -34.88383825314777 ;
+// position.longitude = -58.01997061818839;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 2 
+// position.latitude = -34.8839306636607 ;
+// position.longitude = -58.0199846997857;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 1
+// position.latitude = -34.88399282067345 ;
+// position.longitude = -58.01998972892761;
+// area = getPosition(position);
+// actualizopila2(area);
+
+// //stand 2 
+// position.latitude = -34.8839306636607 ;
+// position.longitude = -58.0199846997857;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 3
+// position.latitude = -34.88383825314777 ;
+// position.longitude = -58.01997061818839;
+// area = getPosition(position);
+// actualizopila2(area);
+// //stand 4
+// position.latitude = -34.88389683482428 ;
+// position.longitude = -58.01990188658237;
+// area = getPosition(position);
+// actualizopila2(area);
+
+console.log('PRUEBAS NUEVAS CON SALTOS');
+//VA A AL 1, 2, 3, 2, 1, 3
 //stand 1
 position.latitude = -34.88399282067345 ;
 position.longitude = -58.01998972892761;
@@ -91,45 +176,9 @@ position.latitude = -34.88383825314777 ;
 position.longitude = -58.01997061818839;
 area = getPosition(position);
 actualizopila2(area);
-//stand 3
-position.latitude = -34.88383825314777 ;
-position.longitude = -58.01997061818839;
-area = getPosition(position);
-actualizopila2(area);
-//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
-area = getPosition(position);
-actualizopila2(area);
-//stand 3
-position.latitude = -34.88383825314777 ;
-position.longitude = -58.01997061818839;
-area = getPosition(position);
-actualizopila2(area);
-//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
-area = getPosition(position);
-actualizopila2(area);
-//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
-area = getPosition(position);
-actualizopila2(area);
-//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
-area = getPosition(position);
-actualizopila2(area);//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
-area = getPosition(position);
-actualizopila2(area);
-
-console.log('PRUEBAS NUEVAS!!');
-//stand 3
-position.latitude = -34.88383825314777 ;
-position.longitude = -58.01997061818839;
+//stand 1
+position.latitude = -34.88399282067345 ;
+position.longitude = -58.01998972892761;
 area = getPosition(position);
 actualizopila2(area);
 //stand 2 
@@ -142,19 +191,8 @@ position.latitude = -34.88399282067345 ;
 position.longitude = -58.01998972892761;
 area = getPosition(position);
 actualizopila2(area);
-
-//stand 2 
-position.latitude = -34.8839306636607 ;
-position.longitude = -58.0199846997857;
-area = getPosition(position);
-actualizopila2(area);
 //stand 3
 position.latitude = -34.88383825314777 ;
 position.longitude = -58.01997061818839;
-area = getPosition(position);
-actualizopila2(area);
-//stand 4
-position.latitude = -34.88389683482428 ;
-position.longitude = -58.01990188658237;
 area = getPosition(position);
 actualizopila2(area);

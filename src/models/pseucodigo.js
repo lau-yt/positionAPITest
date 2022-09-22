@@ -128,26 +128,29 @@ export function actualizopila2(area){
         else{ //es un area diferente
             //realizo el cálculo si el stand es uno anterior a el o bien uno posterior
             //si es EL stand siguiente al que tengo de la pila debo verificar 4 condiciones
-            if ((pila.top().compareStands(area) > 0) && (Math.abs(pila.top().compareStands(area) == 1))) {
+            if ((pila.top().compareStands(area) > 0)) {
+                console.log('Area fue visitada devuelve: ',areaFueVisitada(area));
                 if (areaFueVisitada(area)){  //si esta dentro de la pila entonces ya pase por ahi y lo apilo con marca de visitado
                     console.log('es un siguiente de la pila ya visitado');
                     pila.push(new Stand(area,true));
                 }
                 else { // es un nuevo stand 
-                    if (visitaIncompleta(area)){
+                    if (visitaIncompleta(area) && (Math.abs(pila.top().compareStands(area) == 1))){
                         console.log('visita incompleta!!');
                         pila.push(new Stand(area,false));
                     }
                     else {
-                        console.log('nuevo stand!!');
-                        pila.push(new Stand(area-1,true));
-                        pila.push(new Stand(area,false));
+                        if ((Math.abs(pila.top().compareStands(area) == 1))){
+                            console.log('nuevo stand!!');
+                            pila.push(new Stand(area-1,true));
+                            pila.push(new Stand(area,false));
+                        }
                     }
                 }
             }   
             //si es EL stand anterior , aplico en el historial como visitado (true)
             else {
-                if ((Math.abs(pila.top().compareStands(area)) == 1)){
+                if (Math.abs(pila.top().compareStands(area) < 0) && (areaFueVisitada(area))){
                     console.log('stand anterior!');
                     pila.push(new Stand(area,true));
                 }
