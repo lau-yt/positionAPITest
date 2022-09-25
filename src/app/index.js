@@ -406,7 +406,7 @@ function getPosError(error){
         case error.TIMEOUT: mensaje = MSG_ERR_TIMEOUT; break;
         default: mensaje = MSG_ERR_UNKNOW; break;
     }
-    alert(mensaje);
+    console.log(mensaje);
 }
 
 /**
