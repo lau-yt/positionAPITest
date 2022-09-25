@@ -250,7 +250,7 @@ function actualizopila2(area){
         else{ //es un area diferente
             //realizo el cálculo si el stand es uno anterior a el o bien uno posterior
             //si es EL stand siguiente al que tengo de la pila debo verificar 4 condiciones
-            if ((pila.top().compareStands(area) > 0) && (Math.abs(pila.top().compareStands(area) == 1))) {
+            if ((pila.top().compareStands(area) > 0)) {
                 if (areaFueVisitada(area)){  //si esta dentro de la pila entonces ya pase por ahi y lo apilo con marca de visitado
                     console.log('es un siguiente de la pila ya visitado');
                     pila.push(new Stand(area,true));
@@ -266,11 +266,13 @@ function actualizopila2(area){
                         console.log('visita incompleta!!');
                         pila.push(new Stand(area,false));
 
+                        custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
 
-                        document.getElementById("mostrarStand").style.visibility = "visible ";
-                        var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".webp";
-                        dibujar(area);
+                        // document.getElementById("mostrarStand").style.visibility = "visible ";
+                        // var logo = document.getElementById('rm');
+                        // logo.src = "./static/img/stands/s"+area+".webp";
+                        // dibujar(area);
+
                         //borrar mensaje de fue visitado
                         // const p = document.getElementById("mensaje_visitado").innerText=" "; 
                         // const p = document.getElementById("mensaje_visitado");
@@ -281,10 +283,10 @@ function actualizopila2(area){
                         // button_no.style.visibility='hidden';
                     }
                     else {
+                      if ((Math.abs(pila.top().compareStands(area) == 1))){
                         console.log('nuevo stand!!');
                         pila.push(new Stand(area-1,true));
-                        pila.push(new Stand(area,true));
-
+                        pila.push(new Stand(area,false));
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
                         var logo = document.getElementById('rm');
@@ -298,12 +300,13 @@ function actualizopila2(area){
                         // const button_no = document.getElementById("button_no");
                         // button_si.style.visibility='hidden';
                         // button_no.style.visibility='hidden';
+                      }
                     }
                 }
             }   
             //si es EL stand anterior , aplico en el historial como visitado (true)
             else {
-                if ((Math.abs(pila.top().compareStands(area)) == 1)){
+              if (Math.abs(pila.top().compareStands(area) < 0) && (areaFueVisitada(area))){
                     console.log('stand anterior!');
                     pila.push(new Stand(area,true));
 
