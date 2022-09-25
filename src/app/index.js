@@ -771,8 +771,10 @@ null != e &&
             console.log("CONFIRME EL POPUP");
             document.getElementById("mostrarStand").style.visibility = "visible ";
             var logo = document.getElementById('rm');
-            logo.src = "./static/img/stands/s"+area_global+".webp";
-            dibujar(area_global);
+            // logo.src = "./static/img/stands/s"+area_global+".webp";
+            // dibujar(area_global);
+            logo.src = "./static/img/stands/s"+pila.top().numero+".webp";
+            dibujar(pila.top().numero);
         }
     })
   }
