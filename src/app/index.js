@@ -21,7 +21,7 @@ var flagAlert = false;
 const options = {
     enableHighAccuracy: true,
     maximumAge: 20000,
-    timeout: 10000,
+    timeout: 30000,
 };
 
 // bucar botones para añadir eventos
