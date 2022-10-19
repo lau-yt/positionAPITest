@@ -289,8 +289,10 @@ left: 0;
     }
     .contenedor-image{
       /* width: 512px; */
-      width: 90%;
-      height: 15rem;
+      /* width: 90%;
+      height: 15rem; */
+      width: 40rem;
+      height: 20rem;
     }
     /* acomodar los siguientes puntos */
     /* seccion 1 */
