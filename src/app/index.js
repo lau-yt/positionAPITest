@@ -1,187 +1,117 @@
-var area_global;
-var area_novisitado;
+// importando modulos
+import Mapa from "../models/map.js";
+import Pila from "../models/stack.js";
+import Stand from "../models/stand.js";
+import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
 
-var map = L.map('map').setView([-34.884032, -58.019961], 20);
-var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(map);
+const MSG_ERR_PERMISSION_DENIED = "No hay permiso para obtener la posicion";
+const MSG_ERR_POSITION_UNAVAILABLE = "Posicion actual no disponible";
+const MSG_ERR_TIMEOUT = "No se pudo obtener la posicion en un tiempo";
+const MSG_ERR_UNKNOW = "Error desconocido";
 
-import { Pila } from "../models/stack.js";
-
+// creacion/instanciamiento de variables globales en el contexto de index.js
 var pila = new Pila();
 var pilaAux = new Pila();
+var mapa = new Mapa();
+var area_global;
+var marker,id;
+var flagAlert = false;
 
-//puntos de secciones
-//primera sección 
-var pointList = [
-    [-34.884010,-58.020020], 
-    [-34.883958,-58.020020],
-    [-34.883958, -58.019937],
-    [-34.884010, -58.019937]
-];
-//segunda sección 
-let pointList2 = [
-    [-34.883958,-58.02002],
-    [-34.883958, -58.019937],
-    [-34.883860, -58.019937],
-    [-34.883860,-58.02002],
-];
-//tercera sección 
-let pointList3 = [
-    [-34.883860, -58.019854],
-    [-34.883860,-58.02002],
-    [-34.883800, -58.02002],
-    [-34.883800, -58.019854]
-];
-//cuarta sección 
-let pointList4 = [
-    [-34.883860, -58.019937],
-    [-34.883860,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//quinta sección 
-let pointList5 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.883910, -58.019854],
-    [-34.883910, -58.019937]
-];
-//sexta sección 
-let pointList6 = [
-    [-34.883958, -58.019937],
-    [-34.883958,-58.019854],
-    [-34.884010, -58.019854],
-    [-34.884010, -58.019937]
-];
-let custome = {
-    color: 'red',
-    weight: 1,
-    opacity: 1,
-    smoothFactor: 1
-}
-var firstpolyline = new L.polygon(pointList,custome);
-firstpolyline.addTo(map);
-custome.color = 'blue'
-firstpolyline = new L.polygon(pointList2, custome);
-firstpolyline.addTo(map);
-custome.color = 'green'
-firstpolyline = new L.polygon(pointList3, custome);
-firstpolyline.addTo(map);
-custome.color = 'yellow'
-firstpolyline = new L.polygon(pointList4, custome);
-firstpolyline.addTo(map);
-custome.color = 'orange'
-firstpolyline = new L.polygon(pointList5, custome);
-firstpolyline.addTo(map);
-custome.color = 'black'
-firstpolyline = new L.polygon(pointList6, custome);
-firstpolyline.addTo(map);
-
-var marker, circle,id;
+// configuracion para geopisition
 const options = {
     enableHighAccuracy: true,
     maximumAge: 20000,
-    timeout: 10000,
+    timeout: 30000,
 };
 
-function cheack_area1(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){            
-        if ((latitude <= (-34.883958))&(latitude >= (-34.884010))){ 
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area2(latitude, longitude){
-    if ((longitude <= (-58.019937))&(longitude >= (-58.02002))){
-        if ((latitude <= (-34.883860))&(latitude > (-34.883958)))
-        {
-
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area3(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude >= (-58.02002))){
-        if  ((latitude <= (-34.883800))&(latitude > (-34.883860))){
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area4(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){       
-        if ((latitude < (-34.883860))&(latitude >= (-34.883910)))  { 
-                        
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area5(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883910))&(latitude > (-34.883958)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-function cheack_area6(latitude, longitude){
-    if ((longitude <= (-58.019854))&(longitude > (-58.019937))){
-        if ((latitude < (-34.883958))&(latitude > (-34.884010)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-document.getElementById("button").addEventListener('click', ()=>{
-    navigator.geolocation.clearWatch(id);
-    console.log('congratulations, you deleted the id (: the end');
-    }    
-);
-
+// bucar botones para añadir eventos
+// document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
+// PARA BORRAR SI FUNCIONA EL POPUP (:
+// document.getElementById("button_si").addEventListener('click', () =>{  
+//     console.log("SIII!!");
+//     document.getElementById("mostrarStand").style.visibility = "visible ";
+//     var logo = document.getElementById('rm');
+//     logo.src = "./static/img/stands/s"+area_global+".png";
+//     dibujar(area_global);
+// });
 
+/**
+ * Funcion encargada de inicilizar la deteccion de posicion
+ * @params none
+ * @return none
+*/
 function getLocation(){
     if (navigator.geolocation){
-        //setInterval(()=>{  navigator.geolocation.getCurrentPosition(getPosition,getPosError,options);
             id = navigator.geolocation.watchPosition(getPosition,getPosError,options);
             console.log(id);
-        //},5000);
     }
     else{
-        alert('geolocation is not suuported!');
+        alert('geolocation is not supported!');
     }
 }
+/**
+ * Funcion encargada de eliminar un marcador del mapa
+ * @params none
+ * @return none
+ */
 function removeAfter(){
-    if (marker) map.removeLayer(marker);
+    if (marker) mapa.removeLayer(marker);
+}
+/**
+ * Funcion encargada de dibujar un marcador del mapa
+ * @params none
+ * @return none
+ */
+ function drawMarker(){
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
-function areaFueVisitada(stand){
-    let aux; let ok = false; let i=0;
-    while (i<pila.tamanio()){
-        aux = pila.pop();
-        pilaAux.push(aux);
-        i++;
-        if ((aux.numero == stand)&&(aux.visitado == true)) {
-            ok = true; 
-            break;
+/**
+ * genera una copia de la pila y la recorre hasta encontrar la primera ocurrencia en el historial
+ * @param {Number} stand 
+ * @return {boolean} 
+ *  TRUE -  _se ha encontrado el stan en la pila_
+ * 
+ *  FALSE - _no se encontro ningun stand en la pila_
+ */
+ function areaFueVisitada(stand){
+    var pilaAux = pila.copia();
+    let aux = new Stand(); 
+    while (pilaAux.length != 0){
+        aux = pilaAux.pop();
+        if ( (aux.compareStands(stand) == 0 ) && aux.isVisitado()) {
+            return true;
         } 
     }
-    pila = pilaAux;
-    return ok;
+    return false;
 }
 
+// realizar revision de esta funcion ..............
+function visitaIncompleta(stand){
+    //si es incompleta entonces.. stand actual tiene que estar en el historial y ademas en false
+    // tambien el anterior stand deberia estar en el historial con valor true 
+    let aux = new Stand(); let ok1= false; let ok2 = false;
+    var pilaAux = pila.copia();
+    while (pilaAux != 0){
+        aux = pilaAux.pop();
+        if ((ok1 != true)&&(aux.numero == stand)&&(aux.visitado == false)) {
+            ok1 = true; 
+        }        
+
+        if ((ok2 != true)&&(aux.numero == (stand-1))&&(aux.visitado == true)) {
+            ok2 = true; 
+        }
+        if (ok1 && ok2) break; 
+    }
+    return (ok1 && ok2);
+}
+
+/**
+ * Funcion encargada de verificar si debe o no actualizar la pila 
+ * ademas hace algo para saber si el area fue visitada o no mmm revisar esto tiene mas de una funcionalidad?(descomponer?)
+ * @param {Number} area 
+ */
 function actualizopila(area){
     console.log("esta es la pila: ",pila.toString());
     var stand = {
@@ -199,7 +129,7 @@ function actualizopila(area){
              // dibujar el stand 1
              document.getElementById("mostrarStand").style.visibility = "visible ";
              var logo = document.getElementById('rm');
-             logo.src = "./static/img/stands/s"+area+".png";
+             logo.src = "./static/img/stands/s"+area+".webp";
              dibujar(area);
         }
         else{
@@ -228,7 +158,7 @@ function actualizopila(area){
 
                     document.getElementById("mostrarStand").style.visibility = "visible ";
                     var logo = document.getElementById('rm');
-                    logo.src = "./static/img/stands/s"+area+".png";
+                    logo.src = "./static/img/stands/s"+area+".webp";
                     dibujar(area);
                     //borrar mensaje de fue visitado
                     const p = document.getElementById("mensaje_visitado").innerText=" ";
@@ -276,7 +206,7 @@ function actualizopila(area){
 
                         document.getElementById("mostrarStand").style.visibility = "visible ";
                         var logo = document.getElementById('rm');
-                        logo.src = "./static/img/stands/s"+area+".png";
+                        logo.src = "./static/img/stands/s"+area+".webp";
                         dibujar(area);
                         
                     } else {
@@ -291,12 +221,119 @@ function actualizopila(area){
     
 }
 
-// funcion de mostrar area visitada
-var mostrarEstand = function (){
+function actualizopila2(area){
+    let areaEstoy = area;
+    area_global = area;
+    if (pila.esVacio()) { //caso del historial vacio
+        if (areaEstoy == 1){
+            console.log('Estas en el area 1');
+            pila.push(new Stand(area,false));
+
+            // dibujar el stand 1
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            logo.src = "./static/img/stands/s"+area+".webp";
+            dibujar(area);
+
+        }
+        else{
+            console.log('dirigirse al area 1 para iniciar'); 
+            if (!flagAlert){
+              custom_popup_Alerta("Debe dirigirse al stand 1 para iniciar");
+              flagAlert = true;
+            }
+        }
+    }else{ //el historial tiene contenido
+        if(pila.top().compareStands(area) == 0){  
+           console.log('No hago nada porque esta mismo stand q visita '+area); 
+        }
+        else{ //es un area diferente
+            //realizo el cálculo si el stand es uno anterior a el o bien uno posterior
+            //si es EL stand siguiente al que tengo de la pila debo verificar 4 condiciones
+            if ((pila.top().compareStands(area) > 0)) {
+                if (areaFueVisitada(area)){  //si esta dentro de la pila entonces ya pase por ahi y lo apilo con marca de visitado
+                    console.log('es un siguiente de la pila ya visitado');
+                    pila.push(new Stand(area,true));
+
+                    // document.getElementById("mostrarStand").style.visibility = "visible ";
+                    // var logo = document.getElementById('rm');
+                    // logo.src = "./static/img/stands/s"+area+".webp";
+                    // dibujar(area);
+                    custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
+                }
+                else { // es un nuevo stand 
+                    if (visitaIncompleta(area)){
+                        console.log('visita incompleta!!');
+                        pila.push(new Stand(area,false));
+
+                        custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
+
+                        // document.getElementById("mostrarStand").style.visibility = "visible ";
+                        // var logo = document.getElementById('rm');
+                        // logo.src = "./static/img/stands/s"+area+".webp";
+                        // dibujar(area);
+
+                        //borrar mensaje de fue visitado
+                        // const p = document.getElementById("mensaje_visitado").innerText=" "; 
+                        // const p = document.getElementById("mensaje_visitado");
+                        // p.style.visibility='hidden';
+                        // const button_si = document.getElementById("button_si");
+                        // const button_no = document.getElementById("button_no");
+                        // button_si.style.visibility='hidden';
+                        // button_no.style.visibility='hidden';
+                    }
+                    else {
+                      if ((Math.abs(pila.top().compareStands(area) == 1))){
+                        console.log('nuevo stand!!');
+                        pila.push(new Stand(area-1,true));
+                        pila.push(new Stand(area,false));
+
+                        document.getElementById("mostrarStand").style.visibility = "visible ";
+                        var logo = document.getElementById('rm');
+                        logo.src = "./static/img/stands/s"+area+".webp";
+                        dibujar(area);
+                        //borrar mensaje de fue visitado
+                        // const p = document.getElementById("mensaje_visitado").innerText=" "; 
+                        // const p = document.getElementById("mensaje_visitado");
+                        // p.style.visibility='hidden';
+                        // const button_si = document.getElementById("button_si");
+                        // const button_no = document.getElementById("button_no");
+                        // button_si.style.visibility='hidden';
+                        // button_no.style.visibility='hidden';
+                      }
+                    }
+                }
+            }   
+            //si es EL stand anterior , aplico en el historial como visitado (true)
+            else {
+              if (Math.abs(pila.top().compareStands(area) < 0) && (areaFueVisitada(area))){
+                    console.log('stand anterior!');
+                    pila.push(new Stand(area,true));
+
+                    // const p = document.getElementById("mensaje_visitado");
+                    // p.style.visibility='hidden';
+                    // const button_si = document.getElementById("button_si");
+                    // const button_no = document.getElementById("button_no");
+                    // button_si.style.visibility='visible';
+                    // button_no.style.visibility='visible';
+
+                    custom_popup_standAnterior("Ya has visitado el stand "+area+". ¿Desea visitarlo nuevamente?");
+                }
+            }
+        }
+
+    }
+    
+}
+
+/**
+ * Funcion encargada visualizar stand 
+ */
+ var mostrarEstand = function (){
     
     document.getElementById("mostrarStand").style.visibility = "visible ";
     var logo = document.getElementById('rm');
-    logo.src = "./static/img/stands/s"+area_global+".png";
+    logo.src = "./static/img/stands/s"+area_global+".webp";
     dibujar(area_global);
     console.log("el valor de global_area=  es  " + area_global)
     //borrar mensaje
@@ -312,7 +349,7 @@ var mostrarEstand = function (){
  * Funcion modulado de getPosition
  * @param {GeolocationPosition} position 
  */
-function getPosition(position){
+ function getPosition(position){
     const { latitude, longitude} = position.coords; 
     let area;
         if  (cheack_area3(latitude,longitude)){
@@ -343,7 +380,6 @@ function getPosition(position){
                                     console.log('6');area=6;
                                 }
                                 else{
-                                    area=0;
                                     console.log('sin area');
                                 } 
     
@@ -352,10 +388,10 @@ function getPosition(position){
                 }   
             }
             console.log('area antes de actualizoPila: ',area);
-            actualizopila(area);
+            actualizopila2(area);
             area_global = area
     removeAfter();
-    marker = L.marker([latitude, longitude]).addTo(map)
+    marker = L.marker([latitude, longitude]).addTo(mapa.getMapa())
 }
 
 /**
@@ -365,14 +401,18 @@ function getPosition(position){
 function getPosError(error){
     console.warn(error.message); let mensaje;
     switch(error.code){
-        case error.PERMISSION_DENIED: mensaje = "No hay permiso para obtener la posicion"; break;
-        case error.POSITION_UNAVAILABLE: mensaje = "Posicion actual no disponible"; break;
-        case error.TIMEOUT: mensaje = "No se pudo obtener la posicion en un tiempo"; break;
-        default: mensaje = "Error desconocido"; break;
+        case error.PERMISSION_DENIED: mensaje = MSG_ERR_PERMISSION_DENIED; break;
+        case error.POSITION_UNAVAILABLE: mensaje = MSG_ERR_POSITION_UNAVAILABLE; break;
+        case error.TIMEOUT: mensaje = MSG_ERR_TIMEOUT; break;
+        default: mensaje = MSG_ERR_UNKNOW; break;
     }
-    alert(mensaje);
+    console.log(mensaje);
 }
 
+/**
+ * funcion encargada de dibujar segun el area que reciba
+ * @param {Number} area 
+ */
 function dibujar(area){
     if( area==1 ){
 
@@ -413,80 +453,68 @@ function dibujar(area){
 
 }
 
+/**
+ * esta funcion sirve para mostrar los puntos interactivos de la imagen
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
+ * @return --> don't return anything
+*/
 function mostrarPuntos(area, nroBoton){
     var punto1 = document.getElementById("b" + area + "_" + nroBoton);
     punto1.style.visibility='visible';
-    if(area==1){
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-    }
-    if(area==2){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-    }
-    if(area==3){
-
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==4){
-        // esconder los puntos del stand 1
-        esconderPuntos(1,1);
-        esconderPuntos(1,2);
-        //esconder los puntos del stand 2
-        esconderPuntos(2,1);
-        //esconder los puntos del stand 3
-        esconderPuntos(3,1);
-        esconderPuntos(3,2);
-        esconderPuntos(3,3);
-        //esconder los puntos del stand 5
-        esconderPuntos(5,1);
-        esconderPuntos(5,2);
-        //esconder los puntos del stand 6
-        esconderPuntos(6,1);
-
-    }
-    if(area==5){
+    switch (area) {
+        case 1:
+          //esconder los puntos del stand 2
+          esconderPuntos(2,1);
+          //esconder los puntos del stand 3
+          esconderPuntos(3,1);
+          esconderPuntos(3,2);
+          esconderPuntos(3,3);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 2:
+          // esconder los puntos del stand 1
+          esconderPuntos(1,1);
+          esconderPuntos(1,2);
+          //esconder los puntos del stand 3
+          esconderPuntos(3,1);
+          esconderPuntos(3,2);
+          esconderPuntos(3,3);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 3:
+          // esconder los puntos del stand 1
+          esconderPuntos(1,1);
+          esconderPuntos(1,2);
+          //esconder los puntos del stand 2
+          esconderPuntos(2,1);
+          //esconder los puntos del stand 4
+          esconderPuntos(4,1);
+          esconderPuntos(4,2);
+          esconderPuntos(4,3);
+          //esconder los puntos del stand 5
+          esconderPuntos(5,1);
+          esconderPuntos(5,2);
+          //esconder los puntos del stand 6
+          esconderPuntos(6,1);
+          break;
+        case 4:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -496,15 +524,13 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(3,1);
         esconderPuntos(3,2);
         esconderPuntos(3,3);
-        //esconder los puntos del stand 4
-        esconderPuntos(4,1);
-        esconderPuntos(4,2);
-        esconderPuntos(4,3);
+        //esconder los puntos del stand 5
+        esconderPuntos(5,1);
+        esconderPuntos(5,2);
         //esconder los puntos del stand 6
         esconderPuntos(6,1);
-
-    }
-    if(area==6){
+        break;
+        case 5:
         // esconder los puntos del stand 1
         esconderPuntos(1,1);
         esconderPuntos(1,2);
@@ -518,19 +544,50 @@ function mostrarPuntos(area, nroBoton){
         esconderPuntos(4,1);
         esconderPuntos(4,2);
         esconderPuntos(4,3);
+        //esconder los puntos del stand 6
+        esconderPuntos(6,1);
+        break;
+        case 6:
+        // esconder los puntos del stand 1
+        esconderPuntos(1,1);
+        esconderPuntos(1,2);
+        //esconder los puntos del stand 2
+        esconderPuntos(2,1);
+        //esconder los puntos del stand 3
+        esconderPuntos(3,1);
+        esconderPuntos(3,2);
+        esconderPuntos(3,3);
+        //esconder los puntos del stand 4
+        esconderPuntos(4,1);
+        esconderPuntos(4,2);
+        esconderPuntos(4,3);
         //esconder los puntos del stand 5
         esconderPuntos(5,1);
         esconderPuntos(5,2);
-
-    }
+        break;
+        default:
+          console.log("ERROR: area no valida");
+        break;
+      }
 }
 
+/**
+ * esta funcion sirve para esconder puntos interactivos de la imagen
+ * @param {Number} area area visible
+ * @param {Number} nroBoton numero de boton asociado
+ * @return none
+*/
 function esconderPuntos(area,nroBoton){
     var puntos = document.getElementById("b" + area + "_" + nroBoton);
     puntos.style.visibility='hidden';
 }
 
 
+/**
+ * ---------COMIENZO EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * 
+ * NOTA: es posible transferir esto a otro modulo?, para no mezclar la logica del modulo principal con logica personalizada que aplica a otros componentes.
+ */
 //mostrar sweet alert en los puntos
 //  busqueda y asignacion de puntos...-
 
@@ -555,7 +612,7 @@ null != e &&
  * [titulo del punto 2]
  */
 
- const title_2_1='El peor momento de la inundación. Accedé a las entrevistas realizadas por zonas inundadas.';
+ const title_2_1='Accedé a las entrevistas realizadas por zonas inundadas.';
  e = document.getElementById("b2_1");
  null != e &&
    e.addEventListener("click", (e) => {
@@ -588,7 +645,7 @@ null != e &&
  */
 const title_4_1='Descubrí los diarios del momento, mirá las fotos compartidas por las personas damnificadas.';
 const title_4_2='Informate sobre los motivos de por qué se inundan estas zonas.';
-const title_4_3='Prepararse es fundamental. Aprendé recomendaciones de como actuar, y conocé los centros de evacuación más cercanos.';
+const title_4_3='Aprendé recomendaciones de como actuar y conocé los centros de evacuación más cercanos.';
 
 var e = document.getElementById("b4_1");
 null != e &&
@@ -628,57 +685,50 @@ null != e &&
   /**
  * [titulo del punto 6]
  */
-const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza. Conocé más sobre las inundaciones urbanas en el exterior.';
+const title_6_1='Ingresá al sitio web de Citadine con entrevistas de otros países y con soluciones basadas en la naturaleza.';
 var e = document.getElementById("b6_1");
 null != e &&
   e.addEventListener("click", (e) => {
     custom_popup(title_6_1,"6_1");
   });
 
-
+/**
+ * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ */
 
 /**
- * Funcion:   custom_popup(titulo)
- */
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
   function custom_popup(titulo,nom_img) {
     Swal.fire({
       customClass: {
-        confirmButton: 'alert-btn confirm-btn',
+        // confirmButton: 'alert-btn confirm-btn',
         denyButton: 'alert-btn cancel-btn',
         closeButton: 'cancel-btn',
         popup: 'swal2-pop-style',
       },
       buttonsStyling: false,
   
-      title: titulo,
-    //   icon: "warning",
-    //   iconColor:"#E10000",
-      showCloseButton: !0,
-      showDenyButton: !0,
-      focusConfirm: !1,
-      confirmButtonText: "Si.",
-      denyButtonText: "No.",
-      confirmButtonAriaLabel: "Si.",
-      denyButtonAriaLabel: "No.",
-      // width: "70rem",
-      // height: "35rem",
+      // title: titulo,
       width: "auto",
       height: "auto",
       color: '#000',
-      imageUrl: './static/img/visor/s'+nom_img+'plano.jpg',
-      imageHeight: 200,
-      imageAlt: 'A tall image',
-      html:`
-      <figure class='visor'>
-
-      <img class="altura_visor_img" src='./static/img/visor/s`+nom_img+`plano.jpg' alt='imagen panoramica del Stand 1.' />
-      
-      <figcaption>
-        <h2>`+titulo+`</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-      </figcaption>
-    </figure>
-      `
+      // imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
+      // imageHeight: 80,
+      // imageAlt: 'A tall image',
+       html:`
+    <div class="container-grid">
+        <div class="div-card">
+            <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp'/>
+        </div>  
+        <div class="div-card_p">
+            <p>`+titulo+`</p>
+        </div>
+    </div>
+       `
     //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
       
     //   backdrop: `
@@ -689,3 +739,74 @@ null != e &&
     //   `
     });
   }
+
+  /**
+   * @brief popup para el stand anterior
+   * @param {String} titulo 
+   * @return none
+   */
+  function custom_popup_standAnterior(titulo) {
+    Swal.fire({
+      customClass: {
+        confirmButton: 'alert-btn confirm-btn',
+        denyButton: 'alert-btn cancel-btn',
+        closeButton: 'cancel-btn',
+        popup: 'swal2-pop-style_si_no',
+      },
+      buttonsStyling: false,
+      width: "auto",
+      height: "65%",
+      title: titulo,
+    //   icon: "warning",
+    //   iconColor:"#E10000",
+      showCloseButton: !0,
+      showDenyButton: !0,
+      focusConfirm: !1,
+      confirmButtonText: "Si",
+      denyButtonText: "No",
+      confirmButtonAriaLabel: "Si",
+      denyButtonAriaLabel: "No",
+    }).then((result)=>{
+        if (result.isConfirmed){
+            console.log("CONFIRME EL POPUP");
+            document.getElementById("mostrarStand").style.visibility = "visible ";
+            var logo = document.getElementById('rm');
+            // logo.src = "./static/img/stands/s"+area_global+".webp";
+            // dibujar(area_global);
+            logo.src = "./static/img/stands/s"+pila.top().numero+".webp";
+            dibujar(pila.top().numero);
+        }
+    })
+  }
+
+  /**
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
+function custom_popup_Alerta(titulo) {
+  Swal.fire({
+    customClass: {
+      // confirmButton: 'alert-btn confirm-btn',
+      denyButton: 'alert-btn cancel-btn',
+      closeButton: 'cancel-btn',
+      popup: 'irStand1',
+    },
+    buttonsStyling: false,
+
+    title: titulo,
+    width: "auto",
+    height: "auto",
+    color: '#000',
+  });
+}
+
+
+// REGISTRAMOS EL SERVICE WORKER
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('../sw.js').catch(error => {
+      console.log(error);
+  })
+}
