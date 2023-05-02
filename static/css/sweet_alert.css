@@ -226,6 +226,15 @@ a {
   .swal2-pop-style_si_no{
     height: 90%!important;
   }
+  .swal2-confirm {
+    background: fuchsia;
+  }
+  .swal2-confirm:hover{
+    opacity: .8;
+    transform: scale(1.15);
+    cursor: pointer;
+    background: red;
+  }
 }
 
 

@@ -710,6 +710,7 @@ null != e &&
         closeButton: 'cancel-btn',
         popup: 'swal2-pop-style',
       },
+      showConfirmButton: false,
       buttonsStyling: false,
   
       // title: titulo,
@@ -727,6 +728,7 @@ null != e &&
         <div class="div-card_p" style="  width: 100%; max-width: 800px; margin: 0 auto;">
             <p>`+titulo+`</p>
         </div>
+        <button type="button" id="btn-confirmCustom" onclick="Swal.close()" class="swal2-confirm" aria-label style="display: inline-block;">OK</button>
     </div>
        `
     //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
