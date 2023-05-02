@@ -721,7 +721,7 @@ null != e &&
       // imageHeight: 80,
       // imageAlt: 'A tall image',
        html:`
-    <div class="container-grid" style=" display: flex; flex-wrap: wrap;">
+    <div class="container-grid">
         <div class="div-card" style=" display: flex; flex-wrap: wrap;">
             <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp' style=" max-width: 100%; height: auto; flex: 1; margin: 5px;"/>
         </div>  
