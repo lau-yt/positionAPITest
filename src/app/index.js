@@ -724,7 +724,7 @@ null != e &&
         <div class="div-card" style=" display: flex; flex-wrap: wrap;">
             <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp' style=" max-width: 100%; height: auto; flex: 1; margin: 5px;"/>
         </div>  
-        <div class="div-card_p">
+        <div class="div-card_p" style="  width: 100%; max-width: 800px; margin: 0 auto;">
             <p>`+titulo+`</p>
         </div>
     </div>
