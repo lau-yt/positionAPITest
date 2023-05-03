@@ -56,7 +56,7 @@ a {
 .swal2-popup{
   /* max-width: 75% !important; */
   max-width: 50% !important;
-  height: 90%;
+  height: 52%; /*90*/
   font-size: 0.5rem !important;
   padding: 8px 0 1.25em !important;
   
@@ -99,7 +99,7 @@ a {
   .swal2-popup{
     /* max-width: 75% !important; */
     max-width: 50% !important;
-    height: 90%;
+    height: 60%; /*90%*/
     font-size: 0.5rem !important;
     padding: 8px 0 1.25em !important;
     
@@ -108,7 +108,13 @@ a {
     display: grid;
     grid-template-columns: 1fr .4fr;
     justify-content: space-between;
-    margin: -1rem 1rem 2rem 0rem; 
+    margin: -1rem 1rem 0rem 0rem; 
+  }
+  .swal2-html-container {
+    z-index: 1!important;
+    justify-content: center!important;
+    margin: 0em 1.6em -5.7em !important;
+    /* -11.7em */
   }
   .div-card {
     margin: 1rem auto !important;
