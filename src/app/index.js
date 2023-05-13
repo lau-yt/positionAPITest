@@ -3,6 +3,7 @@ import Mapa from "../models/map.js";
 import Pila from "../models/stack.js";
 import Stand from "../models/stand.js";
 import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
+import { custom_popup, custom_popup_standAnterior, custom_popup_Alerta } from "../models/popup.js";
 
 const MSG_ERR_PERMISSION_DENIED = "No hay permiso para obtener la posicion";
 const MSG_ERR_POSITION_UNAVAILABLE = "Posicion actual no disponible";
@@ -25,16 +26,7 @@ const options = {
 };
 
 // bucar botones para añadir eventos
-// document.getElementById("button").addEventListener('click', ()=>{ navigator.geolocation.clearWatch(id); console.log('congratulations, you deleted the id (: the end'); }  );
 document.getElementById("buttonStar").addEventListener('click', getLocation);
-// PARA BORRAR SI FUNCIONA EL POPUP (:
-// document.getElementById("button_si").addEventListener('click', () =>{  
-//     console.log("SIII!!");
-//     document.getElementById("mostrarStand").style.visibility = "visible ";
-//     var logo = document.getElementById('rm');
-//     logo.src = "./static/img/stands/s"+area_global+".png";
-//     dibujar(area_global);
-// });
 
 /**
  * Funcion encargada de inicilizar la deteccion de posicion
@@ -695,114 +687,6 @@ null != e &&
 /**
  * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
  */
-
-/**
-* Funcion:  custom_popup brinda parametros de configuracion para 
-* @param {String} titulo
-* @param {String} img
-* @return none
-*/
-  function custom_popup(titulo,nom_img) {
-    Swal.fire({
-      customClass: {
-        // confirmButton: 'alert-btn confirm-btn',
-        denyButton: 'alert-btn cancel-btn',
-        closeButton: 'cancel-btn',
-        popup: 'swal2-pop-style',
-      },
-      showConfirmButton: false,
-      buttonsStyling: false,
-  
-      // title: titulo,
-      width: "auto",
-      height: "auto",
-      color: '#000',
-      // imageUrl: './static/img/visor/s'+nom_img+'plano.webp',
-      // imageHeight: 80,
-      // imageAlt: 'A tall image',
-       html:`
-    <div class="container-grid">
-        <div class="div-card" style=" display: flex; flex-wrap: wrap;">
-            <img class="img-size" src='./static/img/visor/s`+nom_img+`plano.webp' style=" max-width: 100%; height: auto; flex: 1; margin: 5px;"/>
-        </div>  
-        <div class="div-card_p" style="  width: 100%; max-width: 800px; margin: 0 auto;">
-            <p>`+titulo+`</p>
-        </div>
-        <button type="button" id="btn-confirmCustom" onclick="Swal.close()" class="swal2-confirm" aria-label style="display: inline-block;">OK</button>
-    </div>
-       `
-    //   background: '#FBFFF0 url(./static/img/stands/s1_1plano.jpg) no-repeat left center/contain' ,
-      
-    //   backdrop: `
-    //     rgba(0,0,123,0.4)
-    //     url("./static/images/demo-256x256.gif")
-    //     left top
-    //     no-repeat
-    //   `
-    });
-  }
-
-  /**
-   * @brief popup para el stand anterior
-   * @param {String} titulo 
-   * @return none
-   */
-  function custom_popup_standAnterior(titulo) {
-    Swal.fire({
-      customClass: {
-        confirmButton: 'alert-btn confirm-btn',
-        denyButton: 'alert-btn cancel-btn',
-        closeButton: 'cancel-btn',
-        popup: 'swal2-pop-style_si_no',
-      },
-      buttonsStyling: false,
-      width: "auto",
-      height: "65%",
-      title: titulo,
-    //   icon: "warning",
-    //   iconColor:"#E10000",
-      showCloseButton: !0,
-      showDenyButton: !0,
-      focusConfirm: !1,
-      confirmButtonText: "Si",
-      denyButtonText: "No",
-      confirmButtonAriaLabel: "Si",
-      denyButtonAriaLabel: "No",
-    }).then((result)=>{
-        if (result.isConfirmed){
-            console.log("CONFIRME EL POPUP");
-            document.getElementById("mostrarStand").style.visibility = "visible ";
-            var logo = document.getElementById('rm');
-            // logo.src = "./static/img/stands/s"+area_global+".webp";
-            // dibujar(area_global);
-            logo.src = "./static/img/stands/s"+pila.top().numero+".webp";
-            dibujar(pila.top().numero);
-        }
-    })
-  }
-
-  /**
-* Funcion:  custom_popup brinda parametros de configuracion para 
-* @param {String} titulo
-* @param {String} img
-* @return none
-*/
-function custom_popup_Alerta(titulo) {
-  Swal.fire({
-    customClass: {
-      // confirmButton: 'alert-btn confirm-btn',
-      denyButton: 'alert-btn cancel-btn',
-      closeButton: 'cancel-btn',
-      popup: 'irStand1',
-    },
-    buttonsStyling: false,
-
-    title: titulo,
-    width: "auto",
-    height: "auto",
-    color: '#000',
-  });
-}
 
 
 // REGISTRAMOS EL SERVICE WORKER
