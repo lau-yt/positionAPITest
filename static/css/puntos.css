@@ -29,7 +29,16 @@
       height: 50%;
     }
   }
-
+  /* Media queries para modo horizontal en pantallas pequeñas */
+  @media screen and (orientation: landscape) and (max-height: 767px) {
+    .highlight {
+      padding: 19%!important;
+      background-image: url("../img/infog.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+  }
   .highlight:hover {
     background: #193549;
     color: #ffdd00;
