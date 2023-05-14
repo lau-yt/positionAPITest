@@ -83,7 +83,7 @@
 }  */
 
 /* Media queries para modo horizontal en pantallas pequeñas */
-@media screen and (max-width: 767px) {
+@media screen and (orientation: landscape) and (max-height: 767px) {
   .popup-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -94,7 +94,7 @@
   }
 
   .popup-image {
-    max-width: 50%;
+    max-width: 100%;
     height: auto;
     margin: 0;
     grid-column: 1 / 2;
