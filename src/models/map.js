@@ -13,7 +13,7 @@ class Mapa {
             keyboard: false
         }).setView([-34.883919, -58.019961], 19);
         // seteando configuraciones de mapa (ubicacion,tamaño,setteo para hacer print del mapa configurado)
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A', {
             maxZoom: 19,
             id: 'mapbox/streets-v11',
             tileSize: 512,
