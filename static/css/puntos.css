@@ -48,74 +48,7 @@
     width: 40rem;
     height: 20rem;
   }
-  /* acomodar los siguientes puntos */
-  /* seccion 1 */
-  #b1_1 {
-    /* left: 134%;
-    top: 9%; */
-    left: 133em;
-    top: 7em;
-  }
-  #b1_2 {
-    /* left: 27%;
-    top: 9%; */
-    left: 8em;
-    top: 17em;
-  }
-  /* seccion 2 */
-  #b2_1 {
-    /* left: 38%;
-    top: 6%; */
-    left: 12em;
-    top: 10em;
-  }
-
-  /* seccion 3 */
-  #b3_3 {
-    /* left: 124%;
-    top: 6%; */
-    left: 124em;
-    top: 6em;
-  }
-  #b3_2 {
-    /* left: 76%;
-    top: 11%; */
-    left: 76em;
-    top: 11em;
-  }
-  #b3_1 {
-    /* left: 15%;
-    top: 13%; */
-    left: 15em;
-    top: 13em;
-  }
-  /* seccion 4 */
-  #b4_3 {
-    left: 47em;
-    top: 21em;
-  }
-  #b4_2 {
-    left: 18em;
-    top: 39em;
-  }
-  #b4_1 {
-    left: 118em;
-    top: 12em;
-  }
-   /* seccion 5 */
-   #b5_1 {
-    left: 115em;
-    top: 13em;
-  }
-  #b5_2 {
-    left: 27em;
-    top: 45em;
-  }
-  /* seccion 6 */
-  #b6_1 {
-    left: 44em;
-    top: 36em;
-  }
+  
   }
   .highlight:hover {
     background: #193549;
