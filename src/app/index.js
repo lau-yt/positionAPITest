@@ -3,7 +3,7 @@ import Mapa from "../models/map.js";
 import Pila from "../models/stack.js";
 import Stand from "../models/stand.js";
 import {cheack_area1, cheack_area2, cheack_area3, cheack_area4, cheack_area5, cheack_area6} from "../models/areas.js"
-import { custom_popup, custom_popup_standAnterior, custom_popup_Alerta } from "../models/popup.js";
+import {popup, popupYes, popupNo, popupOk, popupTexto, popupImage} from "../models/popup.js"
 
 const MSG_ERR_PERMISSION_DENIED = "No hay permiso para obtener la posicion";
 const MSG_ERR_POSITION_UNAVAILABLE = "Posicion actual no disponible";
@@ -24,7 +24,21 @@ const options = {
     maximumAge: 20000,
     timeout: 30000,
 };
+// Cerrar el popup al hacer clic en el botón "No" o en cualquier parte fuera del contenido del popup
+popupNo.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
 
+// Cerrar el popup al hacer clic en el botón "Ok" o en cualquier parte fuera del contenido del popup
+popupOk.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
+
+popup.addEventListener('click', (event) => {
+  if (event.target === popup) {
+    popup.style.display = 'none';
+  }
+});
 // bucar botones para añadir eventos
 document.getElementById("buttonStar").addEventListener('click', getLocation);
 
@@ -686,8 +700,69 @@ null != e &&
 
 /**
  * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * INICIO de funciones del popup
  */
+// Cambiar de imagen visor al hacer clic en el botón "Sí"
+function añadoFuncionSi(){
+  popupYes.addEventListener('click', () => {
+    console.log("CONFIRME EL POPUP");
+    document.getElementById("mostrarStand").style.visibility = "visible ";
+    var logo = document.getElementById('rm');
+    logo.src = "./static/img/stands/s"+pila.top().numero+".webp";
+    dibujar(pila.top().numero);
+    popup.style.display = 'none';
+  });
+}
+/**
+* Funcion:  custom_popup brinda parametros de configuracion para mostra un stand especifico de un area
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
+function custom_popup(titulo,nom_img) {
+  console.log('estoy en custompopup');
+  popupNo.style.visibility = 'hidden';
+  popupYes.style.visibility = 'hidden';
+  popupOk.style.visibility = 'visible';
+  popupImage.style.visibility = 'visible';
+  popupImage.src = './static/img/visor/s'+nom_img+'plano.webp';
+  popupTexto.textContent = titulo;
+  popup.style.display = 'flex';
+}
 
+/**
+ * @brief popup para el stand anterior
+ * @param {String} titulo 
+ * @return none
+ */
+function custom_popup_standAnterior(titulo) {
+  console.log('estoy en custompopup STAND ANTERIOR');
+  popupNo.style.visibility = 'visible';
+  popupYes.style.visibility = 'visible';
+  popupImage.src = '';
+  popupImage.style.visibility = 'hidden';
+  popupOk.style.visibility = 'hidden';
+  popupTexto.textContent = titulo;
+  popup.style.display = 'flex';
+  //ligar funcion Yes con el cambio de stand
+  añadoFuncionSi();
+}
+
+/**
+* Funcion:  custom_popup brinda parametros de configuracion para 
+* @param {String} titulo
+* @param {String} img
+* @return none
+*/
+function custom_popup_Alerta(titulo) {
+  console.log('estoy en ALERTA');
+  popupNo.style.visibility = 'hidden';
+  popupYes.style.visibility = 'hidden';
+  popupOk.style.visibility = 'visible';
+  popupImage.style.visibility = 'hidden';
+  popupTexto.textContent = titulo;
+  popup.style.display = 'flex';
+}
 
 // REGISTRAMOS EL SERVICE WORKER
 
