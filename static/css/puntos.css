@@ -39,17 +39,19 @@
       background-repeat: no-repeat;
     }
     .imagen-forma{
-      background-image: url("../img/mapaH.webp");
-  }
-  .contenedor-image{
-    /* width: 512px; */
-    /* width: 90%;
-    height: 15rem; */
-    width: 40rem;
-    height: 20rem;
-  }
+      background-image: url("../img/mapaH.webp")!important;
+    }
+    .contenedor-image{
+      /* width: 512px; */
+      /* width: 90%;
+      height: 15rem; */
+      width: 40rem;
+      height: 20rem;
+    }
   
   }
+
+
   .highlight:hover {
     background: #193549;
     color: #ffdd00;
