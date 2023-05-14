@@ -25,6 +25,8 @@ const options = {
     timeout: 30000,
 };
 var main = document.querySelector('body');
+const popupContent = document.querySelector('.popup-content');
+const popupButtons =document.querySelector('.popup-buttons');
 
 // Cerrar el popup al hacer clic en el botón "No" o en cualquier parte fuera del contenido del popup
 popupNo.addEventListener('click', () => {
@@ -741,7 +743,10 @@ function custom_popup(titulo,nom_img) {
   popupImage.src = './static/img/visor/s'+nom_img+'plano.webp';
   popupTexto.textContent = titulo;
   popup.style.display = 'flex';
- 
+  
+  popupContent.style.display = 'grid';
+  popupContent.style.gridtemplatecolumns = 'repeat(2, 1fr)';
+  popupButtons.style.marginLeft = '-10rem'; 
 }
 
 /**
@@ -760,6 +765,10 @@ function custom_popup_standAnterior(titulo) {
   popupOk.style.visibility = 'hidden';
   popupTexto.textContent = titulo;
   popup.style.display = 'flex';
+  // cambio el boton de lugar:
+  popupContent.style.display = 'flex';
+  popupContent.style.flexDirection = 'column';
+  popupButtons.style.marginLeft = '4rem';
   //ligar funcion Yes con el cambio de stand
   añadoFuncionSi();
 }
@@ -780,6 +789,9 @@ function custom_popup_Alerta(titulo) {
   popupImage.style.visibility = 'hidden';
   popupTexto.textContent = titulo;
   popup.style.display = 'flex';
+
+  popupContent.style.display = 'flex';
+  popupContent.style.flexDirection = 'column';
 }
 
 // REGISTRAMOS EL SERVICE WORKER
