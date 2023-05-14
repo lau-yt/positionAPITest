@@ -24,19 +24,27 @@ const options = {
     maximumAge: 20000,
     timeout: 30000,
 };
+var main = document.querySelector('body');
+
 // Cerrar el popup al hacer clic en el botón "No" o en cualquier parte fuera del contenido del popup
 popupNo.addEventListener('click', () => {
   popup.style.display = 'none';
+  main.classList.remove('no-scroll');
+  main.style.overflow = '';
 });
 
 // Cerrar el popup al hacer clic en el botón "Ok" o en cualquier parte fuera del contenido del popup
 popupOk.addEventListener('click', () => {
   popup.style.display = 'none';
+  main.classList.remove('no-scroll');
+  main.style.overflow = '';
 });
 
 popup.addEventListener('click', (event) => {
   if (event.target === popup) {
     popup.style.display = 'none';
+    main.classList.remove('no-scroll');
+    main.style.overflow = '';
   }
 });
 // bucar botones para añadir eventos
@@ -590,11 +598,11 @@ function esconderPuntos(area,nroBoton){
 
 
 /**
- * ---------COMIENZO EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * ---------COMIENZO EJCUCION SECUENCIAL PARA POP UP------------
  * 
  * NOTA: es posible transferir esto a otro modulo?, para no mezclar la logica del modulo principal con logica personalizada que aplica a otros componentes.
  */
-//mostrar sweet alert en los puntos
+//mostrar POPUP en los puntos
 //  busqueda y asignacion de puntos...-
 
 /**
@@ -699,7 +707,7 @@ null != e &&
   });
 
 /**
- * ---------FIN EJCUCION SECUENCIAL PARA SWEET ALERT------------
+ * ---------FIN EJCUCION SECUENCIAL PARA popup------------
  * INICIO de funciones del popup
  */
 // Cambiar de imagen visor al hacer clic en el botón "Sí"
@@ -711,6 +719,8 @@ function añadoFuncionSi(){
     logo.src = "./static/img/stands/s"+pila.top().numero+".webp";
     dibujar(pila.top().numero);
     popup.style.display = 'none';
+    main.classList.remove('no-scroll');
+    main.style.overflow = '';
   });
 }
 /**
@@ -721,6 +731,9 @@ function añadoFuncionSi(){
 */
 function custom_popup(titulo,nom_img) {
   console.log('estoy en custompopup');
+  
+  main.classList.add('no-scroll');
+  main.style.overflow = 'hidden';
   popupNo.style.visibility = 'hidden';
   popupYes.style.visibility = 'hidden';
   popupOk.style.visibility = 'visible';
@@ -728,6 +741,7 @@ function custom_popup(titulo,nom_img) {
   popupImage.src = './static/img/visor/s'+nom_img+'plano.webp';
   popupTexto.textContent = titulo;
   popup.style.display = 'flex';
+ 
 }
 
 /**
@@ -737,6 +751,8 @@ function custom_popup(titulo,nom_img) {
  */
 function custom_popup_standAnterior(titulo) {
   console.log('estoy en custompopup STAND ANTERIOR');
+  main.classList.add('no-scroll');
+  main.style.overflow = 'hidden';
   popupNo.style.visibility = 'visible';
   popupYes.style.visibility = 'visible';
   popupImage.src = '';
@@ -756,6 +772,8 @@ function custom_popup_standAnterior(titulo) {
 */
 function custom_popup_Alerta(titulo) {
   console.log('estoy en ALERTA');
+  main.classList.add('no-scroll');
+  main.style.overflow = 'hidden';
   popupNo.style.visibility = 'hidden';
   popupYes.style.visibility = 'hidden';
   popupOk.style.visibility = 'visible';

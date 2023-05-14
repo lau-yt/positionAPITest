@@ -1,3 +1,6 @@
+main{
+  touch-action: auto;
+}
 .mapa{
     width: 86%;
     height: 8rem!important;
@@ -41,4 +44,11 @@
 .btn-color-1{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(49, 46, 92, 0.644) 0%, rgba(9,121,109,1) 40%, rgba(0,212,255,1) 83%);
+}
+
+
+  /* cambios del mapa*/
+.leaflet-control-attribution a {
+  text-decoration: none;
+  display: none;
 }
